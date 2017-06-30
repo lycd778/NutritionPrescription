@@ -2,13 +2,12 @@ package com.easyhealth365.nutritionprescription.api;
 import com.easyhealth365.nutritionprescription.BuildConfig;
 import com.easyhealth365.nutritionprescription.beans.User;
 
+import io.reactivex.Flowable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-
 /**
  * Created by lingxiao-Ching on 2017/6/29.
  */
@@ -49,9 +48,9 @@ public class ApiService {
      *
      *
      */
-    public static Observable<User> userLogin(String username, String password) {
-        Observable<User> ob = apiStores.userLogin(username,password);
-        return  ob;
+    public static Flowable<User> userLogin(String username, String password) {
+        Flowable<User> userFlo=apiStores.userLogin(username,password);
+        return  userFlo;
     }
 
 }

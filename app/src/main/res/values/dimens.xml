@@ -24,6 +24,7 @@
     <dimen name="msg_pic_width">400dp</dimen>
     <dimen name="msg_pic_high">200dp</dimen>
     <dimen name="text_medium_size">18sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

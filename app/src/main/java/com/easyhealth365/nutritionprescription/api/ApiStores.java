@@ -1,9 +1,10 @@
 package com.easyhealth365.nutritionprescription.api;
 import com.easyhealth365.nutritionprescription.beans.User;
+
+import io.reactivex.Flowable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import rx.Observable;
 
 /**
  * Created by lingxiao-Ching on 2017/6/29.
@@ -15,7 +16,5 @@ public interface ApiStores {
  * */
     @FormUrlEncoded
     @POST("api/user/login")
-    Observable<User> userLogin(@Field("username") String username,@Field("password") String password);
-
-
+    Flowable<User> userLogin(@Field("username") String username, @Field("password") String password);
 }

@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">NutritionPrescription</string>
+    <string name="app_name">营养处方</string>
+    <string name="password">密码</string>
+    <string name="username">手机号</string>
+    <string name="forget_password">忘记密码?</string>
+    <string name="remenber_password">记住密码</string>
+    <string name="register">手机注册</string>
+    <string name="login">登录</string>
+
     <!-- Error View -->
     <string name="error_view_click_to_refresh">点击屏幕,重新加载</string>
     <string name="error_view_no_data">暂无内容</string>
@@ -7,5 +14,6 @@
     <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
     <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
     <string name="tip_network_error">没有可用的网络</string>
-    <string name="show_loading_msg" >正在加载...</string>
+    <string name="show_loading_msg">正在加载...</string>
+    <string name="title_activity_login">LoginActivity</string>
 </resources>

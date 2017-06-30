@@ -2,11 +2,11 @@ package com.easyhealth365.nutritionprescription.utils;
 
 import android.util.Log;
 
-public class ILog {
+public class TLog {
 	public static final String LOG_TAG = "MyLog-->";
 	public static boolean DEBUG = true;//是否处在debug
 
-	public ILog() {
+	public TLog() {
 	}
 	
 	public static final void analytics(String log) {
