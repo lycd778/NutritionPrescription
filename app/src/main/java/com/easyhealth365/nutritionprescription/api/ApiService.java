@@ -6,7 +6,7 @@ import io.reactivex.Flowable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by lingxiao-Ching on 2017/6/29.
@@ -23,7 +23,6 @@ public class ApiService {
     public static Retrofit retrofit() {
         if (mRetrofit == null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
             if (BuildConfig.DEBUG) {
                 // Log信息拦截器
                 HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -35,7 +34,7 @@ public class ApiService {
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(URL_HOST)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
                     .build();
         }

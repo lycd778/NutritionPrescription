@@ -22,7 +22,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
     @Override
     public void login(String username, String password) {
-        loginView.showProgress();
+          loginView.showProgress();
           Flowable<User> userFlowable = ApiService.userLogin(username, password);
           userFlowable
                 .subscribeOn(Schedulers.io())
@@ -59,6 +59,6 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
     @Override
     public void onDestroy() {
-
+        TLog.log("-->loginPresenter  onDestroy");
     }
 }
