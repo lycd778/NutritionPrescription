@@ -11,7 +11,7 @@
         android:layout_marginTop="100dp"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
-        android:src="@drawable/logo" />
+        android:src="@mipmap/logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                 android:layout_centerVertical="true"
                 android:paddingStart="6dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/username_icon" />
+                android:src="@mipmap/username_icon" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -92,7 +92,7 @@
                 android:layout_centerVertical="true"
                 android:paddingStart="6dip"
                 android:scaleType="centerInside"
-                android:src="@drawable/password_icon" />
+                android:src="@mipmap/password_icon" />
         </RelativeLayout>
 
 
@@ -154,7 +154,7 @@
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_btn_login"
+            android:background="@mipmap/bg_btn_login"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="24sp" />

@@ -13,6 +13,7 @@ public interface LoginContract {
         void showProgress();
         void hideProgress();
         void showError(String error);
+        void init();
         void navigateToMain();
         void navigateToRegister();
     }

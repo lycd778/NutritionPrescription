@@ -5,17 +5,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseActivity;
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
+import com.easyhealth365.nutritionprescription.ui.mian.MainActivity;
 import com.easyhealth365.nutritionprescription.ui.register.RegisterActivity;
+import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.utils.TLog;
+import com.easyhealth365.nutritionprescription.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity<LoginContract.Presenter> implements LoginContract.View {
@@ -31,6 +36,7 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     Button btn_login;
     @BindView(R.id.btn_register)
     Button btn_register;
+    SharedPreferenceUtil spUtils=SharedPreferenceUtil.getInstance();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +44,28 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
         ButterKnife.bind(this);
         mPresenter = new LoginPresenter(this);
         mPresenter.start();
+        init();
+
     }
 
     public void setPresenter(LoginPresenter presenter) {
         this.mPresenter = presenter;
     }
     @Override
+    public void init() {
+        et_username.setText(spUtils.getUsername());
+        if (spUtils.getIsRemeber()){
+            cb_password.setChecked(true);
+            et_password.setText(spUtils.getPassword());
+        }else {
+            cb_password.setChecked(false);
+        }
+    }
+    @Override
     public void navigateToMain() {
-
+        Intent intent =new Intent(getBaseContext(),MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override
@@ -62,7 +82,16 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
                 break;
             case R.id.btn_login:
                 TLog.log("执行登录");
-                mPresenter.login(et_password.getText().toString(),et_username.getText().toString());
+                if (cb_password.isChecked()){
+                    spUtils.setIsRemeber(true);
+                    spUtils.setUsername(et_username.getText().toString().trim());
+                    spUtils.setPassword(et_password.getText().toString().trim());
+                }else {
+                    spUtils.setIsRemeber(false);
+                    spUtils.setUsername(et_username.getText().toString().trim());
+                    spUtils.setPassword(null);
+                }
+                mPresenter.login(et_username.getText().toString(),et_password.getText().toString());
                 break;
             case R.id.btn_register:
                 navigateToRegister();
@@ -71,6 +100,15 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
                 break;
         }
     }
+
+@OnCheckedChanged(R.id.cb_password)
+public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+    if (!isChecked) {
+        ToastUtil.showShort(getApplicationContext(), "不记住密码");
+    } else {
+        ToastUtil.showShort(getApplicationContext(), "记住密码");
+    }
+}
 
 
     @Override
@@ -87,5 +125,9 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     public void showError(String error) {
         BaseApplication.showShortToast(error);
     }
+
+
+
+
 }
 

@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/bg_user_infor"
+        android:src="@mipmap/bg_user_infor"
         android:scaleType="fitStart"/>
     <LinearLayout
         android:layout_width="match_parent"

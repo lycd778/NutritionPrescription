@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiService {
-    public static final String URL_HOST ="http://123.57.143.76:8010/" ;//服务器端口
+    public static final String URL_HOST ="http://123.57.143.76:8090/" ;//服务器端口
     /**
      * 基础地址
      * 初始化 retroft

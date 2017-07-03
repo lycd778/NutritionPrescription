@@ -1,6 +1,7 @@
 package com.easyhealth365.nutritionprescription.ui.login;
 import com.easyhealth365.nutritionprescription.api.ApiService;
 import com.easyhealth365.nutritionprescription.beans.User;
+import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.utils.TLog;
 
 import org.reactivestreams.Subscriber;
@@ -20,6 +21,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     public LoginPresenter(LoginContract.View loginView) {
         this.loginView = loginView;
     }
+    SharedPreferenceUtil spUtils=SharedPreferenceUtil.getInstance();
     @Override
     public void login(String username, String password) {
           loginView.showProgress();
@@ -36,6 +38,10 @@ public class LoginPresenter implements LoginContract.Presenter {
                     @Override
                     public void onNext(User user) {
                         TLog.log(user.toString());
+                        spUtils.setUsername(user.getResults().getTelephone());
+                        spUtils.putUser(user);
+                        spUtils.setIsLogin(true);
+                        loginView.init();
                         loginView.navigateToMain();
                     }
 

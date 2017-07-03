@@ -16,7 +16,7 @@ public class SharedPreferenceUtil {
 
     // 用户名key
     public final static String KEY_NAME = "KEY_NAME";
-    public final static String KEY_AUTO = "KEY_AUTO";
+    public final static String KEY_Remeber = "KEY_Remeber";
     public final static String KEY_LOGIN = "KEY_LOGIN";
     public final static String KEY_LEVEL = "KEY_LEVEL";
     public final static String KEY_DELIVERY = "KEY_DELIVERY";
@@ -28,7 +28,6 @@ public class SharedPreferenceUtil {
     //
 
     /**
-     *
      * 初始化，一般在应用启动之后就要初始化
      *
      * @param context 此处的context要用application的全局上下文,
@@ -63,14 +62,14 @@ public class SharedPreferenceUtil {
         return sp;
     }
 
-    public synchronized void putAutoLogin(Boolean AutoLogin) {
+    public synchronized void setIsRemeber(Boolean isRemeber) {
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(KEY_AUTO, AutoLogin);
+        editor.putBoolean(KEY_Remeber, isRemeber);
         editor.commit();
     }
 
-    public synchronized Boolean getAutoLogin() {
-        Boolean flag = sp.getBoolean(KEY_AUTO, false);
+    public synchronized Boolean getIsRemeber() {
+        Boolean flag = sp.getBoolean(KEY_Remeber, false);
         Log.i("flag", flag + "flag");
         return flag;
     }
@@ -86,6 +85,29 @@ public class SharedPreferenceUtil {
         return flag;
     }
 
+    //记录用户名
+    public void setUsername(String username) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("pre_username", username);
+        editor.apply();
+    }
+
+    //读取用户名
+    public String getUsername() {
+        return sp.getString("pre_username", "");
+    }
+
+    //记录密码
+    public void setPassword(String password) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("pre_password", password);
+        editor.apply();
+    }
+    //读取密码
+    public String getPassword() {
+        return sp.getString("pre_password", "");
+    }
+
     public synchronized void putUser(User user) {
         SharedPreferences.Editor editor = sp.edit();
         String str = "";
@@ -99,22 +121,7 @@ public class SharedPreferenceUtil {
         spUser = user;
     }
 
-
-    //记录用户名
-    public void setUsername(String username){
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("pre_username",username);
-        editor.apply();
-    }
-
-    //读取用户名
-    public String getUsername(){
-        return sp.getString("pre_username","");
-    }
-
-
-    public synchronized User getUser()
-    {
+    public synchronized User getUser() {
         String str = sp.getString(SharedPreferenceUtil.KEY_NAME, "");
         if (TextUtils.isEmpty(str)) {
             return null;

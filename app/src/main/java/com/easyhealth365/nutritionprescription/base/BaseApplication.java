@@ -45,25 +45,6 @@ public class BaseApplication extends Application {
 
         SharedPreferenceUtil.initSharedPreference(getApplicationContext());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 防抖动 弹窗
      *
