@@ -1,109 +1,126 @@
 package com.easyhealth365.nutritionprescription.ui.fragment.plan;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.easyhealth365.nutritionprescription.R;
+import com.easyhealth365.nutritionprescription.base.BaseFragment;
+import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PlanFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PlanFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PlanFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private OnFragmentInteractionListener mListener;
 
-    public PlanFragment() {
-        // Required empty public constructor
-    }
+public class PlanFragment extends BaseFragment {
+    @BindView(R.id.vp_view)
+    ViewPager mViewPager;
+    @BindView(R.id.tabs)
+    TabLayout mTabLayout;
+    LayoutInflater mInflater;
+//    @BindView(R.id.circle_progress_view)
+//    CircleProgressView cpView;
+    private List<String> mTitleList = new ArrayList<>();//页卡标题集合
+    private View view1, view2;//页卡视图
+    private List<View> mViewList = new ArrayList<>();//页卡视图集合
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PlanFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PlanFragment newInstance(String param1, String param2) {
-        PlanFragment fragment = new PlanFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
+    private View view;
+    private static final String TAG = PlanFragment.class.getSimpleName();
+
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_plan, null);
         }
+        CircleProgressView cpView = (CircleProgressView)view.findViewById(R.id.circle_progress_view);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plan, container, false);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mInflater = LayoutInflater.from(getContext());
+        view1 = mInflater.inflate(R.layout.fragment_diet, null);
+        view2 = mInflater.inflate(R.layout.fragment_weight, null);
+
+        //添加页卡视图
+        mViewList.add(view1);
+        mViewList.add(view2);
+
+
+        //添加页卡标题
+        mTitleList.add("饮食");
+        mTitleList.add("体重");
+
+
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
+        mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
+        mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
+
+        mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
+        mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
+        // mTabLayout.setTabsFromPagerAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给Tabs设置适配器
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    //ViewPager适配器
+    class MyPagerAdapter extends PagerAdapter {
+        private List<View> mViewList;
+
+        public MyPagerAdapter(FragmentManager childFragmentManager, List<View> mViewList) {
+            this.mViewList = mViewList;
         }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        @Override
+        public int getCount() {
+            return mViewList.size();//页卡数
         }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;//官方推荐写法
+        }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            container.addView(mViewList.get(position));//添加页卡
+            return mViewList.get(position);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView(mViewList.get(position));//删除页卡
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTitleList.get(position);//页卡标题
+        }
+
     }
 }

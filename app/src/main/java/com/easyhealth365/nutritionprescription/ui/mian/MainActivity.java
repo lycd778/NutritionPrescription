@@ -15,6 +15,7 @@ import com.easyhealth365.nutritionprescription.base.BaseActivity;
 import com.easyhealth365.nutritionprescription.ui.fragment.food.FoodFragment;
 import com.easyhealth365.nutritionprescription.ui.fragment.plan.PlanFragment;
 import com.easyhealth365.nutritionprescription.ui.fragment.user.UserFragment;
+import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +42,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         ButterKnife.bind(this);
         mPresenter = new MainPresenter(this);
         mPresenter.start();
+
     }
 
     @Override

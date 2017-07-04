@@ -4,8 +4,9 @@ package com.easyhealth365.nutritionprescription.beans;
  * Created by lingxiao-Ching on 2017/6/29.
  */
 
-public class User {
+public class User extends BaseBean {
 
+    private static final long serialVersionUID = 8427255712080006337L;
     /**
      * status : 103
      * message : 登录成功
@@ -40,7 +41,9 @@ public class User {
         this.results = results;
     }
 
-    public static class ResultsBean {
+    public static class ResultsBean extends BaseBean{
+
+        private static final long serialVersionUID = -8809061807184774285L;
         /**
          * access_token : 8MJ3BKL1736N26e54be2-e565-43f2-a0f9-b3f30309ac93X8T5WE201S3A5Z6BC35RIE0HD77TQW8EE960OG952
          * userid : 26e54be2-e565-43f2-a0f9-b3f30309ac93

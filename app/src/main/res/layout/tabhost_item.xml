@@ -10,20 +10,22 @@
 <FrameLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
+
     <ImageView
         android:id="@+id/imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:focusable="false"
         android:scaleType="centerInside"
-        android:src="@mipmap/tab_home_normal"></ImageView>
+        android:src="@mipmap/tab_home_normal" />
 
     <TextView
         android:id="@+id/main_tab_unread_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="6dp"
+        android:textSize="12sp"
         android:padding="2dp"
         android:textColor="@android:color/white"
         android:visibility="invisible"
@@ -32,11 +34,12 @@
         android:layout_toEndOf="@+id/imageview"
         android:layout_gravity="right|top" />
 </FrameLayout>
+
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@drawable/common_tab_color"
-        android:textSize="10sp"></TextView>
+        android:textSize="10sp" />
 
 </LinearLayout>  

@@ -1,75 +1,107 @@
 package com.easyhealth365.nutritionprescription.beans;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lingxiao-Ching on 2017/7/3.
  */
 
-public class Plan {
+public class Plan extends BaseBean{
+
+    private static final long serialVersionUID = 1353203288970544275L;
     /**
-     * nourishmentPlanId : 8d317c21-64e9-464b-9cfe-6c3e5dca4cec
-     * height : 175
-     * weight : 80
-     * bmi : 26.1
-     * TargetL : 长期目标
-     * Target : 控制心血管疾病
-     * targetWeight : 70
-     * strengthFactor : 25
-     * calorie : 1750.0
-     * foodExchange : 19
-     * CHO : 70
-     * PR : 20
-     * fat : 10
-     * vegetable : 6
-     * fruit : 3
-     * bread : 4
-     * bean : 1
-     * milk : 2
-     * meat : 1
-     * oil : 1
-     * nut : 1
-     * assignment : 2:2:1
-     * breakfast_plan : 8
-     * breakfast_addition_plan : 0
-     * lunch_plan : 8
-     * lunch_addition_plan : 0
-     * dinner_plan : 3
-     * dinner_addition_plan : 0
+     * nourishmentPlanId : 64b9e307-bdb3-46f8-9c57-8af5ac1d2ae3
+     * TargetL : 短期目标
+     * Target : 戒烟
+     * targetWeight : 200
+     * strengthFactor : 50
+     * calorie : 10000.0
+     * foodExchange : 111
+     * CHO : 30
+     * PR : 30
+     * fat : 40
+     * vegetable : 10
+     * fruit : 10
+     * bread : 13
+     * bean : 15
+     * milk : 15
+     * meat : 18
+     * oil : 15
+     * nut : 15
+     * assignment : 1:1:1
+     * breakfast_plan : 20
+     * breakfast_addition_plan : 20
+     * lunch_plan : 20
+     * lunch_addition_plan : 20
+     * dinner_plan : 20
+     * dinner_addition_plan : 11
      * breakfast_vegetable : 1
-     * lunch_vegetable : 5
-     * dinner_vegetable : 0
+     * breakfast_addition_vegetable : 1
+     * lunch_vegetable : 2
+     * lunch_addition_vegetable : 1
+     * dinner_vegetable : 3
+     * dinner_addition_vegetable : 2
      * breakfast_fruit : 1
-     * lunch_fruit : 1
-     * dinner_fruit : 1
-     * breakfast_bread : 1
+     * breakfast_addition_fruit : 3
+     * lunch_fruit : 2
+     * lunch_addition_fruit : 1
+     * dinner_fruit : 2
+     * dinner_addition_fruit : 1
+     * breakfast_bread : 4
+     * breakfast_addition_bread : 3
      * lunch_bread : 2
-     * dinner_bread : 1
-     * breakfast_bean : 1
-     * lunch_bean : 0
-     * dinner_bean : 0
-     * breakfast_milk : 1
-     * lunch_milk : 0
-     * dinner_milk : 1
-     * breakfast_meat : 1
-     * lunch_meat : 0
-     * dinner_meat : 0
-     * breakfast_oil : 0
-     * dinner_oil : 1
-     * breakfast_nut : 1
-     * dinner_nut : 0
-     * foodProhibited : 猪肉
-     * remark : 多运动，忌暴饮暴食
-     * checkTime : 2017-07-03T11:09:00
-     * foodRecommend : 黄瓜，香蕉
+     * lunch_addition_bread : 1
+     * dinner_bread : 2
+     * dinner_addition_bread : 1
+     * breakfast_bean : 2
+     * breakfast_addition_bean : 2
+     * lunch_bean : 5
+     * lunch_addition_bean : 3
+     * dinner_bean : 2
+     * dinner_addition_bean : 1
+     * breakfast_milk : 5
+     * breakfast_addition_milk : 2
+     * lunch_milk : 2
+     * lunch_addition_milk : 2
+     * dinner_milk : 2
+     * dinner_addition_milk : 2
+     * breakfast_meat : 2
+     * breakfast_addition_meat : 4
+     * lunch_meat : 2
+     * lunch_addition_meat : 4
+     * dinner_meat : 4
+     * dinner_addition_meat : 2
+     * breakfast_oil : 2
+     * breakfast_addition_oil : 3
+     * lunch_oil : 3
+     * lunch_addition_oil : 3
+     * dinner_oil : 3
+     * dinner_addition_oil : 1
+     * breakfast_nut : 3
+     * breakfast_addition_nut : 2
+     * lunch_nut : 2
+     * lunch_addition_nut : 5
+     * dinner_nut : 2
+     * dinner_addition_nut : 1
+     * foodProhibited : 韭菜
+     * remark : 白菜
+     * checkTime : 2017-07-04T15:30:00
+     * foodRecommend : 青菜
      * template_id : 00000000-0000-0000-0000-000000000000
      * food_addition : 0
-     * auto_dinner : true
-     * need_print : true
+     * auto_dinner : false
+     * need_print : false
      */
 
     private String nourishmentPlanId;
-    private String height;
-    private String weight;
-    private String bmi;
     private String TargetL;
     private String Target;
     private String targetWeight;
@@ -95,27 +127,53 @@ public class Plan {
     private int dinner_plan;
     private int dinner_addition_plan;
     private int breakfast_vegetable;
+    private int breakfast_addition_vegetable;
     private int lunch_vegetable;
+    private int lunch_addition_vegetable;
     private int dinner_vegetable;
+    private int dinner_addition_vegetable;
     private int breakfast_fruit;
+    private int breakfast_addition_fruit;
     private int lunch_fruit;
+    private int lunch_addition_fruit;
     private int dinner_fruit;
+    private int dinner_addition_fruit;
     private int breakfast_bread;
+    private int breakfast_addition_bread;
     private int lunch_bread;
+    private int lunch_addition_bread;
     private int dinner_bread;
+    private int dinner_addition_bread;
     private int breakfast_bean;
+    private int breakfast_addition_bean;
     private int lunch_bean;
+    private int lunch_addition_bean;
     private int dinner_bean;
+    private int dinner_addition_bean;
     private int breakfast_milk;
+    private int breakfast_addition_milk;
     private int lunch_milk;
+    private int lunch_addition_milk;
     private int dinner_milk;
+    private int dinner_addition_milk;
     private int breakfast_meat;
+    private int breakfast_addition_meat;
     private int lunch_meat;
+    private int lunch_addition_meat;
     private int dinner_meat;
+    private int dinner_addition_meat;
     private int breakfast_oil;
+    private int breakfast_addition_oil;
+    private int lunch_oil;
+    private int lunch_addition_oil;
     private int dinner_oil;
+    private int dinner_addition_oil;
     private int breakfast_nut;
+    private int breakfast_addition_nut;
+    private int lunch_nut;
+    private int lunch_addition_nut;
     private int dinner_nut;
+    private int dinner_addition_nut;
     private String foodProhibited;
     private String remark;
     private String checkTime;
@@ -125,36 +183,30 @@ public class Plan {
     private boolean auto_dinner;
     private boolean need_print;
 
+    public static List<Plan> arrayPlanFromData(String str, String key) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(str);
+            Type listType = new TypeToken<ArrayList<Plan>>() {
+            }.getType();
+
+            return new Gson().fromJson(jsonObject.getString(str), listType);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList();
+
+
+    }
+
     public String getNourishmentPlanId() {
         return nourishmentPlanId;
     }
 
     public void setNourishmentPlanId(String nourishmentPlanId) {
         this.nourishmentPlanId = nourishmentPlanId;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
-    public String getBmi() {
-        return bmi;
-    }
-
-    public void setBmi(String bmi) {
-        this.bmi = bmi;
     }
 
     public String getTargetL() {
@@ -357,12 +409,28 @@ public class Plan {
         this.breakfast_vegetable = breakfast_vegetable;
     }
 
+    public int getBreakfast_addition_vegetable() {
+        return breakfast_addition_vegetable;
+    }
+
+    public void setBreakfast_addition_vegetable(int breakfast_addition_vegetable) {
+        this.breakfast_addition_vegetable = breakfast_addition_vegetable;
+    }
+
     public int getLunch_vegetable() {
         return lunch_vegetable;
     }
 
     public void setLunch_vegetable(int lunch_vegetable) {
         this.lunch_vegetable = lunch_vegetable;
+    }
+
+    public int getLunch_addition_vegetable() {
+        return lunch_addition_vegetable;
+    }
+
+    public void setLunch_addition_vegetable(int lunch_addition_vegetable) {
+        this.lunch_addition_vegetable = lunch_addition_vegetable;
     }
 
     public int getDinner_vegetable() {
@@ -373,12 +441,28 @@ public class Plan {
         this.dinner_vegetable = dinner_vegetable;
     }
 
+    public int getDinner_addition_vegetable() {
+        return dinner_addition_vegetable;
+    }
+
+    public void setDinner_addition_vegetable(int dinner_addition_vegetable) {
+        this.dinner_addition_vegetable = dinner_addition_vegetable;
+    }
+
     public int getBreakfast_fruit() {
         return breakfast_fruit;
     }
 
     public void setBreakfast_fruit(int breakfast_fruit) {
         this.breakfast_fruit = breakfast_fruit;
+    }
+
+    public int getBreakfast_addition_fruit() {
+        return breakfast_addition_fruit;
+    }
+
+    public void setBreakfast_addition_fruit(int breakfast_addition_fruit) {
+        this.breakfast_addition_fruit = breakfast_addition_fruit;
     }
 
     public int getLunch_fruit() {
@@ -389,12 +473,28 @@ public class Plan {
         this.lunch_fruit = lunch_fruit;
     }
 
+    public int getLunch_addition_fruit() {
+        return lunch_addition_fruit;
+    }
+
+    public void setLunch_addition_fruit(int lunch_addition_fruit) {
+        this.lunch_addition_fruit = lunch_addition_fruit;
+    }
+
     public int getDinner_fruit() {
         return dinner_fruit;
     }
 
     public void setDinner_fruit(int dinner_fruit) {
         this.dinner_fruit = dinner_fruit;
+    }
+
+    public int getDinner_addition_fruit() {
+        return dinner_addition_fruit;
+    }
+
+    public void setDinner_addition_fruit(int dinner_addition_fruit) {
+        this.dinner_addition_fruit = dinner_addition_fruit;
     }
 
     public int getBreakfast_bread() {
@@ -405,12 +505,28 @@ public class Plan {
         this.breakfast_bread = breakfast_bread;
     }
 
+    public int getBreakfast_addition_bread() {
+        return breakfast_addition_bread;
+    }
+
+    public void setBreakfast_addition_bread(int breakfast_addition_bread) {
+        this.breakfast_addition_bread = breakfast_addition_bread;
+    }
+
     public int getLunch_bread() {
         return lunch_bread;
     }
 
     public void setLunch_bread(int lunch_bread) {
         this.lunch_bread = lunch_bread;
+    }
+
+    public int getLunch_addition_bread() {
+        return lunch_addition_bread;
+    }
+
+    public void setLunch_addition_bread(int lunch_addition_bread) {
+        this.lunch_addition_bread = lunch_addition_bread;
     }
 
     public int getDinner_bread() {
@@ -421,12 +537,28 @@ public class Plan {
         this.dinner_bread = dinner_bread;
     }
 
+    public int getDinner_addition_bread() {
+        return dinner_addition_bread;
+    }
+
+    public void setDinner_addition_bread(int dinner_addition_bread) {
+        this.dinner_addition_bread = dinner_addition_bread;
+    }
+
     public int getBreakfast_bean() {
         return breakfast_bean;
     }
 
     public void setBreakfast_bean(int breakfast_bean) {
         this.breakfast_bean = breakfast_bean;
+    }
+
+    public int getBreakfast_addition_bean() {
+        return breakfast_addition_bean;
+    }
+
+    public void setBreakfast_addition_bean(int breakfast_addition_bean) {
+        this.breakfast_addition_bean = breakfast_addition_bean;
     }
 
     public int getLunch_bean() {
@@ -437,12 +569,28 @@ public class Plan {
         this.lunch_bean = lunch_bean;
     }
 
+    public int getLunch_addition_bean() {
+        return lunch_addition_bean;
+    }
+
+    public void setLunch_addition_bean(int lunch_addition_bean) {
+        this.lunch_addition_bean = lunch_addition_bean;
+    }
+
     public int getDinner_bean() {
         return dinner_bean;
     }
 
     public void setDinner_bean(int dinner_bean) {
         this.dinner_bean = dinner_bean;
+    }
+
+    public int getDinner_addition_bean() {
+        return dinner_addition_bean;
+    }
+
+    public void setDinner_addition_bean(int dinner_addition_bean) {
+        this.dinner_addition_bean = dinner_addition_bean;
     }
 
     public int getBreakfast_milk() {
@@ -453,12 +601,28 @@ public class Plan {
         this.breakfast_milk = breakfast_milk;
     }
 
+    public int getBreakfast_addition_milk() {
+        return breakfast_addition_milk;
+    }
+
+    public void setBreakfast_addition_milk(int breakfast_addition_milk) {
+        this.breakfast_addition_milk = breakfast_addition_milk;
+    }
+
     public int getLunch_milk() {
         return lunch_milk;
     }
 
     public void setLunch_milk(int lunch_milk) {
         this.lunch_milk = lunch_milk;
+    }
+
+    public int getLunch_addition_milk() {
+        return lunch_addition_milk;
+    }
+
+    public void setLunch_addition_milk(int lunch_addition_milk) {
+        this.lunch_addition_milk = lunch_addition_milk;
     }
 
     public int getDinner_milk() {
@@ -469,12 +633,28 @@ public class Plan {
         this.dinner_milk = dinner_milk;
     }
 
+    public int getDinner_addition_milk() {
+        return dinner_addition_milk;
+    }
+
+    public void setDinner_addition_milk(int dinner_addition_milk) {
+        this.dinner_addition_milk = dinner_addition_milk;
+    }
+
     public int getBreakfast_meat() {
         return breakfast_meat;
     }
 
     public void setBreakfast_meat(int breakfast_meat) {
         this.breakfast_meat = breakfast_meat;
+    }
+
+    public int getBreakfast_addition_meat() {
+        return breakfast_addition_meat;
+    }
+
+    public void setBreakfast_addition_meat(int breakfast_addition_meat) {
+        this.breakfast_addition_meat = breakfast_addition_meat;
     }
 
     public int getLunch_meat() {
@@ -485,12 +665,28 @@ public class Plan {
         this.lunch_meat = lunch_meat;
     }
 
+    public int getLunch_addition_meat() {
+        return lunch_addition_meat;
+    }
+
+    public void setLunch_addition_meat(int lunch_addition_meat) {
+        this.lunch_addition_meat = lunch_addition_meat;
+    }
+
     public int getDinner_meat() {
         return dinner_meat;
     }
 
     public void setDinner_meat(int dinner_meat) {
         this.dinner_meat = dinner_meat;
+    }
+
+    public int getDinner_addition_meat() {
+        return dinner_addition_meat;
+    }
+
+    public void setDinner_addition_meat(int dinner_addition_meat) {
+        this.dinner_addition_meat = dinner_addition_meat;
     }
 
     public int getBreakfast_oil() {
@@ -501,12 +697,44 @@ public class Plan {
         this.breakfast_oil = breakfast_oil;
     }
 
+    public int getBreakfast_addition_oil() {
+        return breakfast_addition_oil;
+    }
+
+    public void setBreakfast_addition_oil(int breakfast_addition_oil) {
+        this.breakfast_addition_oil = breakfast_addition_oil;
+    }
+
+    public int getLunch_oil() {
+        return lunch_oil;
+    }
+
+    public void setLunch_oil(int lunch_oil) {
+        this.lunch_oil = lunch_oil;
+    }
+
+    public int getLunch_addition_oil() {
+        return lunch_addition_oil;
+    }
+
+    public void setLunch_addition_oil(int lunch_addition_oil) {
+        this.lunch_addition_oil = lunch_addition_oil;
+    }
+
     public int getDinner_oil() {
         return dinner_oil;
     }
 
     public void setDinner_oil(int dinner_oil) {
         this.dinner_oil = dinner_oil;
+    }
+
+    public int getDinner_addition_oil() {
+        return dinner_addition_oil;
+    }
+
+    public void setDinner_addition_oil(int dinner_addition_oil) {
+        this.dinner_addition_oil = dinner_addition_oil;
     }
 
     public int getBreakfast_nut() {
@@ -517,12 +745,44 @@ public class Plan {
         this.breakfast_nut = breakfast_nut;
     }
 
+    public int getBreakfast_addition_nut() {
+        return breakfast_addition_nut;
+    }
+
+    public void setBreakfast_addition_nut(int breakfast_addition_nut) {
+        this.breakfast_addition_nut = breakfast_addition_nut;
+    }
+
+    public int getLunch_nut() {
+        return lunch_nut;
+    }
+
+    public void setLunch_nut(int lunch_nut) {
+        this.lunch_nut = lunch_nut;
+    }
+
+    public int getLunch_addition_nut() {
+        return lunch_addition_nut;
+    }
+
+    public void setLunch_addition_nut(int lunch_addition_nut) {
+        this.lunch_addition_nut = lunch_addition_nut;
+    }
+
     public int getDinner_nut() {
         return dinner_nut;
     }
 
     public void setDinner_nut(int dinner_nut) {
         this.dinner_nut = dinner_nut;
+    }
+
+    public int getDinner_addition_nut() {
+        return dinner_addition_nut;
+    }
+
+    public void setDinner_addition_nut(int dinner_addition_nut) {
+        this.dinner_addition_nut = dinner_addition_nut;
     }
 
     public String getFoodProhibited() {

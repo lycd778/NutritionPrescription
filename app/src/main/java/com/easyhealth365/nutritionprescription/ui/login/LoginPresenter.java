@@ -37,7 +37,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onNext(User user) {
-                        TLog.log(user.toString());
+                        TLog.log("status: "+user.getStatus()+" message: "+user.getMessage());
                         spUtils.setUsername(user.getResults().getTelephone());
                         spUtils.putUser(user);
                         spUtils.setIsLogin(true);
@@ -47,9 +47,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onError(Throwable t) {
-                        TLog.log(t.getMessage().toString());
+                        TLog.log(t.getMessage());
                         loginView.hideProgress();
-                        loginView.showError(t.getMessage().toString());
+                        loginView.showError(t.getMessage());
                     }
 
                     @Override
