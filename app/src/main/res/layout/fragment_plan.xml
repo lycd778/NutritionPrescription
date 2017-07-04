@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.easyhealth365.nutritionprescription.ui.fragment.plan.PlanFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
@@ -24,6 +17,7 @@
         android:id="@+id/vp_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

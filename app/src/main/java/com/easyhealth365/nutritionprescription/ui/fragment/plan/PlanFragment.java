@@ -42,11 +42,9 @@ public class PlanFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_plan, null);
+            view = inflater.inflate(R.layout.fragment_plan, container, false);
         }
-        CircleProgressView cpView = (CircleProgressView)view.findViewById(R.id.circle_progress_view);
         ButterKnife.bind(this, view);
-
         return view;
     }
 
@@ -63,7 +61,8 @@ public class PlanFragment extends BaseFragment {
         mInflater = LayoutInflater.from(getContext());
         view1 = mInflater.inflate(R.layout.fragment_diet, null);
         view2 = mInflater.inflate(R.layout.fragment_weight, null);
-
+        CircleProgressView cpView = (CircleProgressView)view1.findViewById(R.id.circle_progress_view);
+        cpView.setProgress(80);
         //添加页卡视图
         mViewList.add(view1);
         mViewList.add(view2);
