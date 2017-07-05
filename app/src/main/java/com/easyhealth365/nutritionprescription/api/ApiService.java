@@ -21,7 +21,7 @@ public class ApiService {
      */
     public static Retrofit mRetrofit;
 
-    public static Retrofit retrofit(String url) {
+    public static Retrofit retrofit() {
         if (mRetrofit == null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             if (BuildConfig.DEBUG) {
@@ -33,7 +33,7 @@ public class ApiService {
             }
             OkHttpClient okHttpClient = builder.build();
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl(url)
+                    .baseUrl(URL_HOST)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
@@ -41,16 +41,14 @@ public class ApiService {
         }
         return mRetrofit;
     }
-
+    private static final ApiStores apiStores = retrofit().create(ApiStores.class);
     /**
      * 登录,返回,用的是json格式的post
      *
      *
      */
     public static Flowable<User> userLogin(String username, String password) {
-        ApiStores apiStores = retrofit(URL_HOST).create(ApiStores.class);
-        Flowable<User> userFlo=apiStores.userLogin(username,password);
-        return  userFlo;
+        return apiStores.userLogin(username,password);
     }
 
     /**
@@ -59,9 +57,8 @@ public class ApiService {
      *
      */
     public static Flowable<PlanList> getPlanList(String patientId, String access_token,String hospital_url) {
-        ApiStores apiStores = retrofit(hospital_url).create(ApiStores.class);
-        Flowable<PlanList> planlistFlo=apiStores.getPlanList(patientId,access_token);
-        return  planlistFlo;
+        String url=hospital_url+"/api/nourishmentPlan/GetList/"+patientId+"?";
+        return apiStores.getPlanList(url,access_token);
     }
 
 }

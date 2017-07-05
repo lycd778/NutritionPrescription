@@ -47,7 +47,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onError(Throwable t) {
-                        TLog.log(t.getMessage());
                         loginView.hideProgress();
                         loginView.showError(t.getMessage());
                     }

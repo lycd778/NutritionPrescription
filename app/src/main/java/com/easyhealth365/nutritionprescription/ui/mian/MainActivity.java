@@ -12,9 +12,12 @@ import android.widget.TextView;
 import com.easyhealth365.nutritionprescription.AppManager;
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseActivity;
+import com.easyhealth365.nutritionprescription.base.BaseApplication;
+import com.easyhealth365.nutritionprescription.beans.User;
 import com.easyhealth365.nutritionprescription.ui.fragment.food.FoodFragment;
 import com.easyhealth365.nutritionprescription.ui.fragment.plan.PlanFragment;
 import com.easyhealth365.nutritionprescription.ui.fragment.user.UserFragment;
+import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
 import butterknife.BindView;
@@ -29,6 +32,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     @BindView(android.R.id.tabhost)
     FragmentTabHost mTabHost;
     TabHost.TabSpec tabSpec0;
+    SharedPreferenceUtil spUtils=SharedPreferenceUtil.getInstance();
     private TextView tv_count;
     private Class fragmentArray[] = {PlanFragment.class, FoodFragment.class, UserFragment.class};
     private String tabHostTagArray[] = {"营养处方",  "饮食管理","个人信息"};
@@ -42,7 +46,24 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         ButterKnife.bind(this);
         mPresenter = new MainPresenter(this);
         mPresenter.start();
+        User user=spUtils.getUser();
+        mPresenter.loadPlanlist(user.getResults().getUserid(),user.getResults().getAccess_token(),user.getResults().getHospitalBaseUrl());
 
+    }
+
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showError(String error) {
+        BaseApplication.showShortToast(error);
     }
 
     @Override
@@ -71,6 +92,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         };
         mTabHost.setOnTabChangedListener(tabChangeListener);
     }
+
     /**
      * 给Tab按钮设置图标和文字
      */

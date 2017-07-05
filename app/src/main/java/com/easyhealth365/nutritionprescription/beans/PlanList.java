@@ -3,9 +3,6 @@ package com.easyhealth365.nutritionprescription.beans;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +13,10 @@ import java.util.List;
 
 public class PlanList extends BaseBean{
 
-    private static final long serialVersionUID = 8956032978505646804L;
     /**
-     * nourishmentPlanId : 8d317c21-64e9-464b-9cfe-6c3e5dca4cec
-     * checkTime : 2017-07-04T12:09:00
-     * foodExchange : 23
+     * nourishmentPlanId : 64b9e307-bdb3-46f8-9c57-8af5ac1d2ae3
+     * checkTime : 2017-07-04T15:30:00
+     * foodExchange : 111
      * realName : 开发霄Test
      */
 
@@ -29,22 +25,12 @@ public class PlanList extends BaseBean{
     private String foodExchange;
     private String realName;
 
-    public static List<PlanList> arrayPlanListFromData(String str, String key) {
+    public static List<PlanList> arrayPlanListFromData(String str) {
 
-        try {
-            JSONObject jsonObject = new JSONObject(str);
-            Type listType = new TypeToken<ArrayList<PlanList>>() {
-            }.getType();
+        Type listType = new TypeToken<ArrayList<PlanList>>() {
+        }.getType();
 
-            return new Gson().fromJson(jsonObject.getString(str), listType);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList();
-
-
+        return new Gson().fromJson(str, listType);
     }
 
     public String getNourishmentPlanId() {
@@ -77,5 +63,15 @@ public class PlanList extends BaseBean{
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    @Override
+    public String toString() {
+        return "PlanList{" +
+                "nourishmentPlanId='" + nourishmentPlanId + '\'' +
+                ", checkTime='" + checkTime + '\'' +
+                ", foodExchange='" + foodExchange + '\'' +
+                ", realName='" + realName + '\'' +
+                '}';
     }
 }

@@ -8,14 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitStart"
-        android:src="@mipmap/bg_diet" />
+        android:adjustViewBounds="true"
+        android:src="@mipmap/bg_diet"/>
 
     <com.easyhealth365.nutritionprescription.view.CircleProgressView
         android:id="@+id/circle_progress_view"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_circle"
         cpv:arcWidth="15dp"
         cpv:endColor="#126b94"
         cpv:labelText="学习进度"

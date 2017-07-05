@@ -10,11 +10,15 @@ import com.easyhealth365.nutritionprescription.base.BaseView;
 public interface MainContract {
 
     interface View extends BaseView {
+        void showProgress();
+        void hideProgress();
+        void showError(String error);
         void initTabHost();
     }
 
     interface Presenter extends BasePresenter {
-
+        void loadPlanlist(String patientId,String access_token,String hospital_url);
+        void onDestroy();
     }
 
 }

@@ -8,6 +8,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * Created by lingxiao-Ching on 2017/6/29.
@@ -26,8 +28,8 @@ interface ApiStores {
 /**
  * 获取处方列表(json get)
  * */
-    @GET("/api/nourishmentPlan/GetList/{patientId}?access_token={access_token}")
-    Flowable<PlanList> getPlanList(@Path("patientId") String patientId,@Path("access_token") String access_token);
+    @GET
+    Flowable<PlanList> getPlanList(@Url String url,@Query("access_token") String access_token);
 }
 
 

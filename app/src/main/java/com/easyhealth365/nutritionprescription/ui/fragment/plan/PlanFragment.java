@@ -28,8 +28,6 @@ public class PlanFragment extends BaseFragment {
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
     LayoutInflater mInflater;
-//    @BindView(R.id.circle_progress_view)
-//    CircleProgressView cpView;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private View view1, view2;//页卡视图
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
@@ -42,7 +40,7 @@ public class PlanFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_plan, container, false);
+            view = inflater.inflate(R.layout.fragment_plan, null);
         }
         ButterKnife.bind(this, view);
         return view;
@@ -57,29 +55,27 @@ public class PlanFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-
         mInflater = LayoutInflater.from(getContext());
-        view1 = mInflater.inflate(R.layout.fragment_diet, null);
-        view2 = mInflater.inflate(R.layout.fragment_weight, null);
-        CircleProgressView cpView = (CircleProgressView)view1.findViewById(R.id.circle_progress_view);
-        cpView.setProgress(80);
-        //添加页卡视图
-        mViewList.add(view1);
-        mViewList.add(view2);
+        if (view1 == null && view2 == null) {
+            view1 = mInflater.inflate(R.layout.fragment_diet, null);
+            view2 = mInflater.inflate(R.layout.fragment_weight, null);
+            CircleProgressView cpView = (CircleProgressView) view1.findViewById(R.id.circle_progress_view);
+            cpView.setProgress(80);
+            //添加页卡视图
+            mViewList.add(view1);
+            mViewList.add(view2);
+            //添加页卡标题
+            mTitleList.add("饮食");
+            mTitleList.add("体重");
 
 
-        //添加页卡标题
-        mTitleList.add("饮食");
-        mTitleList.add("体重");
+            mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
+            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
+            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
 
-
-        mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
-        mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
-        mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
-
-        mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
-        mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
-        // mTabLayout.setTabsFromPagerAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给Tabs设置适配器
+            mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
+            mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
+        }
     }
 
     @Override
