@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/red"
         app:tabSelectedTextColor="@color/red"
-        app:tabTextColor="@color/black" />
+        app:tabTextColor="@color/black"
+        app:tabIndicatorHeight="0dp"/>
 
     <!--可滑动的布局内容-->
     <com.easyhealth365.nutritionprescription.view.WrapContentHeightViewPager

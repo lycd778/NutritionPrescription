@@ -31,8 +31,6 @@ public class PlanFragment extends BaseFragment {
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private View view1, view2;//页卡视图
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
-
-
     private View view;
     private static final String TAG = PlanFragment.class.getSimpleName();
 
