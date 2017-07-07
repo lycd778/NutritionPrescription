@@ -1,4 +1,4 @@
-package com.easyhealth365.nutritionprescription.ui.fragment.food;
+package com.easyhealth365.nutritionprescription.ui.food;
 
 
 import android.os.Bundle;
@@ -9,8 +9,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
+
 
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseFragment;
@@ -26,9 +28,11 @@ public class FoodFragment extends BaseFragment {
     ViewPager mViewPager;
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
+
     LayoutInflater mInflater;
+
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
-    private View view1, view2;//页卡视图
+    private View viewB, viewL;//页卡视图
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
     private View view;
     private static final String TAG = FoodFragment.class.getSimpleName();
@@ -54,17 +58,15 @@ public class FoodFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         mInflater = LayoutInflater.from(getContext());
-        if (view1 == null && view2 == null) {
-            view1 = mInflater.inflate(R.layout.fragment_diet, null);
-            view2 = mInflater.inflate(R.layout.fragment_weight, null);
+        if (viewB == null && viewL == null) {
+            viewB = mInflater.inflate(R.layout.fragment_breakfast, null);
+            viewL = mInflater.inflate(R.layout.fragment_weight, null);
             //添加页卡视图
-            mViewList.add(view1);
-            mViewList.add(view2);
+            mViewList.add(viewB);
+            mViewList.add(viewL);
             //添加页卡标题
-            mTitleList.add("饮食");
+            mTitleList.add("早餐");
             mTitleList.add("体重");
-
-
             mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
             mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
             mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
@@ -78,6 +80,7 @@ public class FoodFragment extends BaseFragment {
     public void initView() {
 
     }
+
     //ViewPager适配器
     class MyPagerAdapter extends PagerAdapter {
         private List<View> mViewList;
@@ -112,5 +115,8 @@ public class FoodFragment extends BaseFragment {
             return mTitleList.get(position);//页卡标题
         }
 
+
+
     }
+
 }

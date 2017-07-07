@@ -1,4 +1,4 @@
-package com.easyhealth365.nutritionprescription.ui.fragment.plan;
+package com.easyhealth365.nutritionprescription.ui.plan;
 
 
 import android.os.Bundle;

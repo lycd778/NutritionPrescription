@@ -14,11 +14,10 @@ import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseActivity;
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
 import com.easyhealth365.nutritionprescription.beans.User;
-import com.easyhealth365.nutritionprescription.ui.fragment.food.FoodFragment;
-import com.easyhealth365.nutritionprescription.ui.fragment.plan.PlanFragment;
-import com.easyhealth365.nutritionprescription.ui.fragment.user.UserFragment;
+import com.easyhealth365.nutritionprescription.ui.food.FoodFragment;
+import com.easyhealth365.nutritionprescription.ui.plan.PlanFragment;
+import com.easyhealth365.nutritionprescription.ui.user.UserFragment;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
-import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

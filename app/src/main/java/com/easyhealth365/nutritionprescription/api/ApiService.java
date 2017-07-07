@@ -3,6 +3,8 @@ import com.easyhealth365.nutritionprescription.BuildConfig;
 import com.easyhealth365.nutritionprescription.beans.PlanList;
 import com.easyhealth365.nutritionprescription.beans.User;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Flowable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -31,7 +33,10 @@ public class ApiService {
                 //设置 Debug Log 模式
                 builder.addInterceptor(loggingInterceptor);
             }
-            OkHttpClient okHttpClient = builder.build();
+            OkHttpClient okHttpClient = builder
+                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .readTimeout(20, TimeUnit.SECONDS)
+                    .build();
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(URL_HOST)
                     .addConverterFactory(GsonConverterFactory.create())
