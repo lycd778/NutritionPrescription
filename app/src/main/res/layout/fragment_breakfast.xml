@@ -10,27 +10,70 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
-        <com.easyhealth365.nutritionprescription.view.MutiProgress
-            android:id="@+id/mp_1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            app:currNodeNO="5"
-            app:currNodeState="1"
-            app:nodeRadius="10dp"
-            app:nodesNum="7"
-            app:processingLineColor="#348fff"
-            app:progresFailDrawable="@mipmap/ic_error"
-            app:progresSuccDrawable="@mipmap/ic_checked"
-            app:progressingDrawable="@mipmap/ic_completed"
-            app:unprogressingDrawable="@mipmap/ic_round_ddd" />
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/tips" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="小贴士" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="7月5日" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="7.5dp"
+                android:layout_marginEnd="8dp"
+                android:max="7"
+                android:progress="6"
+                android:progressDrawable="@drawable/progressbar"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
@@ -42,6 +85,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:orientation="vertical">
 
                 <TextView
@@ -52,14 +96,13 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:gravity="center_horizontal">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@mipmap/carbohydrate01" />
+                        android:src="@mipmap/carbohydrate01"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -483,6 +526,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -493,7 +537,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+
                     android:gravity="center_horizontal">
 
                     <ImageView
@@ -923,6 +967,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -933,7 +978,6 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:gravity="center_horizontal">
 
                     <ImageView

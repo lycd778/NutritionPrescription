@@ -7,8 +7,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
     >
-
-
     <FrameLayout
         android:id="@+id/realtabcontent"
         android:layout_width="match_parent"

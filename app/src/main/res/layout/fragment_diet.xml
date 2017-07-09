@@ -20,7 +20,7 @@
         android:background="@drawable/shape_circle"
         cpv:arcWidth="15dp"
         cpv:endColor="#126b94"
-        cpv:labelText="学习进度"
+        cpv:labelText="55K"
         cpv:labelTextSize="10sp"
         cpv:progressTextSize="30sp"
         cpv:scaleCount="1"

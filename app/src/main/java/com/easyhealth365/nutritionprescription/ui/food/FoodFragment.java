@@ -24,15 +24,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FoodFragment extends BaseFragment {
-    @BindView(R.id.vp_view)
+    @BindView(R.id.vp_view_food)
     ViewPager mViewPager;
-    @BindView(R.id.tabs)
+    @BindView(R.id.tabs_food)
     TabLayout mTabLayout;
 
     LayoutInflater mInflater;
 
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
-    private View viewB, viewL;//页卡视图
+    private View viewB, viewL,viewS,viewBA,viewLA,viewSA;//页卡视图
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
     private View view;
     private static final String TAG = FoodFragment.class.getSimpleName();
@@ -58,18 +58,39 @@ public class FoodFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         mInflater = LayoutInflater.from(getContext());
-        if (viewB == null && viewL == null) {
+        if (viewB == null && viewL == null&& viewS == null&& viewBA == null&& viewLA == null&& viewSA == null) {
             viewB = mInflater.inflate(R.layout.fragment_breakfast, null);
-            viewL = mInflater.inflate(R.layout.fragment_weight, null);
+            viewL = mInflater.inflate(R.layout.fragment_breakfast, null);
+            viewS = mInflater.inflate(R.layout.fragment_breakfast, null);
+            viewBA = mInflater.inflate(R.layout.fragment_breakfast, null);
+            viewLA = mInflater.inflate(R.layout.fragment_breakfast, null);
+            viewSA = mInflater.inflate(R.layout.fragment_breakfast, null);
+
+
+
             //添加页卡视图
             mViewList.add(viewB);
             mViewList.add(viewL);
+            mViewList.add(viewS);
+            mViewList.add(viewBA);
+            mViewList.add(viewLA);
+            mViewList.add(viewSA);
+
             //添加页卡标题
             mTitleList.add("早餐");
-            mTitleList.add("体重");
+            mTitleList.add("午餐");
+            mTitleList.add("晚餐");
+            mTitleList.add("早加餐");
+            mTitleList.add("早加餐");
+            mTitleList.add("晚加餐");
             mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
             mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
             mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
+            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(2)));
+            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(3)));
+            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(4)));
+            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(5)));
+
 
             mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
             mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。

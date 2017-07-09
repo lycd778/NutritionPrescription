@@ -62,7 +62,7 @@ public class ApiService {
      *
      */
     public static Flowable<PlanList> getPlanList(String patientId, String access_token,String hospital_url) {
-        String url=hospital_url+"/api/nourishmentPlan/GetList/"+patientId+"?";
+        String url=hospital_url+"api/nourishmentPlan/GetList/"+patientId+"?";
         return apiStores.getPlanList(url,access_token);
     }
 

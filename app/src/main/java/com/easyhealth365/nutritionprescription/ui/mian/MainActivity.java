@@ -21,6 +21,7 @@ import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<MainContract.Presenter> implements MainContract.View {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -49,7 +50,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         mPresenter.loadPlanlist(user.getResults().getUserid(),user.getResults().getAccess_token(),user.getResults().getHospitalBaseUrl());
 
     }
-
+@OnClick({})
     @Override
     public void showProgress() {
         progressDialog.show();
