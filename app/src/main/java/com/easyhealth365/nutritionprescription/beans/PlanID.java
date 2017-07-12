@@ -1,18 +1,11 @@
 package com.easyhealth365.nutritionprescription.beans;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by lingxiao-Ching on 2017/7/3.
  */
 
-public class PlanList extends BaseBean{
+public class PlanID extends BaseBean{
 
+    private static final long serialVersionUID = 6479899371738745406L;
     /**
      * nourishmentPlanId : 64b9e307-bdb3-46f8-9c57-8af5ac1d2ae3
      * checkTime : 2017-07-04T15:30:00
@@ -24,15 +17,6 @@ public class PlanList extends BaseBean{
     private String checkTime;
     private String foodExchange;
     private String realName;
-
-    public static List<PlanList> arrayPlanListFromData(String str) {
-
-        Type listType = new TypeToken<ArrayList<PlanList>>() {
-        }.getType();
-
-        return new Gson().fromJson(str, listType);
-    }
-
     public String getNourishmentPlanId() {
         return nourishmentPlanId;
     }

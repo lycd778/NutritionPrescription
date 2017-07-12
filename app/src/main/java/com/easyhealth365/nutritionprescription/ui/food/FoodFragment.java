@@ -58,38 +58,38 @@ public class FoodFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         mInflater = LayoutInflater.from(getContext());
-        if (viewB == null && viewL == null&& viewS == null&& viewBA == null&& viewLA == null&& viewSA == null) {
+        if (viewB == null && viewL == null&& viewS == null
+//                && viewBA == null&& viewLA == null&& viewSA == null
+                ) {
             viewB = mInflater.inflate(R.layout.fragment_breakfast, null);
             viewL = mInflater.inflate(R.layout.fragment_breakfast, null);
             viewS = mInflater.inflate(R.layout.fragment_breakfast, null);
-            viewBA = mInflater.inflate(R.layout.fragment_breakfast, null);
-            viewLA = mInflater.inflate(R.layout.fragment_breakfast, null);
-            viewSA = mInflater.inflate(R.layout.fragment_breakfast, null);
-
-
+//          viewBA = mInflater.inflate(R.layout.fragment_breakfast, null);
+//          viewLA = mInflater.inflate(R.layout.fragment_breakfast, null);
+//          viewSA = mInflater.inflate(R.layout.fragment_breakfast, null);
 
             //添加页卡视图
             mViewList.add(viewB);
             mViewList.add(viewL);
             mViewList.add(viewS);
-            mViewList.add(viewBA);
-            mViewList.add(viewLA);
-            mViewList.add(viewSA);
+//          mViewList.add(viewBA);
+//          mViewList.add(viewLA);
+//          mViewList.add(viewSA);
 
             //添加页卡标题
             mTitleList.add("早餐");
             mTitleList.add("午餐");
             mTitleList.add("晚餐");
-            mTitleList.add("早加餐");
-            mTitleList.add("早加餐");
-            mTitleList.add("晚加餐");
+//            mTitleList.add("早加餐");
+//            mTitleList.add("早加餐");
+//            mTitleList.add("晚加餐");
             mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
             mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
             mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
             mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(2)));
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(3)));
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(4)));
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(5)));
+//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(3)));
+//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(4)));
+//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(5)));
 
 
             mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
@@ -135,9 +135,6 @@ public class FoodFragment extends BaseFragment {
         public CharSequence getPageTitle(int position) {
             return mTitleList.get(position);//页卡标题
         }
-
-
-
     }
 
 }

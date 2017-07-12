@@ -44,7 +44,8 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     /*JSON解析框架*/
     compile 'com.google.code.gson:gson:2.7'
-
+    /*表单验证框架*/
+    compile 'com.mobsandgeeks:android-saripaar:1.0.2'
     /*左右侧滑控件*/
     compile 'com.nshmura:recyclertablayout:1.1.0'
     testCompile 'junit:junit:4.12'

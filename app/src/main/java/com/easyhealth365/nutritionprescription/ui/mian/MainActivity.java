@@ -1,8 +1,11 @@
 package com.easyhealth365.nutritionprescription.ui.mian;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -106,8 +109,26 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         return view;
     }
     @Override
-    public void onBackPressed() {
-        // LxApplication.exit();
-        AppManager.getAppManager().AppExit(this);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);//新建一个对话框
+            dialog.setMessage("确定要退出吗?");//设置提示信息
+            //设置确定按钮并监听
+            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();//结束当前Activity
+                }
+            });
+            //设置取消按钮并监听
+            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //这里什么也不用做
+                }
+            });
+            dialog.show();//最后不要忘记把对话框显示出来
+        }
+        return false;
     }
 }

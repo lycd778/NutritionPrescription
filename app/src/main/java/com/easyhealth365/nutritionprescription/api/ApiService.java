@@ -1,8 +1,10 @@
 package com.easyhealth365.nutritionprescription.api;
 import com.easyhealth365.nutritionprescription.BuildConfig;
-import com.easyhealth365.nutritionprescription.beans.PlanList;
+import com.easyhealth365.nutritionprescription.beans.CheckPhone;
+import com.easyhealth365.nutritionprescription.beans.PlanID;
 import com.easyhealth365.nutritionprescription.beans.User;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
@@ -21,32 +23,39 @@ public class ApiService {
      * 基础地址
      * 初始化 retroft
      */
-    public static Retrofit mRetrofit;
+//    public static Retrofit mRetrofit;
+//
+//    public static Retrofit retrofit() {
+//        if (mRetrofit == null) {
+//            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//            if (BuildConfig.DEBUG) {
+//                // Log信息拦截器
+//                HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//                //设置 Debug Log 模式
+//                builder.addInterceptor(loggingInterceptor);
+//            }
+//            OkHttpClient okHttpClient = builder
+//                    .connectTimeout(20, TimeUnit.SECONDS)
+//                    .readTimeout(20, TimeUnit.SECONDS)
+//                    .build();
+//            mRetrofit = new Retrofit.Builder()
+//                    .baseUrl(URL_HOST)
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                    .client(okHttpClient)
+//                    .build();
+//        }
+//        return mRetrofit;
+//    }
 
-    public static Retrofit retrofit() {
-        if (mRetrofit == null) {
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            if (BuildConfig.DEBUG) {
-                // Log信息拦截器
-                HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-                //设置 Debug Log 模式
-                builder.addInterceptor(loggingInterceptor);
-            }
-            OkHttpClient okHttpClient = builder
-                    .connectTimeout(20, TimeUnit.SECONDS)
-                    .readTimeout(20, TimeUnit.SECONDS)
-                    .build();
-            mRetrofit = new Retrofit.Builder()
-                    .baseUrl(URL_HOST)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .client(okHttpClient)
-                    .build();
-        }
-        return mRetrofit;
-    }
-    private static final ApiStores apiStores = retrofit().create(ApiStores.class);
+    private static final Retrofit mRetrofit = new Retrofit.Builder()
+            .baseUrl(URL_HOST)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // 使用RxJava作为回调适配器
+            .build();
+//    private static final ApiStores apiStores = retrofit().create(ApiStores.class);
+    private static final ApiStores apiStores = mRetrofit.create(ApiStores.class);
     /**
      * 登录,返回,用的是json格式的post
      *
@@ -61,9 +70,18 @@ public class ApiService {
      *
      *
      */
-    public static Flowable<PlanList> getPlanList(String patientId, String access_token,String hospital_url) {
+    public static Flowable<List<PlanID>> getPlanList(String patientId, String access_token, String hospital_url) {
         String url=hospital_url+"api/nourishmentPlan/GetList/"+patientId+"?";
-        return apiStores.getPlanList(url,access_token);
+        return apiStores.getPlanID(url,access_token);
+    }
+
+    /**
+     * 验证手机号,返回,用的是json格式的get
+     *
+     *
+     */
+    public static Flowable<CheckPhone> checkPhone(String phoneNum, String password) {
+        return apiStores.checkPhone(phoneNum,password,"xxxx","true");
     }
 
 }
