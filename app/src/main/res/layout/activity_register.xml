@@ -1,204 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="#dddfdf"
-        android:gravity="center"
-        android:text="注册账号" />
+        android:background="#dddfdf">
 
-    <LinearLayout
+        <ImageButton
+            android:id="@+id/btn_re_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_re_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="注册账号"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/re_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_below="@+id/title"
+        android:layout_centerInParent="true">
 
-        <RelativeLayout
+        <include
+            android:id="@+id/register_xx0"
+            layout="@layout/register_xx0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
+        <include
+            android:id="@+id/register_xx1"
+            layout="@layout/register_xx1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+        <include
+            android:id="@+id/register_xx2"
+            layout="@layout/register_xx2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+        <include
+            android:id="@+id/register_xx3"
+            layout="@layout/register_xx3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/annv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/re_content"
+        android:layout_marginTop="30dp"
+        android:visibility="gone">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"
-            android:background="@drawable/shape1"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="24dip"
-                android:layout_height="wrap_content"
-                android:scaleType="centerInside"
-                android:src="@mipmap/username_icon" />
-
-            <EditText
-                android:id="@+id/et_re_username"
+            <Button
+                android:id="@+id/btn_re_ship"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="@string/username"
-                android:inputType="number"
-                android:maxLength="11"
-                android:paddingLeft="34dip"
-                android:paddingRight="34dip" />
-        </RelativeLayout>
+                android:layout_marginEnd="45dp"
+                android:layout_marginStart="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_skip"
+                android:text="跳过"
+                android:textColor="@color/blue"
+                android:textSize="18sp"
+                android:visibility="visible"/>
 
-        <TextView
-            android:id="@+id/tv_username"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start"
-            android:text="请填写手机号码"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"
-            android:background="@drawable/shape1"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dip"
-                android:layout_height="wrap_content"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_email" />
-
-            <EditText
-                android:id="@+id/et_re_email"
+            <Button
+                android:id="@+id/btn_re_next"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="34dip"
-                android:paddingRight="34dip" />
-        </RelativeLayout>
+                android:layout_marginEnd="45dp"
+                android:layout_marginStart="45dp"
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_register"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start"
-            android:text="请填写邮箱"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"
-            android:background="@drawable/shape1"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dip"
-                android:layout_height="wrap_content"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_password" />
-
-            <EditText
-                android:id="@+id/et_re_password"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:paddingLeft="34dip"
-                android:paddingRight="34dip" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_password"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start"
-            android:text="请输入密码"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"
-            android:background="@drawable/shape1"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dip"
-                android:layout_height="wrap_content"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_password" />
-
-            <EditText
-                android:id="@+id/et_re_confirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:paddingLeft="34dip"
-                android:paddingRight="34dip" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start"
-            android:text="请再次输入密码"
-            android:textSize="18sp" />
-    </LinearLayout>
-    <Button
-        android:id="@+id/btn_re_register"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:background="@mipmap/bg_btn_logout"
-        android:text="@string/register"
-        android:textColor="@color/white"
-        android:textSize="24sp" />
+        </LinearLayout>
 
 
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -2,6 +2,7 @@ package com.easyhealth365.nutritionprescription.ui.register;
 
 import com.easyhealth365.nutritionprescription.api.ApiService;
 import com.easyhealth365.nutritionprescription.beans.CheckPhone;
+import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 import com.easyhealth365.nutritionprescription.utils.TLog;
 
 import org.reactivestreams.Subscriber;
@@ -22,7 +23,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
 
     @Override
-    public void register(String telephone, String password) {
+    public void checkPhone(String telephone, String password) {
         registerView.showProgress();
         Flowable<CheckPhone> checkPhoneFlowable = ApiService.checkPhone(telephone, password);
         checkPhoneFlowable
@@ -40,7 +41,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                         if (103==checkPhone.getStatus()){
                             registerView.showResult(checkPhone.getMessage());
                         }else if(104==checkPhone.getStatus()){
-                            registerView.navigateToUpdateUser();
+                            registerView.updateReUser();
                         }
                     }
                     @Override
@@ -54,6 +55,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                         registerView.hideProgress();
                     }
                 });
+    }
+
+    @Override
+    public void register(RegisterUser reUser) {
+
     }
 
     @Override

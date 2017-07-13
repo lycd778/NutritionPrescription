@@ -2,6 +2,7 @@ package com.easyhealth365.nutritionprescription.ui.register;
 
 import com.easyhealth365.nutritionprescription.base.BasePresenter;
 import com.easyhealth365.nutritionprescription.base.BaseView;
+import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 
 /**
  * Created by lingxiao-Ching on 2017/7/12.
@@ -14,13 +15,14 @@ public interface RegisterContract {
         void hideProgress();
 
         void showError(String error);
-
-        void navigateToUpdateUser();
+        void navigateToLogin();
+        void updateReUser();
         void showResult(String message);
     }
 
     interface Presenter extends BasePresenter {
-        void register(String telephone, String password);
+        void checkPhone(String telephone, String password);
+        void register(RegisterUser reUser);
         void onDestroy();
     }
 }

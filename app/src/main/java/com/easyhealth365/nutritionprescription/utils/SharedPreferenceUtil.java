@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
+import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 import com.easyhealth365.nutritionprescription.beans.User;
 
 import java.io.IOException;
@@ -15,13 +16,15 @@ import java.io.StreamCorruptedException;
 public class SharedPreferenceUtil {
 
     // 用户名key
-    public final static String KEY_NAME = "KEY_NAME";
+    public final static String USER = "USER";
+    public final static String RE_USER = "RE_USER";
     public final static String KEY_Remeber = "KEY_Remeber";
     public final static String KEY_LOGIN = "KEY_LOGIN";
     public final static String KEY_LEVEL = "KEY_LEVEL";
     public final static String KEY_DELIVERY = "KEY_DELIVERY";
     private static SharedPreferenceUtil spUtils;
     private static User spUser = null;
+    private static RegisterUser spReUser = null;
     private SharedPreferences sp;
 
 
@@ -108,6 +111,7 @@ public class SharedPreferenceUtil {
         return sp.getString("pre_password", "");
     }
 
+
     public synchronized void putUser(User user) {
         SharedPreferences.Editor editor = sp.edit();
         String str = "";
@@ -116,13 +120,13 @@ public class SharedPreferenceUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        editor.putString(KEY_NAME, str);
+        editor.putString(USER, str);
         editor.commit();
         spUser = user;
     }
 
     public synchronized User getUser() {
-        String str = sp.getString(SharedPreferenceUtil.KEY_NAME, "");
+        String str = sp.getString(SharedPreferenceUtil.USER, "");
         if (TextUtils.isEmpty(str)) {
             return null;
         }
@@ -133,7 +137,7 @@ public class SharedPreferenceUtil {
                 Object obj = SerializableUtil.strToObj(str);
                 if (obj != null) {
                     spUser = (User) obj;
-                    Log.e("USER", "getuser" + spUser.toString());
+                    TLog.log("USER", "getuser" + spUser.toString());
                 }
             } catch (StreamCorruptedException e) {
                 e.printStackTrace();
@@ -147,10 +151,56 @@ public class SharedPreferenceUtil {
 
     public synchronized void DeleteUser() {
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString(KEY_NAME, "");
+        editor.putString(USER, "");
         editor.commit();
         spUser = null;
     }
+
+    public synchronized void putReUser(RegisterUser reUser) {
+        SharedPreferences.Editor editor = sp.edit();
+        String str = "";
+        try {
+            str = SerializableUtil.objToStr(reUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        editor.putString(RE_USER, str);
+        editor.commit();
+        spReUser = reUser;
+    }
+
+    public synchronized RegisterUser getReUser() {
+        String str = sp.getString(SharedPreferenceUtil.RE_USER, "");
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
+        if (spReUser == null) {
+            spReUser = new RegisterUser();
+            //获取序列化的数据
+            try {
+                Object obj = SerializableUtil.strToObj(str);
+                if (obj != null) {
+                    spReUser = (RegisterUser) obj;
+                    TLog.log("RegisterUser", "getReUser" + spReUser.toString());
+                }
+            } catch (StreamCorruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return spReUser;
+    }
+
+
+
+    public synchronized void DeleteReUser() {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(RE_USER, "");
+        editor.commit();
+        spReUser = null;
+    }
+
 
 //
 //    public synchronized DeliveryMessage getDeliveryMessage() {
