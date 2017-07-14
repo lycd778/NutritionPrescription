@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/shape_height"
+            android:orientation="vertical">
+
+            <com.easyhealth365.nutritionprescription.view.HeightView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/hv_activity_main"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:padding="15dp"
+                app:highlightLineWidth="3dp"
+                app:backgroundColor="@color/white"
+                app:highlightColor="@color/blue"
+                app:lineColor="@color/btn_dark"
+                app:markerColor="@color/blue"
+                app:markerSize="20dp"
+                app:markerSpace="20dp"
+                app:textColor="@color/blue"
+                app:textSize="12sp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_re_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="170"
+                android:textColor="@color/blue"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/re_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:src="@mipmap/bg_male" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
