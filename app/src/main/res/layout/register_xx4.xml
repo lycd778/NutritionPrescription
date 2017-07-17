@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <com.easyhealth365.nutritionprescription.view.HeightView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/hv_activity_main"
+                android:id="@+id/hv_height"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:focusable="true"
@@ -52,9 +52,9 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/re_image"
+                android:id="@+id/re_image_height"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
                 android:adjustViewBounds="true"
                 android:scaleType="fitStart"

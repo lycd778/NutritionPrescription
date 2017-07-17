@@ -46,8 +46,6 @@ public class HeightView extends View {
      * 阻尼系数，在fling下的阻力，阻力越大就飞的就约慢
      */
     private float ratio = DEFAULT_RATIO;
-
-
     /**
      * 需要绘制多少行
      */
@@ -63,8 +61,6 @@ public class HeightView extends View {
      * 步进值是 10 那么就是 0,10,20,30,40
      */
     private int mSetupValue = 1;
-
-
     /**
      * 每个格子的间距
      */
@@ -183,7 +179,6 @@ public class HeightView extends View {
     private int mMarkerColor;
 
     private OnItemChangedListener mOnItemChangedListener;
-
 
     public HeightView(Context context) {
         super(context);
@@ -655,7 +650,8 @@ public class HeightView extends View {
         canvas.drawLine(left + mCurrentLineIndex * space,
                 (bottom - mTextPaint.getTextSize()),
                 left + mCurrentLineIndex * space,
-                (bottom - mTextPaint.getTextSize()) - (mCurrentLineIndex % mOutSideLine == 0 ? mLongLineLength : mShortLineLength),
+                //(bottom - mTextPaint.getTextSize()) - (mCurrentLineIndex % mOutSideLine == 0 ? mLongLineLength : mShortLineLength),
+                (bottom - mTextPaint.getTextSize()) - (mLongLineLength),
                 mHighlightPaint);
     }
 

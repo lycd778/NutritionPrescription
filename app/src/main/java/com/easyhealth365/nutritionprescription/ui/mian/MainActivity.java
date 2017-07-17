@@ -53,7 +53,6 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         mPresenter.loadPlanlist(user.getResults().getUserid(),user.getResults().getAccess_token(),user.getResults().getHospitalBaseUrl());
 
     }
-@OnClick({})
     @Override
     public void showProgress() {
         progressDialog.show();

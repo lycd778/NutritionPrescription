@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Password;
 import com.mobsandgeeks.saripaar.annotation.Required;
 import com.mobsandgeeks.saripaar.annotation.TextRule;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -66,6 +68,8 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     @BindView(R.id.et_re_realname)
     EditText et_re_realname;
 
+    @BindView(R.id.et_re_idCard)
+    EditText et_re_idCard;
 
     @BindView(R.id.tv_username)
     TextView tv_username;
@@ -79,9 +83,13 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     TextView tv_realname;
     @BindView(R.id.tv_re_height)
     TextView tv_re_height;
-    @BindView(R.id.re_image)
-    ImageView re_image;
+    @BindView(R.id.re_image_height)
+    ImageView re_image_height;
 
+    @BindView(R.id.tv_re_weight)
+    TextView tv_re_weight;
+    @BindView(R.id.re_image_weight)
+    ImageView re_image_weight;
 
     @BindView(R.id.rg_re)
     RadioGroup rg_re;
@@ -111,11 +119,15 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     LinearLayout register_xx3;
     @BindView(R.id.register_xx4)
     LinearLayout register_xx4;
+    @BindView(R.id.register_xx5)
+    LinearLayout register_xx5;
+    @BindView(R.id.register_xx6)
+    LinearLayout register_xx6;
     private boolean gender = true; // true 男 ，false 女
     private boolean isGenderChecked = false;
     SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
     private int i = 0;
-    private String date, time,birthday;
+    private String date, time, birthday;
     private CustomDatePicker datePicker;
 
     @Override
@@ -160,19 +172,21 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
                         switchInfo();
                     }
                 } else {
-                    ToastUtil.showShort(this, "该项为必填项！");
+                    if (i ==1) {
+                        ToastUtil.showShort(this, "姓名不能为空！");
+                    }else if(i==2){
+                        ToastUtil.showShort(this, "性别为必填项！");
+                    }else if(i==6){
+                        ToastUtil.showShort(this, "身份证格式不正确！");
+                    }
                 }
                 break;
             case R.id.btn_re_ship:
-                if (judgeInfo()) {
-                    i++;
-                    if (i > 6) {
-                        //mPresenter.register(reUser);
-                    } else {
-                        switchInfo();
-                    }
-                } else{
-                    ToastUtil.showShort(this,"该项为必填项！");
+                i++;
+                if (i > 6) {
+                    //mPresenter.register(reUser);
+                } else {
+                    switchInfo();
                 }
                 break;
             case R.id.selectDate:
@@ -223,14 +237,22 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
                 tv_re_title.setText("身高");
                 register_xx3.setVisibility(View.GONE);
                 register_xx4.setVisibility(View.VISIBLE);
-                //register_xx2.setVisibility(View.GONE);
+                register_xx5.setVisibility(View.GONE);
                 initHeight();
                 break;
             case 5:
-                ;
+                tv_re_title.setText("体重");
+                register_xx4.setVisibility(View.GONE);
+                register_xx5.setVisibility(View.VISIBLE);
+                register_xx6.setVisibility(View.GONE);
+                btn_re_ship.setVisibility(View.VISIBLE);
+                initWeight();
                 break;
             case 6:
-                ;
+                tv_re_title.setText("身份证");
+                register_xx5.setVisibility(View.GONE);
+                register_xx6.setVisibility(View.VISIBLE);
+                btn_re_ship.setVisibility(View.GONE);
                 break;
         }
 
@@ -253,12 +275,22 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
                     return false;
                 }
             case 3:
-                if (birthday.equals(date)){
+                if (birthday.equals(date)) {
                     spUtils.getReUser().setBirthday("");
-                }else{
+                } else {
                     spUtils.getReUser().setBirthday(birthday);
                 }
                 return true;
+            case 6:
+                String id=et_re_idCard.getText().toString().trim();
+                TLog.log("id: "+id+"'t: "+TextUtils.isEmpty(id));
+                if (!TextUtils.isEmpty(id)) {
+                    String IDCardRegex = "(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x|Y|y)$)";
+                    return id.matches(IDCardRegex);
+                } else {
+                    return true;
+                }
+
             default:
                 return true;
 
@@ -312,7 +344,7 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         time = sdf.format(new Date());
         date = time.split(" ")[0];
-        birthday=date;
+        birthday = date;
         //设置当前显示的日期
         currentDate.setText(date);
         /**
@@ -322,7 +354,7 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
             @Override
             public void handle(String time) {
                 currentDate.setText(time.split(" ")[0]);
-                birthday=time.split(" ")[0];
+                birthday = time.split(" ")[0];
 
             }
         }, "1900-01-01 00:00", time);
@@ -333,12 +365,12 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     }
 
     private void initHeight() {
-        if (gender){
-            re_image.setImageResource(R.mipmap.bg_male);
-        }else{
-            re_image.setImageResource(R.mipmap.bg_female);
+        if (gender) {
+            re_image_height.setImageResource(R.mipmap.bg_male);
+        } else {
+            re_image_height.setImageResource(R.mipmap.bg_female);
         }
-        final HeightView hv = (HeightView) findViewById(R.id.hv_activity_main);
+        final HeightView hv = (HeightView) findViewById(R.id.hv_height);
         hv.post(new Runnable() {
             @Override
             public void run() {
@@ -350,8 +382,32 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
         hv.setOnItemChangedListener(new HeightView.OnItemChangedListener() {
             @Override
             public void onItemChanged(int index, int value) {
-                tv_re_height.setText(value+"cm");
+                tv_re_height.setText(value + "cm");
                 spUtils.getReUser().setHeight(Integer.toString(value));
+            }
+        });
+    }
+
+    private void initWeight() {
+        if (gender) {
+            re_image_weight.setImageResource(R.mipmap.bg_male);
+        } else {
+            re_image_weight.setImageResource(R.mipmap.bg_female);
+        }
+        final HeightView hv = (HeightView) findViewById(R.id.hv_weight);
+        hv.post(new Runnable() {
+            @Override
+            public void run() {
+                //设置选中项
+                hv.setCurrentLineIndex(60);
+            }
+        });
+
+        hv.setOnItemChangedListener(new HeightView.OnItemChangedListener() {
+            @Override
+            public void onItemChanged(int index, int value) {
+                tv_re_weight.setText(value + "KG");
+                spUtils.getReUser().setWeight(Integer.toString(value));
             }
         });
     }
