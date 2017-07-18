@@ -1,7 +1,9 @@
 package com.easyhealth365.nutritionprescription.ui.mian;
 
 import com.easyhealth365.nutritionprescription.api.ApiService;
+import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.beans.PlanID;
+import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.utils.TLog;
 
 import org.reactivestreams.Subscriber;
@@ -19,28 +21,21 @@ import io.reactivex.schedulers.Schedulers;
 public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View mainView;
+    SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
 
     public MainPresenter(MainContract.View mainView) {
-        this.mainView=mainView;
+        this.mainView = mainView;
     }
 
     @Override
     public void start() {
-        mainView.initTabHost();
+
     }
 
     @Override
-    public void onDestroy() {
-        TLog.log("-->MainPresenter  onDestroy");
-        if (mainView!=null){
-            mainView=null;
-        }
-    }
-
-    @Override
-    public void loadPlanlist(String patientId, String access_token,String hospital_url) {
+    public void getPlan(String patientId, final String access_token, final String hospital_url) {
         mainView.showProgress();
-        Flowable<List<PlanID>> planListFlowable = ApiService.getPlanList(patientId, access_token,hospital_url);
+        Flowable<List<PlanID>> planListFlowable = ApiService.getPlanList(patientId, access_token, hospital_url);
         planListFlowable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -49,11 +44,50 @@ public class MainPresenter implements MainContract.Presenter {
                     public void onSubscribe(Subscription s) {
                         s.request(Long.MAX_VALUE);
                     }
+
                     @Override
                     public void onNext(List<PlanID> IDList) {
-                        for(PlanID plID:IDList){
-                            TLog.log(plID.toString());
+                        if (IDList.size() == 0) {
+                            spUtils.setHavePlan(false);
+                        } else {
+                            spUtils.setHavePlan(true);
+                            for (PlanID plID : IDList) {
+                                TLog.log(plID.toString());
+                            }
+                            loadPlan(IDList.get(0).getNourishmentPlanId(), access_token, hospital_url);
                         }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        mainView.hideProgress();
+                        mainView.showError(t.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    private void loadPlan(String nid, String access_token, String hospital_url) {
+        Flowable<Plan> planFlowable = ApiService.getPlan(nid, access_token, hospital_url);
+        planFlowable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Plan>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
+
+                    @Override
+                    public void onNext(Plan plan) {
+                        mainView.hideProgress();
+                        TLog.log(plan.toString());
+                        spUtils.putPlan(plan);
+                        mainView.initTabHost();
                     }
 
                     @Override
@@ -68,4 +102,14 @@ public class MainPresenter implements MainContract.Presenter {
                     }
                 });
     }
+
+    @Override
+    public void onDestroy() {
+        TLog.log("-->MainPresenter  onDestroy");
+        if (mainView != null) {
+            mainView = null;
+        }
+    }
+
+
 }

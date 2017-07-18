@@ -17,7 +17,7 @@ public interface MainContract {
     }
 
     interface Presenter extends BasePresenter {
-        void loadPlanlist(String patientId,String access_token,String hospital_url);
+        void getPlan(String patientId,String access_token,String hospital_url);
         void onDestroy();
     }
 

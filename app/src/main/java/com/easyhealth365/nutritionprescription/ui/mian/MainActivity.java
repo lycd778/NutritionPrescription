@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         mPresenter = new MainPresenter(this);
         mPresenter.start();
         User user=spUtils.getUser();
-        mPresenter.loadPlanlist(user.getResults().getUserid(),user.getResults().getAccess_token(),user.getResults().getHospitalBaseUrl());
+        mPresenter.getPlan(user.getResults().getUserid(),user.getResults().getAccess_token(),user.getResults().getHospitalBaseUrl());
 
     }
     @Override

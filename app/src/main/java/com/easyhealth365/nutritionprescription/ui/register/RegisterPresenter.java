@@ -4,13 +4,17 @@ import com.easyhealth365.nutritionprescription.api.ApiService;
 import com.easyhealth365.nutritionprescription.beans.CheckPhone;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 import com.easyhealth365.nutritionprescription.utils.TLog;
+import com.google.gson.Gson;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.io.IOException;
+
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 /**
  * Created by lingxiao-Ching on 2017/7/12.
@@ -59,7 +63,39 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public void register(RegisterUser reUser) {
+        registerView.showProgress();
+        Flowable<ResponseBody> registerFlowable = ApiService.register(reUser);
+        registerFlowable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
 
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+
+                        try {
+                            TLog.log("successs: "+responseBody.string());
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable t) {
+                        registerView.hideProgress();
+                        TLog.log("error: "+t.getMessage());
+                        registerView.showError(t.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        registerView.hideProgress();
+                    }
+                });
     }
 
     @Override

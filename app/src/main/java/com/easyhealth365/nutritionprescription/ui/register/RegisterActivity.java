@@ -166,8 +166,11 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
             case R.id.btn_re_next:
                 if (judgeInfo()) {
                     i++;
+                    TLog.log("i: "+i);
                     if (i > 6) {
-                        //mPresenter.register(reUser);
+                        i=6;
+                        TLog.log(spUtils.getReUser().toString());
+                        mPresenter.register(spUtils.getReUser());
                     } else {
                         switchInfo();
                     }
@@ -183,8 +186,10 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
                 break;
             case R.id.btn_re_ship:
                 i++;
+                TLog.log("i: "+i);
                 if (i > 6) {
-                    //mPresenter.register(reUser);
+                    i=6;
+                    mPresenter.register(spUtils.getReUser());
                 } else {
                     switchInfo();
                 }
@@ -333,6 +338,7 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     public void updateReUser() {
         RegisterUser reUser = new RegisterUser();
         reUser.setUsername(et_re_username.getText().toString().trim());
+        reUser.setTelephone(et_re_username.getText().toString().trim());
         reUser.setPassword(et_re_password.getText().toString().trim());
         reUser.setEmail(et_re_email.getText().toString().trim());
         spUtils.putReUser(reUser);

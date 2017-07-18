@@ -848,4 +848,91 @@ public class Plan extends BaseBean{
     public void setNeed_print(boolean need_print) {
         this.need_print = need_print;
     }
+
+    @Override
+    public String toString() {
+        return "Plan{" +
+                "nourishmentPlanId='" + nourishmentPlanId + '\'' +
+                ", TargetL='" + TargetL + '\'' +
+                ", Target='" + Target + '\'' +
+                ", targetWeight='" + targetWeight + '\'' +
+                ", strengthFactor='" + strengthFactor + '\'' +
+                ", calorie='" + calorie + '\'' +
+                ", foodExchange='" + foodExchange + '\'' +
+                ", CHO=" + CHO +
+                ", PR=" + PR +
+                ", fat=" + fat +
+                ", vegetable=" + vegetable +
+                ", fruit=" + fruit +
+                ", bread=" + bread +
+                ", bean=" + bean +
+                ", milk=" + milk +
+                ", meat=" + meat +
+                ", oil=" + oil +
+                ", nut=" + nut +
+                ", assignment='" + assignment + '\'' +
+                ", breakfast_plan=" + breakfast_plan +
+                ", breakfast_addition_plan=" + breakfast_addition_plan +
+                ", lunch_plan=" + lunch_plan +
+                ", lunch_addition_plan=" + lunch_addition_plan +
+                ", dinner_plan=" + dinner_plan +
+                ", dinner_addition_plan=" + dinner_addition_plan +
+                ", breakfast_vegetable=" + breakfast_vegetable +
+                ", breakfast_addition_vegetable=" + breakfast_addition_vegetable +
+                ", lunch_vegetable=" + lunch_vegetable +
+                ", lunch_addition_vegetable=" + lunch_addition_vegetable +
+                ", dinner_vegetable=" + dinner_vegetable +
+                ", dinner_addition_vegetable=" + dinner_addition_vegetable +
+                ", breakfast_fruit=" + breakfast_fruit +
+                ", breakfast_addition_fruit=" + breakfast_addition_fruit +
+                ", lunch_fruit=" + lunch_fruit +
+                ", lunch_addition_fruit=" + lunch_addition_fruit +
+                ", dinner_fruit=" + dinner_fruit +
+                ", dinner_addition_fruit=" + dinner_addition_fruit +
+                ", breakfast_bread=" + breakfast_bread +
+                ", breakfast_addition_bread=" + breakfast_addition_bread +
+                ", lunch_bread=" + lunch_bread +
+                ", lunch_addition_bread=" + lunch_addition_bread +
+                ", dinner_bread=" + dinner_bread +
+                ", dinner_addition_bread=" + dinner_addition_bread +
+                ", breakfast_bean=" + breakfast_bean +
+                ", breakfast_addition_bean=" + breakfast_addition_bean +
+                ", lunch_bean=" + lunch_bean +
+                ", lunch_addition_bean=" + lunch_addition_bean +
+                ", dinner_bean=" + dinner_bean +
+                ", dinner_addition_bean=" + dinner_addition_bean +
+                ", breakfast_milk=" + breakfast_milk +
+                ", breakfast_addition_milk=" + breakfast_addition_milk +
+                ", lunch_milk=" + lunch_milk +
+                ", lunch_addition_milk=" + lunch_addition_milk +
+                ", dinner_milk=" + dinner_milk +
+                ", dinner_addition_milk=" + dinner_addition_milk +
+                ", breakfast_meat=" + breakfast_meat +
+                ", breakfast_addition_meat=" + breakfast_addition_meat +
+                ", lunch_meat=" + lunch_meat +
+                ", lunch_addition_meat=" + lunch_addition_meat +
+                ", dinner_meat=" + dinner_meat +
+                ", dinner_addition_meat=" + dinner_addition_meat +
+                ", breakfast_oil=" + breakfast_oil +
+                ", breakfast_addition_oil=" + breakfast_addition_oil +
+                ", lunch_oil=" + lunch_oil +
+                ", lunch_addition_oil=" + lunch_addition_oil +
+                ", dinner_oil=" + dinner_oil +
+                ", dinner_addition_oil=" + dinner_addition_oil +
+                ", breakfast_nut=" + breakfast_nut +
+                ", breakfast_addition_nut=" + breakfast_addition_nut +
+                ", lunch_nut=" + lunch_nut +
+                ", lunch_addition_nut=" + lunch_addition_nut +
+                ", dinner_nut=" + dinner_nut +
+                ", dinner_addition_nut=" + dinner_addition_nut +
+                ", foodProhibited='" + foodProhibited + '\'' +
+                ", remark='" + remark + '\'' +
+                ", checkTime='" + checkTime + '\'' +
+                ", foodRecommend='" + foodRecommend + '\'' +
+                ", template_id='" + template_id + '\'' +
+                ", food_addition=" + food_addition +
+                ", auto_dinner=" + auto_dinner +
+                ", need_print=" + need_print +
+                '}';
+    }
 }

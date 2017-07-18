@@ -143,4 +143,25 @@ public class RegisterUser extends BaseBean {
     public void setMbemail(String mbemail) {
         Mbemail = mbemail;
     }
+
+    @Override
+    public String toString() {
+        return "RegisterUser{" +
+                "userid='" + userid + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", realname='" + realname + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", step='" + step + '\'' +
+                ", weight='" + weight + '\'' +
+                ", height='" + height + '\'' +
+                ", Mbtelephone='" + Mbtelephone + '\'' +
+                ", Mbemail='" + Mbemail + '\'' +
+                ", access_token='" + access_token + '\'' +
+                '}';
+    }
 }

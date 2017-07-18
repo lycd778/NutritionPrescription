@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
+import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 import com.easyhealth365.nutritionprescription.beans.User;
 
@@ -18,13 +19,16 @@ public class SharedPreferenceUtil {
     // 用户名key
     public final static String USER = "USER";
     public final static String RE_USER = "RE_USER";
+    public final static String PLAN = "PLAN";
     public final static String KEY_Remeber = "KEY_Remeber";
     public final static String KEY_LOGIN = "KEY_LOGIN";
     public final static String KEY_LEVEL = "KEY_LEVEL";
     public final static String KEY_DELIVERY = "KEY_DELIVERY";
+    public final static String HAVE_PLAN = "HAVE_PLAN";
     private static SharedPreferenceUtil spUtils;
     private static User spUser = null;
     private static RegisterUser spReUser = null;
+    private static Plan spPlan = null;
     private SharedPreferences sp;
 
 
@@ -73,7 +77,16 @@ public class SharedPreferenceUtil {
 
     public synchronized Boolean getIsRemeber() {
         Boolean flag = sp.getBoolean(KEY_Remeber, false);
-        Log.i("flag", flag + "flag");
+        return flag;
+    }
+    public synchronized void setHavePlan(Boolean havePlan) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean(HAVE_PLAN, havePlan);
+        editor.commit();
+    }
+
+    public synchronized Boolean getHavePlan() {
+        Boolean flag = sp.getBoolean(HAVE_PLAN, false);
         return flag;
     }
 
@@ -191,9 +204,6 @@ public class SharedPreferenceUtil {
         }
         return spReUser;
     }
-
-
-
     public synchronized void DeleteReUser() {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(RE_USER, "");
@@ -201,6 +211,50 @@ public class SharedPreferenceUtil {
         spReUser = null;
     }
 
+
+
+
+    public synchronized void putPlan(Plan plan) {
+        SharedPreferences.Editor editor = sp.edit();
+        String str = "";
+        try {
+            str = SerializableUtil.objToStr(plan);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        editor.putString(PLAN, str);
+        editor.commit();
+        spPlan = plan;
+    }
+
+    public synchronized Plan getPlan() {
+        String str = sp.getString(SharedPreferenceUtil.PLAN, "");
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
+        if (spPlan == null) {
+            spPlan = new Plan();
+            //获取序列化的数据
+            try {
+                Object obj = SerializableUtil.strToObj(str);
+                if (obj != null) {
+                    spPlan = (Plan) obj;
+                    TLog.log("Plan", "getspPlan" + spPlan.toString());
+                }
+            } catch (StreamCorruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return spPlan;
+    }
+    public synchronized void DeletePlan() {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(PLAN, "");
+        editor.commit();
+        spPlan = null;
+    }
 
 //
 //    public synchronized DeliveryMessage getDeliveryMessage() {

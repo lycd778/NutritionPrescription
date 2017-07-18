@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseFragment;
+import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +31,18 @@ public class FoodFragment extends BaseFragment {
     @BindView(R.id.tabs_food)
     TabLayout mTabLayout;
 
-    LayoutInflater mInflater;
+    @BindView(R.id.line_food)
+    LinearLayout line_food;
+    @BindView(R.id.line_food_noplan)
+    LinearLayout line_food_noplan;
 
+    LayoutInflater mInflater;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
-    private View viewB, viewL,viewS,viewBA,viewLA,viewSA;//页卡视图
+    private View viewB, viewL, viewS, viewBA, viewLA, viewSA;//页卡视图
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
     private View view;
     private static final String TAG = FoodFragment.class.getSimpleName();
+    SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
 
     @Nullable
     @Override
@@ -44,6 +51,10 @@ public class FoodFragment extends BaseFragment {
             view = inflater.inflate(R.layout.fragment_food, null);
         }
         ButterKnife.bind(this, view);
+        if (!spUtils.getHavePlan()) {
+            line_food.setVisibility(View.GONE);
+            line_food_noplan.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
@@ -58,7 +69,7 @@ public class FoodFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         mInflater = LayoutInflater.from(getContext());
-        if (viewB == null && viewL == null&& viewS == null
+        if (viewB == null && viewL == null && viewS == null
 //                && viewBA == null&& viewLA == null&& viewSA == null
                 ) {
             viewB = mInflater.inflate(R.layout.fragment_breakfast, null);
