@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -94,6 +94,7 @@
                     android:text="碳水化合物" />
 
                 <FrameLayout
+                    android:id="@+id/vegetable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal">
@@ -127,6 +128,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/vegetable_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -149,6 +151,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/vegetable_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -184,6 +187,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/vegetable_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -223,6 +227,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/vegetable_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -235,6 +240,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/fruit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -269,6 +275,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/fruit_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -291,6 +298,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/fruit_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -327,6 +335,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/fruit_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -366,6 +375,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/fruit_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -379,6 +389,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/bread"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -413,6 +424,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/bread_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -435,6 +447,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/bread_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -470,6 +483,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/bread_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -509,6 +523,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/bread_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -535,9 +550,9 @@
                     android:text="蛋白质" />
 
                 <FrameLayout
+                    android:id="@+id/bean"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:gravity="center_horizontal">
 
                     <ImageView
@@ -569,6 +584,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/bean_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -591,6 +607,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/bean_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -626,6 +643,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/bean_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -665,6 +683,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/bean_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -677,6 +696,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/milk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -711,6 +731,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/milk_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -733,6 +754,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/milk_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -768,6 +790,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/milk_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -807,6 +830,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/milk_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -820,6 +844,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/meat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -854,6 +879,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/meat_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -876,6 +902,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/meat_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -911,6 +938,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/meat_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -950,6 +978,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/meat_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -977,6 +1006,7 @@
                     android:text="脂肪" />
 
                 <FrameLayout
+                    android:id="@+id/oil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal">
@@ -1010,6 +1040,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/oil_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -1032,6 +1063,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/oil_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1067,6 +1099,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/oil_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1106,6 +1139,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/oil_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -1118,6 +1152,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/nut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -1152,6 +1187,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/nut_plus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -1174,6 +1210,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/nut_plan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1209,6 +1246,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/nut_actual"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1248,6 +1286,7 @@
                                 android:layout_weight="1" />
 
                             <ImageView
+                                android:id="@+id/nut_minus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

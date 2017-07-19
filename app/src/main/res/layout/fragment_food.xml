@@ -1,14 +1,8 @@
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--android:orientation="vertical"--><!--tools:context="com.easyhealth365.nutritionprescription.ui.food.FoodFragment">-->
-
-<!--<android.support.design.widget.TabLayout--><!--android:id="@+id/tabs"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--app:tabIndicatorColor="@color/red"--><!--app:tabSelectedTextColor="@color/red"--><!--app:tabTextColor="@color/black"--><!--app:tabIndicatorHeight="0dp"/>-->
-
-<!--&lt;!&ndash;可滑动的布局内容&ndash;&gt;--><!--<com.easyhealth365.nutritionprescription.view.WrapContentHeightViewPager--><!--android:id="@+id/vp_view"--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp" />-->
-
-<!--</LinearLayout>-->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/line_food"
@@ -17,20 +11,53 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs_food"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabBackground="@color/white"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/black" />
+            android:orientation="horizontal"
+            android:background="#e7e9e9">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_view_food"
+            <com.easyhealth365.nutritionprescription.view.StringScrollPicker
+                android:id="@+id/sScrollPicker"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:background="#e7e9e9"
+                app:spv_alignment="center"
+                app:spv_disallow_intercept_touch="true"
+                app:spv_draw_bitmap_height="40dp"
+                app:spv_draw_bitmap_mode="size"
+                app:spv_draw_bitmap_width="40dp"
+                app:spv_is_circulation="true"
+                app:spv_max_line_width="80dp"
+                app:spv_max_text_size="14sp"
+                app:spv_min_text_size="12sp"
+                app:spv_orientation="horizontal"
+                app:spv_visible_item_count="3" />
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/fragment_food_detial"
+            layout="@layout/fragment_food_detial"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+
+
+        <!--<android.support.design.widget.TabLayout-->
+        <!--android:id="@+id/tabs_food"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:tabBackground="@color/white"-->
+        <!--app:tabIndicatorHeight="0dp"-->
+        <!--app:tabMode="scrollable"-->
+        <!--app:tabSelectedTextColor="@color/black" />-->
+
+        <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/vp_view_food"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
     </LinearLayout>
 
 
@@ -67,4 +94,4 @@
             android:text="请联系您的医生在心脏卫士平台进行制定。"
             android:textSize="18sp" />
     </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

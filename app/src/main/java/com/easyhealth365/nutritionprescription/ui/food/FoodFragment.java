@@ -1,45 +1,74 @@
 package com.easyhealth365.nutritionprescription.ui.food;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
+import android.widget.TextView;
 
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseFragment;
+import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
+import com.easyhealth365.nutritionprescription.utils.TLog;
+import com.easyhealth365.nutritionprescription.view.ScrollPickerView;
+import com.easyhealth365.nutritionprescription.view.StringScrollPicker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class FoodFragment extends BaseFragment {
-    @BindView(R.id.vp_view_food)
-    ViewPager mViewPager;
-    @BindView(R.id.tabs_food)
-    TabLayout mTabLayout;
-
     @BindView(R.id.line_food)
     LinearLayout line_food;
     @BindView(R.id.line_food_noplan)
     LinearLayout line_food_noplan;
+    @BindView(R.id.vegetable_plan)
+    TextView vegetable_plan;
+    @BindView(R.id.vegetable_actual)
+    TextView vegetable_actual;
+    @BindView(R.id.fruit_plan)
+    TextView fruit_plan;
+    @BindView(R.id.fruit_actual)
+    TextView fruit_actual;
+    @BindView(R.id.bread_plan)
+    TextView bread_plan;
+    @BindView(R.id.bread_actual)
+    TextView bread_actual;
+    @BindView(R.id.bean_plan)
+    TextView bean_plan;
+    @BindView(R.id.bean_actual)
+    TextView bean_actual;
+    @BindView(R.id.milk_plan)
+    TextView milk_plan;
+    @BindView(R.id.milk_actual)
+    TextView milk_actual;
+    @BindView(R.id.meat_plan)
+    TextView meat_plan;
+    @BindView(R.id.meat_actual)
+    TextView meat_actual;
+    @BindView(R.id.oil_plan)
+    TextView oil_plan;
+    @BindView(R.id.oil_actual)
+    TextView oil_actual;
+    @BindView(R.id.nut_plan)
+    TextView nut_plan;
+    @BindView(R.id.nut_actual)
+    TextView nut_actual;
+    private int vegetableNum = 0, fruitNum = 0, breadNum = 0, beanNum = 0, milkNum = 0, meatNum = 0, oilNum = 0, nutNum = 0, pageNum = 0;
+
 
     LayoutInflater mInflater;
-    private List<String> mTitleList = new ArrayList<>();//页卡标题集合
-    private View viewB, viewL, viewS, viewBA, viewLA, viewSA;//页卡视图
-    private List<View> mViewList = new ArrayList<>();//页卡视图集合
+    private StringScrollPicker sScrollPicker;
+    private String[] titleList = {"早餐", "午餐", "晚餐", "早加餐", "午加餐", "晚加餐"};
+    private List<CharSequence> newList = new ArrayList<>();//页卡标题集合
     private View view;
     private static final String TAG = FoodFragment.class.getSimpleName();
     SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
@@ -54,98 +83,117 @@ public class FoodFragment extends BaseFragment {
         if (!spUtils.getHavePlan()) {
             line_food.setVisibility(View.GONE);
             line_food_noplan.setVisibility(View.VISIBLE);
+        } else {
+            initView();
         }
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mInflater = LayoutInflater.from(getContext());
-        if (viewB == null && viewL == null && viewS == null
-//                && viewBA == null&& viewLA == null&& viewSA == null
-                ) {
-            viewB = mInflater.inflate(R.layout.fragment_breakfast, null);
-            viewL = mInflater.inflate(R.layout.fragment_breakfast, null);
-            viewS = mInflater.inflate(R.layout.fragment_breakfast, null);
-//          viewBA = mInflater.inflate(R.layout.fragment_breakfast, null);
-//          viewLA = mInflater.inflate(R.layout.fragment_breakfast, null);
-//          viewSA = mInflater.inflate(R.layout.fragment_breakfast, null);
+    }
 
-            //添加页卡视图
-            mViewList.add(viewB);
-            mViewList.add(viewL);
-            mViewList.add(viewS);
-//          mViewList.add(viewBA);
-//          mViewList.add(viewLA);
-//          mViewList.add(viewSA);
-
-            //添加页卡标题
-            mTitleList.add("早餐");
-            mTitleList.add("午餐");
-            mTitleList.add("晚餐");
-//            mTitleList.add("早加餐");
-//            mTitleList.add("早加餐");
-//            mTitleList.add("晚加餐");
-            mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(2)));
-//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(3)));
-//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(4)));
-//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(5)));
+    @OnClick({R.id.vegetable_plus, R.id.vegetable_minus, R.id.fruit_plus, R.id.fruit_minus, R.id.bread_plus, R.id.bread_minus,
+            R.id.bean_plus, R.id.bean_minus, R.id.milk_plus, R.id.milk_minus, R.id.meat_plus, R.id.meat_minus,
+            R.id.oil_plus, R.id.oil_minus, R.id.nut_plus, R.id.nut_minus,
+    })
+    public void onClick(View view) {
+        switch (view.getId()) {
+     
 
 
-            mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
-            mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
         }
     }
+
 
     @Override
     public void initView() {
+        sScrollPicker = (StringScrollPicker) view.findViewById(R.id.sScrollPicker);
+
+        for (String s : titleList) {
+            newList.add(s);
+        }
+        sScrollPicker.setData(newList);
+        sScrollPicker.setCenterPosition(pageNum);
+        loadFoodView(pageNum);
+        sScrollPicker.setOnSelectedListener(new ScrollPickerView.OnSelectedListener() {
+            @Override
+            public void onSelected(ScrollPickerView scrollPickerView, int position) {
+                TLog.log("position" + position);
+                loadFoodView(position);
+                pageNum = position;
+
+            }
+        });
 
     }
 
-    //ViewPager适配器
-    class MyPagerAdapter extends PagerAdapter {
-        private List<View> mViewList;
-
-        public MyPagerAdapter(FragmentManager childFragmentManager, List<View> mViewList) {
-            this.mViewList = mViewList;
+    @SuppressLint("SetTextI18n")
+    private void loadFoodView(int position) {
+        Plan plan = spUtils.getPlan();
+        if (position == 0) {
+            vegetable_plan.setText(plan.getBreakfast_vegetable() + "份");
+            fruit_plan.setText(plan.getBreakfast_fruit() + "份");
+            bread_plan.setText(plan.getBreakfast_bread() + "份");
+            bean_plan.setText(plan.getBreakfast_bean() + "份");
+            milk_plan.setText(plan.getBreakfast_milk() + "份");
+            meat_plan.setText(plan.getBreakfast_meat() + "份");
+            oil_plan.setText(plan.getBreakfast_oil() + "份");
+            nut_plan.setText(plan.getBreakfast_nut() + "份");
+        } else if (position == 1) {
+            vegetable_plan.setText(plan.getLunch_vegetable() + "份");
+            fruit_plan.setText(plan.getLunch_fruit() + "份");
+            bread_plan.setText(plan.getLunch_bread() + "份");
+            bean_plan.setText(plan.getLunch_bean() + "份");
+            milk_plan.setText(plan.getLunch_milk() + "份");
+            meat_plan.setText(plan.getLunch_meat() + "份");
+            oil_plan.setText(plan.getLunch_oil() + "份");
+            nut_plan.setText(plan.getLunch_nut() + "份");
+        } else if (position == 2) {
+            vegetable_plan.setText(plan.getDinner_vegetable() + "份");
+            fruit_plan.setText(plan.getDinner_fruit() + "份");
+            bread_plan.setText(plan.getDinner_bread() + "份");
+            bean_plan.setText(plan.getDinner_bean() + "份");
+            milk_plan.setText(plan.getDinner_milk() + "份");
+            meat_plan.setText(plan.getDinner_meat() + "份");
+            oil_plan.setText(plan.getDinner_oil() + "份");
+            nut_plan.setText(plan.getDinner_nut() + "份");
+        } else if (position == 3) {
+            vegetable_plan.setText(plan.getBreakfast_addition_vegetable() + "份");
+            fruit_plan.setText(plan.getBreakfast_addition_fruit() + "份");
+            bread_plan.setText(plan.getBreakfast_addition_bread() + "份");
+            bean_plan.setText(plan.getBreakfast_addition_bean() + "份");
+            milk_plan.setText(plan.getBreakfast_addition_milk() + "份");
+            meat_plan.setText(plan.getBreakfast_addition_meat() + "份");
+            oil_plan.setText(plan.getBreakfast_addition_oil() + "份");
+            nut_plan.setText(plan.getBreakfast_addition_nut() + "份");
+        } else if (position == 4) {
+            vegetable_plan.setText(plan.getLunch_addition_vegetable() + "份");
+            fruit_plan.setText(plan.getLunch_addition_fruit() + "份");
+            bread_plan.setText(plan.getLunch_addition_bread() + "份");
+            bean_plan.setText(plan.getLunch_addition_bean() + "份");
+            milk_plan.setText(plan.getLunch_addition_milk() + "份");
+            meat_plan.setText(plan.getLunch_addition_meat() + "份");
+            oil_plan.setText(plan.getLunch_addition_oil() + "份");
+            nut_plan.setText(plan.getLunch_addition_nut() + "份");
+        } else if (position == 5) {
+            vegetable_plan.setText(plan.getDinner_addition_vegetable() + "份");
+            fruit_plan.setText(plan.getDinner_addition_fruit() + "份");
+            bread_plan.setText(plan.getDinner_addition_bread() + "份");
+            bean_plan.setText(plan.getDinner_addition_bean() + "份");
+            milk_plan.setText(plan.getDinner_addition_milk() + "份");
+            meat_plan.setText(plan.getDinner_addition_meat() + "份");
+            oil_plan.setText(plan.getDinner_addition_oil() + "份");
+            nut_plan.setText(plan.getDinner_addition_nut() + "份");
         }
 
-        @Override
-        public int getCount() {
-            return mViewList.size();//页卡数
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;//官方推荐写法
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(mViewList.get(position));//添加页卡
-            return mViewList.get(position);
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(mViewList.get(position));//删除页卡
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTitleList.get(position);//页卡标题
-        }
     }
 
 }

@@ -24,6 +24,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     SharedPreferenceUtil spUtils=SharedPreferenceUtil.getInstance();
     @Override
     public void login(String username, String password) {
+        loginView.showProgress();
           Flowable<User> userFlowable = ApiService.userLogin(username, password);
           userFlowable
                 .subscribeOn(Schedulers.io())
@@ -36,6 +37,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onNext(User user) {
+                        loginView.hideProgress();
                         TLog.log("status: "+user.getStatus()+" message: "+user.getMessage());
                         spUtils.setUsername(user.getResults().getTelephone());
                         spUtils.putUser(user);
@@ -46,11 +48,13 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onError(Throwable t) {
+                        loginView.hideProgress();
                         loginView.showError(t.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
+                        loginView.hideProgress();
                     }
                 });
     }
