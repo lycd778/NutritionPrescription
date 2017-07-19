@@ -34,6 +34,13 @@
                 app:spv_min_text_size="12sp"
                 app:spv_orientation="horizontal"
                 app:spv_visible_item_count="3" />
+            <Button
+                android:id="@+id/btn_save_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保存"
+                android:layout_alignParentEnd="true"
+                android:textSize="14sp"/>
         </RelativeLayout>
 
         <include

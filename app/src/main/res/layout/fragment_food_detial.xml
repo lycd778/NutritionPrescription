@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,13 +37,16 @@
                     android:text="小贴士" />
             </LinearLayout>
 
-            <TextView
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="right"-->
+                <!--android:text="7月5日" />-->
+            <Spinner
+                android:id="@+id/previous_plan"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="7月5日" />
-
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

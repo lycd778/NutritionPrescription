@@ -1,42 +1,13 @@
 package com.easyhealth365.nutritionprescription.beans;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by lingxiao-Ching on 2017/7/3.
+ * Created by Administrator on 2017/7/19.
  */
 
-public class Plan extends BaseBean{
+public class Recored extends BaseBean {
 
-    private static final long serialVersionUID = 1353203288970544275L;
+    private static final long serialVersionUID = -7851583248682859657L;
     /**
-     * nourishmentPlanId : 64b9e307-bdb3-46f8-9c57-8af5ac1d2ae3
-     * TargetL : 短期目标
-     * Target : 戒烟
-     * targetWeight : 200
-     * strengthFactor : 50
-     * calorie : 10000.0
-     * foodExchange : 111
-     * CHO : 30
-     * PR : 30
-     * fat : 40
-     * vegetable : 10
-     * fruit : 10
-     * bread : 13
-     * bean : 15
-     * milk : 15
-     * meat : 18
-     * oil : 15
-     * nut : 15
-     * assignment : 1:1:1
      * breakfast_plan : 20
      * breakfast_addition_plan : 20
      * lunch_plan : 20
@@ -100,240 +71,62 @@ public class Plan extends BaseBean{
      * auto_dinner : false
      * need_print : false
      */
-
-    private String nourishmentPlanId;
-    private String TargetL;
-    private String Target;
-    private String targetWeight;
-    private String strengthFactor;
-    private String calorie;
-    private String foodExchange;
-    private int CHO;
-    private int PR;
-    private int fat;
-    private int vegetable;
-    private int fruit;
-    private int bread;
-    private int bean;
-    private int milk;
-    private int meat;
-    private int oil;
-    private int nut;
-    private String assignment;
-    private int breakfast_plan;
-    private int breakfast_addition_plan;
-    private int lunch_plan;
-    private int lunch_addition_plan;
-    private int dinner_plan;
-    private int dinner_addition_plan;
-    private int breakfast_vegetable;
-    private int breakfast_addition_vegetable;
-    private int lunch_vegetable;
-    private int lunch_addition_vegetable;
-    private int dinner_vegetable;
-    private int dinner_addition_vegetable;
-    private int breakfast_fruit;
-    private int breakfast_addition_fruit;
-    private int lunch_fruit;
-    private int lunch_addition_fruit;
-    private int dinner_fruit;
-    private int dinner_addition_fruit;
-    private int breakfast_bread;
-    private int breakfast_addition_bread;
-    private int lunch_bread;
-    private int lunch_addition_bread;
-    private int dinner_bread;
-    private int dinner_addition_bread;
-    private int breakfast_bean;
-    private int breakfast_addition_bean;
-    private int lunch_bean;
-    private int lunch_addition_bean;
-    private int dinner_bean;
-    private int dinner_addition_bean;
-    private int breakfast_milk;
-    private int breakfast_addition_milk;
-    private int lunch_milk;
-    private int lunch_addition_milk;
-    private int dinner_milk;
-    private int dinner_addition_milk;
-    private int breakfast_meat;
-    private int breakfast_addition_meat;
-    private int lunch_meat;
-    private int lunch_addition_meat;
-    private int dinner_meat;
-    private int dinner_addition_meat;
-    private int breakfast_oil;
-    private int breakfast_addition_oil;
-    private int lunch_oil;
-    private int lunch_addition_oil;
-    private int dinner_oil;
-    private int dinner_addition_oil;
-    private int breakfast_nut;
-    private int breakfast_addition_nut;
-    private int lunch_nut;
-    private int lunch_addition_nut;
-    private int dinner_nut;
-    private int dinner_addition_nut;
-    private String foodProhibited;
-    private String remark;
+    private int breakfast_plan=0;
+    private int breakfast_addition_plan=0;
+    private int lunch_plan=0;
+    private int lunch_addition_plan=0;
+    private int dinner_plan=0;
+    private int dinner_addition_plan=0;
+    private int breakfast_vegetable=0;
+    private int breakfast_addition_vegetable=0;
+    private int lunch_vegetable=0;
+    private int lunch_addition_vegetable=0;
+    private int dinner_vegetable=0;
+    private int dinner_addition_vegetable=0;
+    private int breakfast_fruit=0;
+    private int breakfast_addition_fruit=0;
+    private int lunch_fruit=0;
+    private int lunch_addition_fruit=0;
+    private int dinner_fruit=0;
+    private int dinner_addition_fruit=0;
+    private int breakfast_bread=0;
+    private int breakfast_addition_bread=0;
+    private int lunch_bread=0;
+    private int lunch_addition_bread=0;
+    private int dinner_bread=0;
+    private int dinner_addition_bread=0;
+    private int breakfast_bean=0;
+    private int breakfast_addition_bean=0;
+    private int lunch_bean=0;
+    private int lunch_addition_bean=0;
+    private int dinner_bean=0;
+    private int dinner_addition_bean=0;
+    private int breakfast_milk=0;
+    private int breakfast_addition_milk=0;
+    private int lunch_milk=0;
+    private int lunch_addition_milk=0;
+    private int dinner_milk=0;
+    private int dinner_addition_milk=0;
+    private int breakfast_meat=0;
+    private int breakfast_addition_meat=0;
+    private int lunch_meat=0;
+    private int lunch_addition_meat=0;
+    private int dinner_meat=0;
+    private int dinner_addition_meat=0;
+    private int breakfast_oil=0;
+    private int breakfast_addition_oil=0;
+    private int lunch_oil=0;
+    private int lunch_addition_oil=0;
+    private int dinner_oil=0;
+    private int dinner_addition_oil=0;
+    private int breakfast_nut=0;
+    private int breakfast_addition_nut=0;
+    private int lunch_nut=0;
+    private int lunch_addition_nut=0;
+    private int dinner_nut=0;
+    private int dinner_addition_nut=0;
     private String checkTime;
-    private String foodRecommend;
-    private String template_id;
-    private int food_addition;
-    private boolean auto_dinner;
-    private boolean need_print;
 
-    public String getNourishmentPlanId() {
-        return nourishmentPlanId;
-    }
-
-    public void setNourishmentPlanId(String nourishmentPlanId) {
-        this.nourishmentPlanId = nourishmentPlanId;
-    }
-
-    public String getTargetL() {
-        return TargetL;
-    }
-
-    public void setTargetL(String TargetL) {
-        this.TargetL = TargetL;
-    }
-
-    public String getTarget() {
-        return Target;
-    }
-
-    public void setTarget(String Target) {
-        this.Target = Target;
-    }
-
-    public String getTargetWeight() {
-        return targetWeight;
-    }
-
-    public void setTargetWeight(String targetWeight) {
-        this.targetWeight = targetWeight;
-    }
-
-    public String getStrengthFactor() {
-        return strengthFactor;
-    }
-
-    public void setStrengthFactor(String strengthFactor) {
-        this.strengthFactor = strengthFactor;
-    }
-
-    public String getCalorie() {
-        return calorie;
-    }
-
-    public void setCalorie(String calorie) {
-        this.calorie = calorie;
-    }
-
-    public String getFoodExchange() {
-        return foodExchange;
-    }
-
-    public void setFoodExchange(String foodExchange) {
-        this.foodExchange = foodExchange;
-    }
-
-    public int getCHO() {
-        return CHO;
-    }
-
-    public void setCHO(int CHO) {
-        this.CHO = CHO;
-    }
-
-    public int getPR() {
-        return PR;
-    }
-
-    public void setPR(int PR) {
-        this.PR = PR;
-    }
-
-    public int getFat() {
-        return fat;
-    }
-
-    public void setFat(int fat) {
-        this.fat = fat;
-    }
-
-    public int getVegetable() {
-        return vegetable;
-    }
-
-    public void setVegetable(int vegetable) {
-        this.vegetable = vegetable;
-    }
-
-    public int getFruit() {
-        return fruit;
-    }
-
-    public void setFruit(int fruit) {
-        this.fruit = fruit;
-    }
-
-    public int getBread() {
-        return bread;
-    }
-
-    public void setBread(int bread) {
-        this.bread = bread;
-    }
-
-    public int getBean() {
-        return bean;
-    }
-
-    public void setBean(int bean) {
-        this.bean = bean;
-    }
-
-    public int getMilk() {
-        return milk;
-    }
-
-    public void setMilk(int milk) {
-        this.milk = milk;
-    }
-
-    public int getMeat() {
-        return meat;
-    }
-
-    public void setMeat(int meat) {
-        this.meat = meat;
-    }
-
-    public int getOil() {
-        return oil;
-    }
-
-    public void setOil(int oil) {
-        this.oil = oil;
-    }
-
-    public int getNut() {
-        return nut;
-    }
-
-    public void setNut(int nut) {
-        this.nut = nut;
-    }
-
-    public String getAssignment() {
-        return assignment;
-    }
-
-    public void setAssignment(String assignment) {
-        this.assignment = assignment;
-    }
 
     public int getBreakfast_plan() {
         return breakfast_plan;
@@ -767,22 +560,6 @@ public class Plan extends BaseBean{
         this.dinner_addition_nut = dinner_addition_nut;
     }
 
-    public String getFoodProhibited() {
-        return foodProhibited;
-    }
-
-    public void setFoodProhibited(String foodProhibited) {
-        this.foodProhibited = foodProhibited;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public String getCheckTime() {
         return checkTime;
     }
@@ -791,69 +568,10 @@ public class Plan extends BaseBean{
         this.checkTime = checkTime;
     }
 
-    public String getFoodRecommend() {
-        return foodRecommend;
-    }
-
-    public void setFoodRecommend(String foodRecommend) {
-        this.foodRecommend = foodRecommend;
-    }
-
-    public String getTemplate_id() {
-        return template_id;
-    }
-
-    public void setTemplate_id(String template_id) {
-        this.template_id = template_id;
-    }
-
-    public int getFood_addition() {
-        return food_addition;
-    }
-
-    public void setFood_addition(int food_addition) {
-        this.food_addition = food_addition;
-    }
-
-    public boolean isAuto_dinner() {
-        return auto_dinner;
-    }
-
-    public void setAuto_dinner(boolean auto_dinner) {
-        this.auto_dinner = auto_dinner;
-    }
-
-    public boolean isNeed_print() {
-        return need_print;
-    }
-
-    public void setNeed_print(boolean need_print) {
-        this.need_print = need_print;
-    }
-
     @Override
     public String toString() {
-        return "Plan{" +
-                "nourishmentPlanId='" + nourishmentPlanId + '\'' +
-                ", TargetL='" + TargetL + '\'' +
-                ", Target='" + Target + '\'' +
-                ", targetWeight='" + targetWeight + '\'' +
-                ", strengthFactor='" + strengthFactor + '\'' +
-                ", calorie='" + calorie + '\'' +
-                ", foodExchange='" + foodExchange + '\'' +
-                ", CHO=" + CHO +
-                ", PR=" + PR +
-                ", fat=" + fat +
-                ", vegetable=" + vegetable +
-                ", fruit=" + fruit +
-                ", bread=" + bread +
-                ", bean=" + bean +
-                ", milk=" + milk +
-                ", meat=" + meat +
-                ", oil=" + oil +
-                ", nut=" + nut +
-                ", assignment='" + assignment + '\'' +
-                ", breakfast_plan=" + breakfast_plan +
+        return "Recored{" +
+                "breakfast_plan=" + breakfast_plan +
                 ", breakfast_addition_plan=" + breakfast_addition_plan +
                 ", lunch_plan=" + lunch_plan +
                 ", lunch_addition_plan=" + lunch_addition_plan +
@@ -907,14 +625,7 @@ public class Plan extends BaseBean{
                 ", lunch_addition_nut=" + lunch_addition_nut +
                 ", dinner_nut=" + dinner_nut +
                 ", dinner_addition_nut=" + dinner_addition_nut +
-                ", foodProhibited='" + foodProhibited + '\'' +
-                ", remark='" + remark + '\'' +
                 ", checkTime='" + checkTime + '\'' +
-                ", foodRecommend='" + foodRecommend + '\'' +
-                ", template_id='" + template_id + '\'' +
-                ", food_addition=" + food_addition +
-                ", auto_dinner=" + auto_dinner +
-                ", need_print=" + need_print +
                 '}';
     }
 }

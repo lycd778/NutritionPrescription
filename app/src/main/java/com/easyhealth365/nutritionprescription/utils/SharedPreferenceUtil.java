@@ -3,10 +3,10 @@ package com.easyhealth365.nutritionprescription.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
 import com.easyhealth365.nutritionprescription.beans.Plan;
+import com.easyhealth365.nutritionprescription.beans.Recored;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 import com.easyhealth365.nutritionprescription.beans.User;
 
@@ -20,6 +20,7 @@ public class SharedPreferenceUtil {
     public final static String USER = "USER";
     public final static String RE_USER = "RE_USER";
     public final static String PLAN = "PLAN";
+    public final static String RECORD = "RECORD";
     public final static String KEY_Remeber = "KEY_Remeber";
     public final static String KEY_LOGIN = "KEY_LOGIN";
     public final static String KEY_LEVEL = "KEY_LEVEL";
@@ -29,6 +30,7 @@ public class SharedPreferenceUtil {
     private static User spUser = null;
     private static RegisterUser spReUser = null;
     private static Plan spPlan = null;
+    private static Recored spRecord = null;
     private SharedPreferences sp;
 
 
@@ -256,6 +258,48 @@ public class SharedPreferenceUtil {
         spPlan = null;
     }
 
+
+    public synchronized void putRecord(Recored recored) {
+        SharedPreferences.Editor editor = sp.edit();
+        String str = "";
+        try {
+            str = SerializableUtil.objToStr(recored);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        editor.putString(RECORD, str);
+        editor.commit();
+        spRecord = recored;
+    }
+
+    public synchronized Recored getRecord() {
+        String str = sp.getString(SharedPreferenceUtil.RECORD, "");
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
+        if (spRecord == null) {
+            spRecord = new Recored();
+            //获取序列化的数据
+            try {
+                Object obj = SerializableUtil.strToObj(str);
+                if (obj != null) {
+                    spRecord = (Recored) obj;
+                    TLog.log("Record", "getspRecord" + spRecord.toString());
+                }
+            } catch (StreamCorruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return spRecord;
+    }
+    public synchronized void DeleteRecord() {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(RECORD, "");
+        editor.commit();
+        spRecord = null;
+    }
 //
 //    public synchronized DeliveryMessage getDeliveryMessage() {
 //        DeliveryMessage deliveryMessage = new DeliveryMessage();

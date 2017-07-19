@@ -101,6 +101,8 @@
 
     </RelativeLayout>
 
+
+
     <LinearLayout
         android:id="@+id/guider_noplan"
         android:layout_width="match_parent"
