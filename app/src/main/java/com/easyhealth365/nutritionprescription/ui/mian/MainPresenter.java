@@ -34,6 +34,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getPlan(String patientId, final String access_token, final String hospital_url) {
+        TLog.log("获取处方列表");
         mainView.showProgress();
         Flowable<List<PlanID>> planListFlowable = ApiService.getPlanList(patientId, access_token, hospital_url);
         planListFlowable
@@ -72,6 +73,7 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     private void loadPlan(String nid, String access_token, String hospital_url) {
+        TLog.log("获取最新处方");
         Flowable<Plan> planFlowable = ApiService.getPlan(nid, access_token, hospital_url);
         planFlowable
                 .subscribeOn(Schedulers.io())

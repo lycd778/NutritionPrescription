@@ -125,7 +125,7 @@ public class Record extends BaseBean {
     private int lunch_addition_nut=0;
     private int dinner_nut=0;
     private int dinner_addition_nut=0;
-    private String checkTime;
+    private String checkTime=null;
 
 
     public int getBreakfast_plan() {

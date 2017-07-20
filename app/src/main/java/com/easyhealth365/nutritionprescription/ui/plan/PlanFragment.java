@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseFragment;
 import com.easyhealth365.nutritionprescription.beans.Plan;
+import com.easyhealth365.nutritionprescription.ui.food.FoodFragment;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
@@ -163,7 +165,9 @@ public class PlanFragment extends BaseFragment {
     private View view;
     private static final String TAG = PlanFragment.class.getSimpleName();
     SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
-    android.app.FragmentManager fm = getActivity().getFragmentManager();
+    private FragmentManager manager;
+    private FragmentTransaction ft;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -175,6 +179,7 @@ public class PlanFragment extends BaseFragment {
             line_plan.setVisibility(View.GONE);
             line_plan_noplan.setVisibility(View.VISIBLE);
         }
+        manager = getFragmentManager();
         initView();
         return view;
     }
@@ -188,9 +193,12 @@ public class PlanFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.breakfast:
-//                      fm.beginTransaction()
-//                        .replace(R.layout.fragment_plan, new FoodFragment())
-//                        .commit();
+                FoodFragment foodFragment = new FoodFragment();
+                ft = manager.beginTransaction();
+               //当前的fragment会被myJDEditFragment替换
+                ft.replace(R.id.realtabcontent, foodFragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
         }
     }

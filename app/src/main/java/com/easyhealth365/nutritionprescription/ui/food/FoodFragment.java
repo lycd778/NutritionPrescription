@@ -120,7 +120,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
 
     private int vegetableNum = 0, fruitNum = 0, breadNum = 0, beanNum = 0, milkNum = 0, meatNum = 0, oilNum = 0, nutNum = 0,
             breakfastNum = 0, lunchNum = 0, dinnerNum, breakfastAdNum = 0, lunchAdNum = 0, dinnerAdNum,
-    pageNum = 0, dateNum = 0;
+            pageNum = 0, dateNum = 0;
     private String[] preDate = new String[6];
 
     LayoutInflater mInflater;
@@ -166,11 +166,21 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
             line_food_noplan.setVisibility(View.VISIBLE);
         } else {
             time = DateUtil.getDate("yyyy-MM-dd");
-            if((spUtils.getRecord()==null)
-                    ||!(spUtils.getRecord().getCheckTime().equals(time))){
+
+            if (spUtils.getRecord() == null) {
                 mRecord = new Record();
-            }else{
-                mRecord=spUtils.getRecord();
+            } else {
+                if (spUtils.getRecord().getCheckTime() == null) {
+                    mRecord = new Record();
+                } else {
+                    if (!(spUtils.getRecord().getCheckTime().equals(time))) {
+                        mRecord = new Record();
+                    } else {
+                        mRecord = spUtils.getRecord();
+                    }
+                }
+
+
             }
             mPlan = spUtils.getPlan();
             for (int i = 0; i >= -5; i--) {
@@ -333,7 +343,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int pos, long id) {
                 dateNum = pos;
-              //  TLog.log("当前日期是:" + preDate[pos]);
+                //  TLog.log("当前日期是:" + preDate[pos]);
                 if (dateNum == 0) {
                     loadActualView(pageNum, mRecord);
                     setNowProgressBar();
@@ -361,7 +371,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
         sScrollPicker.setOnSelectedListener(new ScrollPickerView.OnSelectedListener() {
             @Override
             public void onSelected(ScrollPickerView scrollPickerView, int position) {
-               // TLog.log("position: " + position);
+                // TLog.log("position: " + position);
                 loadPlanView(position);
                 pageNum = position;
                 if (dateNum == 0) {
@@ -822,84 +832,84 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
             case 0:
                 progressBar.setMax(mPlan.getBreakfast_plan());
                 progressBar.setProgress(mRecord.getBreakfast_plan());
-                tv_progress.setText(mRecord.getBreakfast_plan()+"/"+mPlan.getBreakfast_plan());
-                if (mRecord.getBreakfast_plan()==mPlan.getBreakfast_plan()){
+                tv_progress.setText(mRecord.getBreakfast_plan() + "/" + mPlan.getBreakfast_plan());
+                if (mRecord.getBreakfast_plan() == mPlan.getBreakfast_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mRecord.getBreakfast_plan()>mPlan.getBreakfast_plan()){
+                } else if (mRecord.getBreakfast_plan() > mPlan.getBreakfast_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 1:
                 progressBar.setMax(mPlan.getLunch_plan());
                 progressBar.setProgress(mRecord.getLunch_plan());
-                tv_progress.setText(mRecord.getLunch_plan()+"/"+mPlan.getLunch_plan());
-                if (mRecord.getLunch_plan()==mPlan.getLunch_plan()){
+                tv_progress.setText(mRecord.getLunch_plan() + "/" + mPlan.getLunch_plan());
+                if (mRecord.getLunch_plan() == mPlan.getLunch_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mRecord.getLunch_plan()>mPlan.getLunch_plan()){
+                } else if (mRecord.getLunch_plan() > mPlan.getLunch_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 2:
                 progressBar.setMax(mPlan.getDinner_plan());
                 progressBar.setProgress(mRecord.getDinner_plan());
-                tv_progress.setText(mRecord.getDinner_plan()+"/"+mPlan.getDinner_plan());
-                if (mRecord.getDinner_plan()==mPlan.getDinner_plan()){
+                tv_progress.setText(mRecord.getDinner_plan() + "/" + mPlan.getDinner_plan());
+                if (mRecord.getDinner_plan() == mPlan.getDinner_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mRecord.getDinner_plan()>mPlan.getDinner_plan()){
+                } else if (mRecord.getDinner_plan() > mPlan.getDinner_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 3:
                 progressBar.setMax(mPlan.getBreakfast_addition_plan());
                 progressBar.setProgress(mRecord.getBreakfast_addition_plan());
-                tv_progress.setText(mRecord.getBreakfast_addition_plan()+"/"+mPlan.getBreakfast_addition_plan());
-                if (mRecord.getBreakfast_addition_plan()==mPlan.getBreakfast_addition_plan()){
+                tv_progress.setText(mRecord.getBreakfast_addition_plan() + "/" + mPlan.getBreakfast_addition_plan());
+                if (mRecord.getBreakfast_addition_plan() == mPlan.getBreakfast_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mRecord.getBreakfast_addition_plan()>mPlan.getBreakfast_addition_plan()){
+                } else if (mRecord.getBreakfast_addition_plan() > mPlan.getBreakfast_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 4:
                 progressBar.setMax(mPlan.getLunch_addition_plan());
                 progressBar.setProgress(mRecord.getLunch_addition_plan());
-                tv_progress.setText(mRecord.getLunch_addition_plan()+"/"+mPlan.getLunch_addition_plan());
-                if (mRecord.getLunch_addition_plan()==mPlan.getLunch_addition_plan()){
+                tv_progress.setText(mRecord.getLunch_addition_plan() + "/" + mPlan.getLunch_addition_plan());
+                if (mRecord.getLunch_addition_plan() == mPlan.getLunch_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mRecord.getLunch_addition_plan()>mPlan.getLunch_addition_plan()){
+                } else if (mRecord.getLunch_addition_plan() > mPlan.getLunch_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 5:
                 progressBar.setMax(mPlan.getDinner_addition_plan());
                 progressBar.setProgress(mRecord.getDinner_addition_plan());
-                tv_progress.setText(mRecord.getDinner_addition_plan()+"/"+mPlan.getDinner_addition_plan());
-                if (mRecord.getDinner_addition_plan()==mPlan.getDinner_addition_plan()){
+                tv_progress.setText(mRecord.getDinner_addition_plan() + "/" + mPlan.getDinner_addition_plan());
+                if (mRecord.getDinner_addition_plan() == mPlan.getDinner_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mRecord.getDinner_addition_plan()>mPlan.getDinner_addition_plan()){
+                } else if (mRecord.getDinner_addition_plan() > mPlan.getDinner_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
@@ -913,84 +923,84 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
             case 0:
                 progressBar.setMax(mPlan.getBreakfast_plan());
                 progressBar.setProgress(mPreRecord.getBreakfast_plan());
-                tv_progress.setText(mPreRecord.getBreakfast_plan()+"/"+mPlan.getBreakfast_plan());
-                if (mPreRecord.getBreakfast_plan()==mPlan.getBreakfast_plan()){
+                tv_progress.setText(mPreRecord.getBreakfast_plan() + "/" + mPlan.getBreakfast_plan());
+                if (mPreRecord.getBreakfast_plan() == mPlan.getBreakfast_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mPreRecord.getBreakfast_plan()>mPlan.getBreakfast_plan()){
+                } else if (mPreRecord.getBreakfast_plan() > mPlan.getBreakfast_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 1:
                 progressBar.setMax(mPlan.getLunch_plan());
                 progressBar.setProgress(mPreRecord.getLunch_plan());
-                tv_progress.setText(mPreRecord.getLunch_plan()+"/"+mPlan.getLunch_plan());
-                if (mPreRecord.getLunch_plan()==mPlan.getLunch_plan()){
+                tv_progress.setText(mPreRecord.getLunch_plan() + "/" + mPlan.getLunch_plan());
+                if (mPreRecord.getLunch_plan() == mPlan.getLunch_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mPreRecord.getLunch_plan()>mPlan.getLunch_plan()){
+                } else if (mPreRecord.getLunch_plan() > mPlan.getLunch_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 2:
                 progressBar.setMax(mPlan.getDinner_plan());
                 progressBar.setProgress(mPreRecord.getDinner_plan());
-                tv_progress.setText(mPreRecord.getDinner_plan()+"/"+mPlan.getDinner_plan());
-                if (mPreRecord.getDinner_plan()==mPlan.getDinner_plan()){
+                tv_progress.setText(mPreRecord.getDinner_plan() + "/" + mPlan.getDinner_plan());
+                if (mPreRecord.getDinner_plan() == mPlan.getDinner_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mPreRecord.getDinner_plan()>mPlan.getDinner_plan()){
+                } else if (mPreRecord.getDinner_plan() > mPlan.getDinner_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 3:
                 progressBar.setMax(mPlan.getBreakfast_addition_plan());
                 progressBar.setProgress(mPreRecord.getBreakfast_addition_plan());
-                tv_progress.setText(mPreRecord.getBreakfast_addition_plan()+"/"+mPlan.getBreakfast_addition_plan());
-                if (mPreRecord.getBreakfast_addition_plan()==mPlan.getBreakfast_addition_plan()){
+                tv_progress.setText(mPreRecord.getBreakfast_addition_plan() + "/" + mPlan.getBreakfast_addition_plan());
+                if (mPreRecord.getBreakfast_addition_plan() == mPlan.getBreakfast_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mPreRecord.getBreakfast_addition_plan()>mPlan.getBreakfast_addition_plan()){
+                } else if (mPreRecord.getBreakfast_addition_plan() > mPlan.getBreakfast_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 4:
                 progressBar.setMax(mPlan.getLunch_addition_plan());
                 progressBar.setProgress(mPreRecord.getLunch_addition_plan());
-                tv_progress.setText(mPreRecord.getLunch_addition_plan()+"/"+mPlan.getLunch_addition_plan());
-                if (mPreRecord.getLunch_addition_plan()==mPlan.getLunch_addition_plan()){
+                tv_progress.setText(mPreRecord.getLunch_addition_plan() + "/" + mPlan.getLunch_addition_plan());
+                if (mPreRecord.getLunch_addition_plan() == mPlan.getLunch_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mPreRecord.getLunch_addition_plan()>mPlan.getLunch_addition_plan()){
+                } else if (mPreRecord.getLunch_addition_plan() > mPlan.getLunch_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 5:
                 progressBar.setMax(mPlan.getDinner_addition_plan());
                 progressBar.setProgress(mPreRecord.getDinner_addition_plan());
-                tv_progress.setText(mPreRecord.getDinner_addition_plan()+"/"+mPlan.getDinner_addition_plan());
-                if (mPreRecord.getDinner_addition_plan()==mPlan.getDinner_addition_plan()){
+                tv_progress.setText(mPreRecord.getDinner_addition_plan() + "/" + mPlan.getDinner_addition_plan());
+                if (mPreRecord.getDinner_addition_plan() == mPlan.getDinner_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_complete);
-                }else if(mPreRecord.getDinner_addition_plan()>mPlan.getDinner_addition_plan()){
+                } else if (mPreRecord.getDinner_addition_plan() > mPlan.getDinner_addition_plan()) {
                     image_progress.setVisibility(View.VISIBLE);
                     image_progress.setImageResource(R.mipmap.ic_over);
-                }else{
+                } else {
                     image_progress.setVisibility(View.INVISIBLE);
                 }
                 break;
