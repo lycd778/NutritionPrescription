@@ -11,8 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-
-import com.easyhealth365.nutritionprescription.AppManager;
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseActivity;
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
@@ -51,21 +49,6 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         mPresenter.start();
         User user=spUtils.getUser();
         mPresenter.getPlan(user.getResults().getUserid(),user.getResults().getAccess_token(),user.getResults().getHospitalBaseUrl());
-
-    }
-    @Override
-    public void showProgress() {
-        progressDialog.show();
-    }
-
-    @Override
-    public void hideProgress() {
-        progressDialog.dismiss();
-    }
-
-    @Override
-    public void showError(String error) {
-        BaseApplication.showShortToast(error);
     }
 
     @Override
@@ -107,6 +90,21 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         textView.setText(tabHostTagArray[index]);
         return view;
     }
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showError(String error) {
+        BaseApplication.showShortToast(error);
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下

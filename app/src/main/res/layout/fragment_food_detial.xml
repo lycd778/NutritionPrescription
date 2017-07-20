@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="60dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -31,22 +31,44 @@
                     android:src="@mipmap/tips" />
 
                 <TextView
+                    android:id="@+id/tips"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="小贴士" />
             </LinearLayout>
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="right"-->
-                <!--android:text="7月5日" />-->
-            <Spinner
-                android:id="@+id/previous_plan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/previous_plan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:id="@+id/tv_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/image_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@mipmap/ic_complete"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -75,9 +97,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp">
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,7 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@mipmap/carbohydrate01"/>
+                        android:src="@mipmap/carbohydrate01" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -998,8 +1020,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
+                android:layout_marginTop="25dp"
                 android:orientation="vertical">
 
                 <TextView

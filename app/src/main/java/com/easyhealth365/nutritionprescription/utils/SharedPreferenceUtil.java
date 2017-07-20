@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
 import com.easyhealth365.nutritionprescription.beans.Plan;
-import com.easyhealth365.nutritionprescription.beans.Recored;
+import com.easyhealth365.nutritionprescription.beans.Record;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 import com.easyhealth365.nutritionprescription.beans.User;
 
@@ -30,7 +30,7 @@ public class SharedPreferenceUtil {
     private static User spUser = null;
     private static RegisterUser spReUser = null;
     private static Plan spPlan = null;
-    private static Recored spRecord = null;
+    private static Record spRecord = null;
     private SharedPreferences sp;
 
 
@@ -259,7 +259,7 @@ public class SharedPreferenceUtil {
     }
 
 
-    public synchronized void putRecord(Recored recored) {
+    public synchronized void putRecord(Record recored) {
         SharedPreferences.Editor editor = sp.edit();
         String str = "";
         try {
@@ -272,18 +272,18 @@ public class SharedPreferenceUtil {
         spRecord = recored;
     }
 
-    public synchronized Recored getRecord() {
+    public synchronized Record getRecord() {
         String str = sp.getString(SharedPreferenceUtil.RECORD, "");
         if (TextUtils.isEmpty(str)) {
             return null;
         }
         if (spRecord == null) {
-            spRecord = new Recored();
+            spRecord = new Record();
             //获取序列化的数据
             try {
                 Object obj = SerializableUtil.strToObj(str);
                 if (obj != null) {
-                    spRecord = (Recored) obj;
+                    spRecord = (Record) obj;
                     TLog.log("Record", "getspRecord" + spRecord.toString());
                 }
             } catch (StreamCorruptedException e) {

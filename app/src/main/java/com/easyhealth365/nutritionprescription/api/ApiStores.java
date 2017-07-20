@@ -3,7 +3,10 @@ package com.easyhealth365.nutritionprescription.api;
 import com.easyhealth365.nutritionprescription.beans.CheckPhone;
 import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.beans.PlanID;
+import com.easyhealth365.nutritionprescription.beans.PreRecord;
+import com.easyhealth365.nutritionprescription.beans.Record;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
+import com.easyhealth365.nutritionprescription.beans.UpdateRecordResult;
 import com.easyhealth365.nutritionprescription.beans.User;
 
 import java.util.List;
@@ -59,7 +62,16 @@ interface ApiStores {
     @POST("api/user/reg")
     Flowable<ResponseBody> register(@Body RegisterUser registerUser);
 
-
+    /**
+     * 上传处方执行记录返回(json post)
+     */
+    @POST()
+    Flowable<UpdateRecordResult> updateRecord(@Url String url, @Query("access_token") String access_token, @Body Record record);
+    /**
+     * 获取往期处方执行记录返回(json get)
+     */
+    @GET()
+    Flowable<PreRecord> getPreRecord(@Url String url, @Query("access_token") String access_token);
 }
 
 

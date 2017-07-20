@@ -25,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class PlanFragment extends BaseFragment {
@@ -153,7 +154,8 @@ public class PlanFragment extends BaseFragment {
     @BindView(R.id.dinner_addition_nut)
     TextView dinner_addition_nut;
 
-
+    @BindView(R.id.breakfast)
+    LinearLayout breakfast;
     LayoutInflater mInflater;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private View view1, view2;//页卡视图
@@ -161,7 +163,7 @@ public class PlanFragment extends BaseFragment {
     private View view;
     private static final String TAG = PlanFragment.class.getSimpleName();
     SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
-
+    android.app.FragmentManager fm = getActivity().getFragmentManager();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -182,6 +184,16 @@ public class PlanFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    @OnClick({R.id.breakfast})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.breakfast:
+//                      fm.beginTransaction()
+//                        .replace(R.layout.fragment_plan, new FoodFragment())
+//                        .commit();
+                break;
+        }
+    }
 
     @Override
     public void onStart() {
@@ -213,65 +225,65 @@ public class PlanFragment extends BaseFragment {
     @Override
     public void initView() {
         Plan plan = spUtils.getPlan();
-        breakfast_plan.setText(plan.getBreakfast_plan()+"份");
-        breakfast_vegetable.setText("蔬菜类："+plan.getBreakfast_vegetable()+"份");
-        breakfast_fruit.setText("水果类："+plan.getBreakfast_fruit()+"份");
-        breakfast_bread.setText("谷薯类："+plan.getBreakfast_bread()+"份");
-        breakfast_bean.setText("豆类："+plan.getBreakfast_bean()+"份");
-        breakfast_milk.setText("乳类："+plan.getBreakfast_milk()+"份");
-        breakfast_meat.setText("肉蛋类："+plan.getBreakfast_meat()+"份");
-        breakfast_oil.setText("油脂类："+plan.getBreakfast_oil()+"份");
-        breakfast_nut.setText("坚果类："+plan.getBreakfast_nut()+"份");
+        breakfast_plan.setText(plan.getBreakfast_plan() + "份");
+        breakfast_vegetable.setText("蔬菜类：" + plan.getBreakfast_vegetable() + "份");
+        breakfast_fruit.setText("水果类：" + plan.getBreakfast_fruit() + "份");
+        breakfast_bread.setText("谷薯类：" + plan.getBreakfast_bread() + "份");
+        breakfast_bean.setText("豆类：" + plan.getBreakfast_bean() + "份");
+        breakfast_milk.setText("乳类：" + plan.getBreakfast_milk() + "份");
+        breakfast_meat.setText("肉蛋类：" + plan.getBreakfast_meat() + "份");
+        breakfast_oil.setText("油脂类：" + plan.getBreakfast_oil() + "份");
+        breakfast_nut.setText("坚果类：" + plan.getBreakfast_nut() + "份");
 
-        lunch_plan.setText(plan.getLunch_plan()+"份");
-        lunch_vegetable.setText("蔬菜类："+plan.getLunch_vegetable()+"份");
-        lunch_fruit.setText("水果类："+plan.getLunch_fruit()+"份");
-        lunch_bread.setText("谷薯类："+plan.getLunch_bread()+"份");
-        lunch_bean.setText("豆类："+plan.getLunch_bean()+"份");
-        lunch_milk.setText("乳类："+plan.getLunch_milk()+"份");
-        lunch_meat.setText("肉蛋类："+plan.getLunch_meat()+"份");
-        lunch_oil.setText("油脂类："+plan.getLunch_oil()+"份");
-        lunch_nut.setText("坚果类："+plan.getLunch_nut()+"份");
+        lunch_plan.setText(plan.getLunch_plan() + "份");
+        lunch_vegetable.setText("蔬菜类：" + plan.getLunch_vegetable() + "份");
+        lunch_fruit.setText("水果类：" + plan.getLunch_fruit() + "份");
+        lunch_bread.setText("谷薯类：" + plan.getLunch_bread() + "份");
+        lunch_bean.setText("豆类：" + plan.getLunch_bean() + "份");
+        lunch_milk.setText("乳类：" + plan.getLunch_milk() + "份");
+        lunch_meat.setText("肉蛋类：" + plan.getLunch_meat() + "份");
+        lunch_oil.setText("油脂类：" + plan.getLunch_oil() + "份");
+        lunch_nut.setText("坚果类：" + plan.getLunch_nut() + "份");
 
-        dinner_plan.setText(plan.getDinner_plan()+"份");
-        dinner_vegetable.setText("蔬菜类："+plan.getDinner_vegetable()+"份");
-        dinner_fruit.setText("水果类："+plan.getDinner_fruit()+"份");
-        dinner_bread.setText("谷薯类："+plan.getDinner_bread()+"份");
-        dinner_bean.setText("豆类："+plan.getDinner_bean()+"份");
-        dinner_milk.setText("乳类："+plan.getDinner_milk()+"份");
-        dinner_meat.setText("肉蛋类："+plan.getDinner_meat()+"份");
-        dinner_oil.setText("油脂类："+plan.getDinner_oil()+"份");
-        dinner_nut.setText("坚果类："+plan.getDinner_nut()+"份");
+        dinner_plan.setText(plan.getDinner_plan() + "份");
+        dinner_vegetable.setText("蔬菜类：" + plan.getDinner_vegetable() + "份");
+        dinner_fruit.setText("水果类：" + plan.getDinner_fruit() + "份");
+        dinner_bread.setText("谷薯类：" + plan.getDinner_bread() + "份");
+        dinner_bean.setText("豆类：" + plan.getDinner_bean() + "份");
+        dinner_milk.setText("乳类：" + plan.getDinner_milk() + "份");
+        dinner_meat.setText("肉蛋类：" + plan.getDinner_meat() + "份");
+        dinner_oil.setText("油脂类：" + plan.getDinner_oil() + "份");
+        dinner_nut.setText("坚果类：" + plan.getDinner_nut() + "份");
 
-        breakfast_addition_plan.setText(plan.getBreakfast_addition_plan()+"份");
-        breakfast_addition_vegetable.setText("蔬菜类："+plan.getBreakfast_addition_vegetable()+"份");
-        breakfast_addition_fruit.setText("水果类："+plan.getBreakfast_addition_fruit()+"份");
-        breakfast_addition_bread.setText("谷薯类："+plan.getBreakfast_addition_bread()+"份");
-        breakfast_addition_bean.setText("豆类："+plan.getBreakfast_addition_bean()+"份");
-        breakfast_addition_milk.setText("乳类："+plan.getBreakfast_addition_milk()+"份");
-        breakfast_addition_meat.setText("肉蛋类："+plan.getBreakfast_addition_meat()+"份");
-        breakfast_addition_oil.setText("油脂类："+plan.getBreakfast_addition_oil()+"份");
-        breakfast_addition_nut.setText("坚果类："+plan.getBreakfast_addition_nut()+"份");
+        breakfast_addition_plan.setText(plan.getBreakfast_addition_plan() + "份");
+        breakfast_addition_vegetable.setText("蔬菜类：" + plan.getBreakfast_addition_vegetable() + "份");
+        breakfast_addition_fruit.setText("水果类：" + plan.getBreakfast_addition_fruit() + "份");
+        breakfast_addition_bread.setText("谷薯类：" + plan.getBreakfast_addition_bread() + "份");
+        breakfast_addition_bean.setText("豆类：" + plan.getBreakfast_addition_bean() + "份");
+        breakfast_addition_milk.setText("乳类：" + plan.getBreakfast_addition_milk() + "份");
+        breakfast_addition_meat.setText("肉蛋类：" + plan.getBreakfast_addition_meat() + "份");
+        breakfast_addition_oil.setText("油脂类：" + plan.getBreakfast_addition_oil() + "份");
+        breakfast_addition_nut.setText("坚果类：" + plan.getBreakfast_addition_nut() + "份");
 
-        lunch_addition_plan.setText(plan.getLunch_addition_plan()+"份");
-        lunch_addition_vegetable.setText("蔬菜类："+plan.getLunch_addition_vegetable()+"份");
-        lunch_addition_fruit.setText("水果类："+plan.getLunch_addition_fruit()+"份");
-        lunch_addition_bread.setText("谷薯类："+plan.getLunch_addition_bread()+"份");
-        lunch_addition_bean.setText("豆类："+plan.getLunch_addition_bean()+"份");
-        lunch_addition_milk.setText("乳类："+plan.getLunch_addition_milk()+"份");
-        lunch_addition_meat.setText("肉蛋类："+plan.getLunch_addition_meat()+"份");
-        lunch_addition_oil.setText("油脂类："+plan.getLunch_addition_oil()+"份");
-        lunch_addition_nut.setText("坚果类："+plan.getLunch_addition_nut()+"份");
+        lunch_addition_plan.setText(plan.getLunch_addition_plan() + "份");
+        lunch_addition_vegetable.setText("蔬菜类：" + plan.getLunch_addition_vegetable() + "份");
+        lunch_addition_fruit.setText("水果类：" + plan.getLunch_addition_fruit() + "份");
+        lunch_addition_bread.setText("谷薯类：" + plan.getLunch_addition_bread() + "份");
+        lunch_addition_bean.setText("豆类：" + plan.getLunch_addition_bean() + "份");
+        lunch_addition_milk.setText("乳类：" + plan.getLunch_addition_milk() + "份");
+        lunch_addition_meat.setText("肉蛋类：" + plan.getLunch_addition_meat() + "份");
+        lunch_addition_oil.setText("油脂类：" + plan.getLunch_addition_oil() + "份");
+        lunch_addition_nut.setText("坚果类：" + plan.getLunch_addition_nut() + "份");
 
-        dinner_addition_plan.setText(plan.getDinner_addition_plan()+"份");
-        dinner_addition_vegetable.setText("蔬菜类："+plan.getDinner_addition_vegetable()+"份");
-        dinner_addition_fruit.setText("水果类："+plan.getDinner_addition_fruit()+"份");
-        dinner_addition_bread.setText("谷薯类："+plan.getDinner_addition_bread()+"份");
-        dinner_addition_bean.setText("豆类："+plan.getDinner_addition_bean()+"份");
-        dinner_addition_milk.setText("乳类："+plan.getDinner_addition_milk()+"份");
-        dinner_addition_meat.setText("肉蛋类："+plan.getDinner_addition_meat()+"份");
-        dinner_addition_oil.setText("油脂类："+plan.getDinner_addition_oil()+"份");
-        dinner_addition_nut.setText("坚果类："+plan.getDinner_addition_nut()+"份");
+        dinner_addition_plan.setText(plan.getDinner_addition_plan() + "份");
+        dinner_addition_vegetable.setText("蔬菜类：" + plan.getDinner_addition_vegetable() + "份");
+        dinner_addition_fruit.setText("水果类：" + plan.getDinner_addition_fruit() + "份");
+        dinner_addition_bread.setText("谷薯类：" + plan.getDinner_addition_bread() + "份");
+        dinner_addition_bean.setText("豆类：" + plan.getDinner_addition_bean() + "份");
+        dinner_addition_milk.setText("乳类：" + plan.getDinner_addition_milk() + "份");
+        dinner_addition_meat.setText("肉蛋类：" + plan.getDinner_addition_meat() + "份");
+        dinner_addition_oil.setText("油脂类：" + plan.getDinner_addition_oil() + "份");
+        dinner_addition_nut.setText("坚果类：" + plan.getDinner_addition_nut() + "份");
 
     }
 

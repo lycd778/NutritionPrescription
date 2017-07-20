@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
     private LayoutInflater mInflater;
-    private Dialog dialog;
+    private ProgressDialog progressDialog;
     public T mPresenter;
     protected float mDensity;
     protected int mDensityDpi;
@@ -32,16 +32,16 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
 
 
     public void showLoading() {
-        if (dialog==null){
-            dialog=new ProgressDialog(getActivity());
+        if (progressDialog==null){
+            progressDialog=new ProgressDialog(getActivity());
         }
-        dialog.setTitle("正在加载...");
-        dialog.show();
+        progressDialog.setTitle("正在加载...");
+        progressDialog.show();
     }
 
     public void dismissLoading() {
-        if (dialog!=null){
-            dialog.dismiss();
+        if (progressDialog!=null){
+            progressDialog.dismiss();
         }
     }
 

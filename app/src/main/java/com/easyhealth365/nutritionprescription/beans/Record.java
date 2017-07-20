@@ -4,7 +4,7 @@ package com.easyhealth365.nutritionprescription.beans;
  * Created by Administrator on 2017/7/19.
  */
 
-public class Recored extends BaseBean {
+public class Record extends BaseBean {
 
     private static final long serialVersionUID = -7851583248682859657L;
     /**
@@ -570,7 +570,7 @@ public class Recored extends BaseBean {
 
     @Override
     public String toString() {
-        return "Recored{" +
+        return "Record{" +
                 "breakfast_plan=" + breakfast_plan +
                 ", breakfast_addition_plan=" + breakfast_addition_plan +
                 ", lunch_plan=" + lunch_plan +

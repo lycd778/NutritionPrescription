@@ -1,19 +1,18 @@
 package com.easyhealth365.nutritionprescription.api;
 
-import com.easyhealth365.nutritionprescription.BuildConfig;
 import com.easyhealth365.nutritionprescription.beans.CheckPhone;
 import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.beans.PlanID;
+import com.easyhealth365.nutritionprescription.beans.PreRecord;
+import com.easyhealth365.nutritionprescription.beans.Record;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
+import com.easyhealth365.nutritionprescription.beans.UpdateRecordResult;
 import com.easyhealth365.nutritionprescription.beans.User;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
-import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -97,6 +96,22 @@ public class ApiService {
      */
     public static Flowable<ResponseBody> register(RegisterUser registerUser) {
         return apiStores.register(registerUser);
+    }
+
+    /**
+     * 上传处方执行记录,返回,用的是json格式的post
+     */
+    public static Flowable<UpdateRecordResult> updateRecord(Record record, String patientId, String access_token, String hospital_url) {
+        String url = hospital_url + "/api/nourishmentPlanFeedback/Add/" + patientId + "?";
+        return apiStores.updateRecord(url, access_token, record);
+    }
+
+    /**
+     * 获取往期处方执行记录,返回,用的是json格式的get
+     */
+    public static Flowable<PreRecord> getPreRecord(String checkTime, String patientId, String access_token, String hospital_url) {
+        String url = hospital_url + "/api/nourishmentPlanFeedback/Get/" + patientId + "/"+checkTime+"?";
+        return apiStores.getPreRecord(url, access_token);
     }
 
 }
