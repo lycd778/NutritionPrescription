@@ -51,15 +51,15 @@
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:background="@null"
+                android:gravity="center"
                 android:hint="@string/username"
                 android:inputType="number"
                 android:maxLength="11"
                 android:paddingLeft="34dip"
-                android:paddingRight="34dip"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:paddingRight="34dip" />
 
             <ImageView
                 android:layout_width="24dip"
@@ -70,23 +70,30 @@
                 android:src="@mipmap/username_icon" />
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:background="#8c8c8c" />
+
         <RelativeLayout
             android:layout_width="250dp"
             android:layout_height="46dip"
             android:layout_gravity="center"
             android:layout_marginTop="46dip">
+
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:background="@null"
+                android:gravity="center"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingLeft="34dip"
-                android:paddingRight="34dip"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:paddingRight="34dip" />
 
             <ImageView
                 android:layout_width="24dip"

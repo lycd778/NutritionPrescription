@@ -40,7 +40,10 @@
             android:name=".ui.register.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.updateUser.UpdateUserInfoActivity"
+            android:name=".ui.user_info.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.day_report.DayReportActivity"
             android:screenOrientation="portrait" />
     </application>
 

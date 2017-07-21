@@ -108,6 +108,9 @@ public class Plan extends BaseBean{
     private String strengthFactor;
     private String calorie;
     private String foodExchange;
+    private String height ;//身高
+    private String weight ;//体重
+    private String bmi;// DMI
     private int CHO;
     private int PR;
     private int fat;
@@ -237,6 +240,30 @@ public class Plan extends BaseBean{
 
     public void setFoodExchange(String foodExchange) {
         this.foodExchange = foodExchange;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getBmi() {
+        return bmi;
+    }
+
+    public void setBmi(String bmi) {
+        this.bmi = bmi;
     }
 
     public int getCHO() {
@@ -841,6 +868,9 @@ public class Plan extends BaseBean{
                 ", strengthFactor='" + strengthFactor + '\'' +
                 ", calorie='" + calorie + '\'' +
                 ", foodExchange='" + foodExchange + '\'' +
+                ", height='" + height + '\'' +
+                ", weight='" + weight + '\'' +
+                ", bmi='" + bmi + '\'' +
                 ", CHO=" + CHO +
                 ", PR=" + PR +
                 ", fat=" + fat +

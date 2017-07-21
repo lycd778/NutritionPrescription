@@ -18,7 +18,8 @@ import android.widget.TextView;
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseFragment;
 import com.easyhealth365.nutritionprescription.beans.Plan;
-import com.easyhealth365.nutritionprescription.ui.food.FoodFragment;
+import com.easyhealth365.nutritionprescription.beans.Record;
+import com.easyhealth365.nutritionprescription.utils.DateUtil;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
@@ -156,6 +157,7 @@ public class PlanFragment extends BaseFragment {
     @BindView(R.id.dinner_addition_nut)
     TextView dinner_addition_nut;
 
+
     @BindView(R.id.breakfast)
     LinearLayout breakfast;
     LayoutInflater mInflater;
@@ -167,6 +169,10 @@ public class PlanFragment extends BaseFragment {
     SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
     private FragmentManager manager;
     private FragmentTransaction ft;
+    private int total_plan_num, total_actual_num;
+    private Record pRecord = null;
+    private Plan pPlan = null;
+    private String time;
 
     @Nullable
     @Override
@@ -193,12 +199,12 @@ public class PlanFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.breakfast:
-                FoodFragment foodFragment = new FoodFragment();
-                ft = manager.beginTransaction();
-               //当前的fragment会被myJDEditFragment替换
-                ft.replace(R.id.realtabcontent, foodFragment);
-                ft.addToBackStack(null);
-                ft.commit();
+//                FoodFragment foodFragment = new FoodFragment();
+//                ft = manager.beginTransaction();
+//               //当前的fragment会被myJDEditFragment替换
+//                ft.replace(R.id.realtabcontent, foodFragment);
+//                ft.addToBackStack(null);
+//                ft.commit();
                 break;
         }
     }
@@ -206,12 +212,36 @@ public class PlanFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
+        time = DateUtil.getDate("yyyy-MM-dd");
+        pPlan = spUtils.getPlan();
+        if (spUtils.getRecord() == null) {
+            pRecord = new Record();
+        } else {
+            if (spUtils.getRecord().getCheckTime() == null) {
+                pRecord = new Record();
+            } else {
+                if (!(spUtils.getRecord().getCheckTime().equals(time))) {
+                    pRecord = new Record();
+                } else {
+                    pRecord = spUtils.getRecord();
+                }
+            }
+        }
+
+        total_plan_num = Integer.parseInt(pPlan.getFoodExchange());
+        total_actual_num = pRecord.getBreakfast_plan() + pRecord.getLunch_plan() +
+                pRecord.getDinner_plan() + pRecord.getBreakfast_addition_plan() +
+                pRecord.getLunch_addition_plan() + pRecord.getDinner_addition_plan();
         mInflater = LayoutInflater.from(getContext());
         if (view1 == null && view2 == null) {
             view1 = mInflater.inflate(R.layout.fragment_diet, null);
             view2 = mInflater.inflate(R.layout.fragment_weight, null);
+            TextView tv_diet_num = (TextView) view1.findViewById(R.id.tv_diet_num);
             CircleProgressView cpView = (CircleProgressView) view1.findViewById(R.id.circle_progress_view);
-            cpView.setProgress(80);
+            int percent = (int) (total_actual_num / total_plan_num * 100);
+            cpView.setProgress(percent);
+            tv_diet_num.setText(total_actual_num + "份/" + total_plan_num + "份");
+
             //添加页卡视图
             mViewList.add(view1);
             mViewList.add(view2);
