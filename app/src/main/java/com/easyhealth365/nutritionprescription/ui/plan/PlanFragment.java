@@ -21,6 +21,7 @@ import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.beans.Record;
 import com.easyhealth365.nutritionprescription.utils.DateUtil;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
+import com.easyhealth365.nutritionprescription.utils.TLog;
 import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
 import java.util.ArrayList;
@@ -157,6 +158,8 @@ public class PlanFragment extends BaseFragment {
     @BindView(R.id.dinner_addition_nut)
     TextView dinner_addition_nut;
 
+    @BindView(R.id.tv_circle_progress_text)
+    TextView tv_circle_progress_text;
 
     @BindView(R.id.breakfast)
     LinearLayout breakfast;
@@ -169,7 +172,8 @@ public class PlanFragment extends BaseFragment {
     SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
     private FragmentManager manager;
     private FragmentTransaction ft;
-    private int total_plan_num, total_actual_num;
+    private float total_plan_num;
+    private int total_actual_num;
     private Record pRecord = null;
     private Plan pPlan = null;
     private String time;
@@ -228,35 +232,46 @@ public class PlanFragment extends BaseFragment {
             }
         }
 
-        total_plan_num = Integer.parseInt(pPlan.getFoodExchange());
+        total_plan_num = Float.parseFloat(pPlan.getFoodExchange());
         total_actual_num = pRecord.getBreakfast_plan() + pRecord.getLunch_plan() +
                 pRecord.getDinner_plan() + pRecord.getBreakfast_addition_plan() +
                 pRecord.getLunch_addition_plan() + pRecord.getDinner_addition_plan();
-        mInflater = LayoutInflater.from(getContext());
-        if (view1 == null && view2 == null) {
-            view1 = mInflater.inflate(R.layout.fragment_diet, null);
-            view2 = mInflater.inflate(R.layout.fragment_weight, null);
-            TextView tv_diet_num = (TextView) view1.findViewById(R.id.tv_diet_num);
-            CircleProgressView cpView = (CircleProgressView) view1.findViewById(R.id.circle_progress_view);
-            int percent = (int) (total_actual_num / total_plan_num * 100);
-            cpView.setProgress(percent);
-            tv_diet_num.setText(total_actual_num + "份/" + total_plan_num + "份");
-
-            //添加页卡视图
-            mViewList.add(view1);
-            mViewList.add(view2);
-            //添加页卡标题
-            mTitleList.add("饮食");
-            mTitleList.add("体重");
+        CircleProgressView cpView = (CircleProgressView) view.findViewById(R.id.circle_progress_view);
+        int percent = (int) ((total_actual_num / total_plan_num) * 100);
+        TLog.log(percent + "%");
+        cpView.setProgress(percent);
+        cpView.setProgressText(total_actual_num + "份/" + total_plan_num + "份");
+        tv_circle_progress_text.setText(percent + "%");
 
 
-            mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
-            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
 
-            mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
-            mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
-        }
+
+
+//        mInflater = LayoutInflater.from(getContext());
+//        if (view1 == null && view2 == null) {
+//            view1 = mInflater.inflate(R.layout.fragment_diet, null);
+//            view2 = mInflater.inflate(R.layout.fragment_weight, null);
+//            TextView tv_diet_num = (TextView) view1.findViewById(R.id.tv_diet_num);
+//            CircleProgressView cpView = (CircleProgressView) view1.findViewById(R.id.circle_progress_view_diet);
+//            int percent = (int) (total_actual_num / total_plan_num * 100);
+//            cpView.setProgress(percent);
+//            cpView.setProgressText(total_actual_num + "份/" + total_plan_num + "份");
+//            tv_diet_num.setText(percent+"%");
+//            //添加页卡视图
+//            mViewList.add(view1);
+//            mViewList.add(view2);
+//            //添加页卡标题
+//            mTitleList.add("饮食");
+//            mTitleList.add("体重");
+//
+//
+//            mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
+//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
+//            mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
+//
+//            mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), mViewList));//给ViewPager设置适配器
+//            mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
+//        }
     }
 
     @SuppressLint("SetTextI18n")

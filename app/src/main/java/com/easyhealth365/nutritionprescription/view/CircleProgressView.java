@@ -55,7 +55,8 @@ public class CircleProgressView extends View {
     private RectF mArcRectF;
     /* 测量文本宽高的矩形 */
     private Rect mTextRect;
-
+    /* 百分比文本 */
+    private String progressText="文本";
     /* 百分比 */
     private float mProgress;
     /* 百分比对应角度 */
@@ -150,7 +151,7 @@ public class CircleProgressView extends View {
             canvas.rotate(360 / mScaleCount, getWidth() / 2, getHeight() / 2);
         }
         //画百分比文本
-        String progressText = mProgress + "%";
+//        String progressText = mProgress + "%";
         mProgressTextPaint.getTextBounds(progressText, 0, progressText.length(), mTextRect);
         float progressTextWidth = mTextRect.width();
         float progressTextHeight = mTextRect.height();
@@ -176,5 +177,9 @@ public class CircleProgressView extends View {
             }
         });
         anim.start();
+    }
+    public void setProgressText(String text) {
+        Log.e("--> ", text);
+        progressText=text;
     }
 }

@@ -114,4 +114,11 @@ public class ApiService {
         return apiStores.getPreRecord(url, access_token);
     }
 
+    /**
+     * 重置密码用户,返回,用的是json格式的post
+     */
+    public static Flowable<ResponseBody> resetPassword(String userid,String oldpassword,String newpassword) {
+        return apiStores.resetPassword(userid,oldpassword,newpassword);
+    }
+
 }

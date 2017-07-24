@@ -1,10 +1,70 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cpv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.easyhealth365.nutritionprescription.ui.plan.PlanFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@mipmap/bg_diet" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="营养计划"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <com.easyhealth365.nutritionprescription.view.CircleProgressView
+            android:id="@+id/circle_progress_view"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/shape_circle"
+            cpv:arcWidth="15dp"
+            cpv:endColor="#126b94"
+            cpv:labelText=""
+            cpv:labelTextSize="30sp"
+            cpv:progressTextSize="10sp"
+            cpv:scaleCount="1"
+            cpv:startColor="#12d699"
+            cpv:textColor="#4F5F6F" />
+
+        <TextView
+            android:id="@+id/tv_circle_progress_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="85dp"
+            android:gravity="center"
+            android:text="82份/111份"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="140dp"
+            android:gravity="center"
+            android:text="饮食管理"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/line_plan"
@@ -176,6 +236,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lunch"
                     android:layout_width="match_parent"
@@ -451,6 +512,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/breakfast_addition"
                     android:layout_width="match_parent"
@@ -726,6 +788,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/dinner_addition"
                     android:layout_width="match_parent"

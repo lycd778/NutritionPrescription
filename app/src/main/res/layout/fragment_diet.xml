@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,8 +12,18 @@
         android:scaleType="fitStart"
         android:src="@mipmap/bg_diet" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="营养计划"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
     <com.easyhealth365.nutritionprescription.view.CircleProgressView
-        android:id="@+id/circle_progress_view"
+        android:id="@+id/circle_progress_view_diet"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_alignParentTop="true"
@@ -22,8 +33,8 @@
         cpv:arcWidth="15dp"
         cpv:endColor="#126b94"
         cpv:labelText=""
-        cpv:labelTextSize="10sp"
-        cpv:progressTextSize="30sp"
+        cpv:labelTextSize="30sp"
+        cpv:progressTextSize="10sp"
         cpv:scaleCount="1"
         cpv:startColor="#12d699"
         cpv:textColor="#4F5F6F" />

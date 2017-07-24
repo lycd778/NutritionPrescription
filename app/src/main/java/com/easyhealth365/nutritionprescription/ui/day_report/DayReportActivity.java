@@ -194,8 +194,8 @@ public class DayReportActivity extends BaseActivity {
                 dRecord.getLunch_addition_nut() + dRecord.getDinner_addition_nut();
         tv_fat_plan_num.setText("/" + fat_plan_num);
         tv_fat_actual_num.setText(fat_actual_num + "");
-        fat_progressBar.setMax(45);
-        fat_progressBar.setProgress(30);
+        fat_progressBar.setMax(fat_plan_num);
+        fat_progressBar.setProgress(fat_actual_num);
         if (fat_actual_num < fat_plan_num) {
             setProgressBar(fat_progressBar, -1);
             image_fat.setImageResource(R.mipmap.ic_uncomplete);

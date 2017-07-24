@@ -72,6 +72,14 @@ interface ApiStores {
      */
     @GET()
     Flowable<PreRecord> getPreRecord(@Url String url, @Query("access_token") String access_token);
+
+    /**
+     * 重置密码返回(json post)
+     */
+    @POST("api/user/Updatep")
+    Flowable<ResponseBody> resetPassword(@Query("userid") String userid,
+                                         @Query("oldpassword") String oldpassword,
+                                         @Query("newpassword") String newpassword);
 }
 
 
