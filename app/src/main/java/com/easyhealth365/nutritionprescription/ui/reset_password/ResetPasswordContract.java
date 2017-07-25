@@ -12,6 +12,7 @@ public interface ResetPasswordContract{
         void showProgress();
         void hideProgress();
         void showError(String error);
+        void showResult(int status);
         void navigateToLogin();
     }
     interface Presenter extends BasePresenter {

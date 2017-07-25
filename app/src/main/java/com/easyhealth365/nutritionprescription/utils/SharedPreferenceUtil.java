@@ -21,6 +21,7 @@ public class SharedPreferenceUtil {
     public final static String RE_USER = "RE_USER";
     public final static String PLAN = "PLAN";
     public final static String RECORD = "RECORD";
+    public final static String WEIGHT = "WEIGHT";
     public final static String KEY_Remeber = "KEY_Remeber";
     public final static String KEY_LOGIN = "KEY_LOGIN";
     public final static String KEY_LEVEL = "KEY_LEVEL";
@@ -113,6 +114,18 @@ public class SharedPreferenceUtil {
     //读取用户名
     public String getUsername() {
         return sp.getString("pre_username", "");
+    }
+
+    //记录现体重
+    public void setWeight(int weight) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(WEIGHT, weight);
+        editor.apply();
+    }
+
+    //读取现体重
+    public int getWeight() {
+        return sp.getInt(WEIGHT,0);
     }
 
     //记录密码

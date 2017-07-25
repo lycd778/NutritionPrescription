@@ -6,6 +6,7 @@ import com.easyhealth365.nutritionprescription.beans.PlanID;
 import com.easyhealth365.nutritionprescription.beans.PreRecord;
 import com.easyhealth365.nutritionprescription.beans.Record;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
+import com.easyhealth365.nutritionprescription.beans.UpdatePasswordResult;
 import com.easyhealth365.nutritionprescription.beans.UpdateRecordResult;
 import com.easyhealth365.nutritionprescription.beans.User;
 
@@ -76,10 +77,11 @@ interface ApiStores {
     /**
      * 重置密码返回(json post)
      */
+    @FormUrlEncoded
     @POST("api/user/Updatep")
-    Flowable<ResponseBody> resetPassword(@Query("userid") String userid,
-                                         @Query("oldpassword") String oldpassword,
-                                         @Query("newpassword") String newpassword);
+    Flowable<UpdatePasswordResult> resetPassword(@Field("userid") String userid,
+                                                 @Field("oldpassword") String oldpassword,
+                                                 @Field("newpassword") String newpassword);
 }
 
 

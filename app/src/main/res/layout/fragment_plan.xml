@@ -41,7 +41,7 @@
             cpv:endColor="#126b94"
             cpv:labelText=""
             cpv:labelTextSize="30sp"
-            cpv:progressTextSize="10sp"
+            cpv:progressTextSize="15sp"
             cpv:scaleCount="1"
             cpv:startColor="#12d699"
             cpv:textColor="#4F5F6F" />
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="85dp"
+            android:layout_marginTop="90dp"
             android:gravity="center"
             android:text="82份/111份"
             android:textSize="12sp" />
@@ -60,10 +60,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="130dp"
             android:gravity="center"
             android:text="饮食管理"
             android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_to_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="#80000000"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@mipmap/ic_left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="5dp"
+                android:ems="1"
+                android:text="饮食"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_to_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="#80000000"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:ems="1"
+                android:text="体重"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@mipmap/ic_right" />
+
+
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout

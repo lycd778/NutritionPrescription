@@ -7,17 +7,12 @@ import com.easyhealth365.nutritionprescription.beans.UpdateRecordResult;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.utils.TLog;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-
-import java.io.IOException;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
 
 /**
  * Created by lingxiao-Ching on 2017/7/20.

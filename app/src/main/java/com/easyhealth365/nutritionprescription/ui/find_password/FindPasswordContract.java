@@ -1,26 +1,22 @@
-package com.easyhealth365.nutritionprescription.ui.register;
+package com.easyhealth365.nutritionprescription.ui.find_password;
 
 import com.easyhealth365.nutritionprescription.base.BasePresenter;
 import com.easyhealth365.nutritionprescription.base.BaseView;
-import com.easyhealth365.nutritionprescription.beans.RegisterUser;
 
 /**
- * Created by lingxiao-Ching on 2017/7/12.
+ * Created by lingxiao-Ching on 2017/7/25.
  */
 
-public interface RegisterContract {
+public interface FindPasswordContract{
     interface View extends BaseView {
         void showProgress();
         void hideProgress();
         void showError(String error);
+        void showResult(int status);
         void navigateToLogin();
-        void updateReUser();
-        void showResult(String message);
     }
-
     interface Presenter extends BasePresenter {
-        void checkPhone(String telephone, String password);
-        void register(RegisterUser reUser);
+        void findPassword(String mbtelephone,int type, String telephone,String password,boolean istelephonecheck);
         void onDestroy();
     }
 }

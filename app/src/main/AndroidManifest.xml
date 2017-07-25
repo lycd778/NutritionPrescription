@@ -45,6 +45,9 @@
         <activity
             android:name=".ui.day_report.DayReportActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.reset_password.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

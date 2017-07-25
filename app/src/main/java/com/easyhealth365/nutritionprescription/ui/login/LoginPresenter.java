@@ -39,17 +39,21 @@ public class LoginPresenter implements LoginContract.Presenter {
                     public void onNext(User user) {
                         loginView.hideProgress();
                         TLog.log("status: "+user.getStatus()+" message: "+user.getMessage());
-                        spUtils.setUsername(user.getResults().getTelephone());
-                        spUtils.putUser(user);
-                        spUtils.setIsLogin(true);
-                        loginView.init();
-                        loginView.navigateToMain();
+                        if (103==user.getStatus()){
+                            spUtils.setUsername(user.getResults().getTelephone());
+                            spUtils.putUser(user);
+                            spUtils.setIsLogin(true);
+                            loginView.init();
+                            loginView.navigateToMain();
+                        }else{
+                            loginView.showError(user.getMessage());
+                        }
                     }
 
                     @Override
                     public void onError(Throwable t) {
                         loginView.hideProgress();
-                        TLog.log("erroe: "+t.getMessage());
+                        TLog.log("error: "+t.getMessage());
                         loginView.showError(t.getMessage());
                     }
 

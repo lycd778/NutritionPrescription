@@ -12,6 +12,7 @@ import com.easyhealth365.nutritionprescription.ui.day_report.DayReportActivity;
 import com.easyhealth365.nutritionprescription.ui.login.LoginActivity;
 import com.easyhealth365.nutritionprescription.ui.mian.MainActivity;
 import com.easyhealth365.nutritionprescription.ui.register.RegisterActivity;
+import com.easyhealth365.nutritionprescription.ui.reset_password.ResetPasswordActivity;
 import com.easyhealth365.nutritionprescription.ui.user_info.UserInfoActivity;
 import com.easyhealth365.nutritionprescription.utils.TLog;
 
@@ -37,7 +38,7 @@ public class UserFragment extends BaseFragment {
 
 
     }
-    @OnClick({R.id.btn_login_out,R.id.user_info,R.id.user_day_report})
+    @OnClick({R.id.btn_login_out,R.id.user_info,R.id.user_day_report,R.id.user_reset_password})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login_out:
@@ -45,14 +46,16 @@ public class UserFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.user_info:
-                TLog.log("跳转到UserInfo");
                 Intent userInfoIntent = new Intent(getActivity(), UserInfoActivity.class);
                 startActivity(userInfoIntent);
                 break;
             case R.id.user_day_report:
-                TLog.log("跳转到DayReport");
                 Intent dayReportIntent = new Intent(getActivity(), DayReportActivity.class);
                 startActivity(dayReportIntent);
+                break;
+            case R.id.user_reset_password:
+                Intent resetPasswordIntent = new Intent(getActivity(), ResetPasswordActivity.class);
+                startActivity(resetPasswordIntent);
                 break;
             default:
                 break;

@@ -6,6 +6,7 @@ import com.easyhealth365.nutritionprescription.beans.PlanID;
 import com.easyhealth365.nutritionprescription.beans.PreRecord;
 import com.easyhealth365.nutritionprescription.beans.Record;
 import com.easyhealth365.nutritionprescription.beans.RegisterUser;
+import com.easyhealth365.nutritionprescription.beans.UpdatePasswordResult;
 import com.easyhealth365.nutritionprescription.beans.UpdateRecordResult;
 import com.easyhealth365.nutritionprescription.beans.User;
 
@@ -117,7 +118,7 @@ public class ApiService {
     /**
      * 重置密码用户,返回,用的是json格式的post
      */
-    public static Flowable<ResponseBody> resetPassword(String userid,String oldpassword,String newpassword) {
+    public static Flowable<UpdatePasswordResult> resetPassword(String userid, String oldpassword, String newpassword) {
         return apiStores.resetPassword(userid,oldpassword,newpassword);
     }
 
