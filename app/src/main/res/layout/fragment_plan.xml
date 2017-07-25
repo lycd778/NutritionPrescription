@@ -41,7 +41,7 @@
             cpv:endColor="#126b94"
             cpv:labelText=""
             cpv:labelTextSize="30sp"
-            cpv:progressTextSize="15sp"
+            cpv:progressTextSize="10sp"
             cpv:scaleCount="1"
             cpv:startColor="#12d699"
             cpv:textColor="#4F5F6F" />
@@ -51,12 +51,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="80dp"
             android:gravity="center"
-            android:text="82份/111份"
-            android:textSize="12sp" />
+            android:text="75kg"
+            android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/tv_circle_progress_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

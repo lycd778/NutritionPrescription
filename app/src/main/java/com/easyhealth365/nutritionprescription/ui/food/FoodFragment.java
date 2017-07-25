@@ -26,6 +26,7 @@ import com.easyhealth365.nutritionprescription.utils.DateUtil;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.utils.TLog;
 import com.easyhealth365.nutritionprescription.utils.ToastUtil;
+import com.easyhealth365.nutritionprescription.view.CenterDialog;
 import com.easyhealth365.nutritionprescription.view.ScrollPickerView;
 import com.easyhealth365.nutritionprescription.view.StringScrollPicker;
 
@@ -37,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FoodFragment extends BaseFragment<FoodContract.Presenter> implements FoodContract.View {
+public class FoodFragment extends BaseFragment<FoodContract.Presenter> implements FoodContract.View ,CenterDialog.OnCenterItemClickListener{
     @BindView(R.id.line_food)
     LinearLayout line_food;
     @BindView(R.id.progressBar)
@@ -122,7 +123,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
             breakfastNum = 0, lunchNum = 0, dinnerNum, breakfastAdNum = 0, lunchAdNum = 0, dinnerAdNum,
             pageNum = 0, dateNum = 0;
     private String[] preDate = new String[6];
-
+    private CenterDialog centerDialog;
     LayoutInflater mInflater;
     private StringScrollPicker sScrollPicker;
     private String[] titleList = {"早餐", "午餐", "晚餐", "早加餐", "午加餐", "晚加餐"};
@@ -159,8 +160,22 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
     }
 
     @Override
+    public void OnCenterItemClick(CenterDialog dialog, View view) {
+        switch (view.getId()){
+            case R.id.dialog_sure:
+                ToastUtil.showShort(getContext(),"按钮点击");
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
+        centerDialog = new CenterDialog(getContext(), R.layout.dialog_layout, new int[]{R.id.dialog_cancel, R.id.dialog_sure});
+        centerDialog.setOnCenterItemClickListener(this);
+
         if (!spUtils.getHavePlan()) {
             line_food.setVisibility(View.GONE);
             line_food_noplan.setVisibility(View.VISIBLE);
@@ -194,7 +209,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
 
     @OnClick({R.id.vegetable_plus, R.id.vegetable_minus, R.id.fruit_plus, R.id.fruit_minus, R.id.bread_plus, R.id.bread_minus,
             R.id.bean_plus, R.id.bean_minus, R.id.milk_plus, R.id.milk_minus, R.id.meat_plus, R.id.meat_minus,
-            R.id.oil_plus, R.id.oil_minus, R.id.nut_plus, R.id.nut_minus, R.id.btn_save_plan
+            R.id.oil_plus, R.id.oil_minus, R.id.nut_plus, R.id.nut_minus, R.id.btn_save_plan,R.id.ll_show_tips
     })
     public void onClick(View view) {
         switch (view.getId()) {
@@ -323,6 +338,9 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
                         spUtils.getUser().getResults().getUserid(),
                         spUtils.getUser().getResults().getAccess_token(),
                         spUtils.getUser().getResults().getHospitalBaseUrl());
+                break;
+            case R.id.ll_show_tips:
+                centerDialog.show();
                 break;
 
         }

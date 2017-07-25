@@ -165,6 +165,9 @@ public class PlanFragment extends BaseFragment {
     @BindView(R.id.tv_circle_progress_text)
     TextView tv_circle_progress_text;
 
+    @BindView(R.id.tv_circle_progress_title)
+    TextView tv_circle_progress_title;
+
     @BindView(R.id.breakfast)
     LinearLayout breakfast;
     LayoutInflater mInflater;
@@ -219,6 +222,7 @@ public class PlanFragment extends BaseFragment {
             case R.id.ll_to_food:
                 ll_to_food.setVisibility(View.INVISIBLE);
                 ll_to_weight.setVisibility(View.VISIBLE);
+                tv_circle_progress_title.setText("饮食管理");
                 total_plan_num = Float.parseFloat(pPlan.getFoodExchange());
                 total_actual_num = pRecord.getBreakfast_plan() + pRecord.getLunch_plan() +
                         pRecord.getDinner_plan() + pRecord.getBreakfast_addition_plan() +
@@ -227,20 +231,21 @@ public class PlanFragment extends BaseFragment {
                 int planPercent = (int) ((total_actual_num / total_plan_num) * 100);
                 TLog.log(planPercent + "%");
                 cpView.setProgress(planPercent);
-                cpView.setProgressText(total_actual_num + "份/" + total_plan_num + "份");
+                cpView.setProgressText(total_actual_num + "份/" + (int)total_plan_num + "份");
                 tv_circle_progress_text.setText(planPercent + "%");
                 break;
             case R.id.ll_to_weight:
                 ll_to_food.setVisibility(View.VISIBLE);
                 ll_to_weight.setVisibility(View.INVISIBLE);
+                tv_circle_progress_title.setText("体重管理");
                 int weightPercent = 0;
                 if (Float.parseFloat(pPlan.getTargetWeight()) > Float.parseFloat(pPlan.getWeight())) {
                     total_weight_mimus_num = Float.parseFloat(pPlan.getTargetWeight()) - Float.parseFloat(pPlan.getWeight());
-                    weight_minus_num = Float.parseFloat(pPlan.getTargetWeight()) - spUtils.getWeight();
+                    weight_minus_num = spUtils.getWeight()- Float.parseFloat(pPlan.getWeight());
                     weightPercent = (int) ((weight_minus_num / total_weight_mimus_num) * 100);
                 } else {
                     total_weight_mimus_num = Float.parseFloat(pPlan.getWeight()) - Float.parseFloat(pPlan.getTargetWeight());
-                    weight_minus_num = spUtils.getWeight() - Float.parseFloat(pPlan.getTargetWeight());
+                    weight_minus_num = Float.parseFloat(pPlan.getWeight()) - spUtils.getWeight();
                     weightPercent = (int) ((weight_minus_num / total_weight_mimus_num) * 100);
                 }
                 TLog.log(weightPercent + "%");
