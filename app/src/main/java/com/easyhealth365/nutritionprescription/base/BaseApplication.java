@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
-import com.squareup.leakcanary.LeakCanary;
+//import com.squareup.leakcanary.LeakCanary;
 
 /**
  * 获取上下文,Toast,以及各种初始化
@@ -41,7 +41,7 @@ public class BaseApplication extends Application {
         context = getBaseContext();
         baseApplication = this;
         //检测内存泄露
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
 
         SharedPreferenceUtil.initSharedPreference(getApplicationContext());
     }

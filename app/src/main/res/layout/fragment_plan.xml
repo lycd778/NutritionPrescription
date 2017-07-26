@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,12 +37,12 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/shape_circle"
             cpv:arcWidth="15dp"
-            cpv:endColor="#126b94"
+            cpv:endColor="@color/btn_blue_bg_press"
             cpv:labelText=""
             cpv:labelTextSize="30sp"
             cpv:progressTextSize="10sp"
             cpv:scaleCount="1"
-            cpv:startColor="#12d699"
+            cpv:startColor="@color/blue"
             cpv:textColor="#4F5F6F" />
 
         <TextView
@@ -121,8 +120,36 @@
                 android:adjustViewBounds="true"
                 android:padding="5dp"
                 android:src="@mipmap/ic_right" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_current_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="210dp"
+            android:paddingBottom="5dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_current_weight" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
+                android:gravity="end"
+                android:text="现体重"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
     </RelativeLayout>
 

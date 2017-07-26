@@ -10,7 +10,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
+
 import com.easyhealth365.nutritionprescription.R;
+import com.easyhealth365.nutritionprescription.utils.TLog;
 
 /**
  * @describe 自定义居中弹出dialog
@@ -21,6 +24,9 @@ public class CenterDialog extends Dialog implements View.OnClickListener {
 
     private int layoutResID;
 
+    private EditText editText;
+    private boolean isWeight;
+    private Double height=0.5;
     /**
      * 要监听的控件id
      */
@@ -46,19 +52,26 @@ public class CenterDialog extends Dialog implements View.OnClickListener {
         WindowManager windowManager = ((Activity) context).getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.width = display.getWidth()*4/5; // 设置dialog宽度为屏幕的4/5
+        lp.width = display.getWidth() * 6 / 7; // 设置dialog宽度为屏幕的4/5
+        lp.height = (int) (display.getHeight() *height);// 设置dialog高度为屏幕的1/3
         getWindow().setAttributes(lp);
         // 点击Dialog外部消失
         setCanceledOnTouchOutside(true);
 
         for (int id : listenedItems) {
-            findViewById(id).setOnClickListener(this);
+            if (id == R.id.et_current_weight) {
+                editText = (EditText) findViewById(id);
+                isWeight = true;
+            } else {
+                findViewById(id).setOnClickListener(this);
+            }
         }
+
     }
 
     public interface OnCenterItemClickListener {
 
-        void OnCenterItemClick(CenterDialog dialog, View view);
+        void OnCenterItemClick(CenterDialog dialog, View view, String et_weight);
 
     }
 
@@ -69,7 +82,15 @@ public class CenterDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         dismiss();
-        listener.OnCenterItemClick(this, view);
+        if (isWeight) {
+            listener.OnCenterItemClick(this, view, editText.getText().toString().trim());
+        } else {
+            listener.OnCenterItemClick(this, view, isWeight + "");
+        }
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
     }
 }
 

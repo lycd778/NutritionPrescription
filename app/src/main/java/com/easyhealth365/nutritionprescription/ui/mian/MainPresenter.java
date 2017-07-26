@@ -89,7 +89,9 @@ public class MainPresenter implements MainContract.Presenter {
                         mainView.hideProgress();
                         TLog.log(plan.toString());
                         spUtils.putPlan(plan);
-                        spUtils.setWeight(Integer.parseInt(plan.getWeight()));
+                        if (0 == spUtils.getWeight()) {
+                            spUtils.setWeight(Integer.parseInt(plan.getWeight()));
+                        }
                         mainView.initTabHost();
                     }
 

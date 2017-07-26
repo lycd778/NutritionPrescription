@@ -9,9 +9,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import com.easyhealth365.nutritionprescription.beans.Record;
 import com.easyhealth365.nutritionprescription.utils.DateUtil;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 import com.easyhealth365.nutritionprescription.utils.TLog;
+import com.easyhealth365.nutritionprescription.view.CenterDialog;
 import com.easyhealth365.nutritionprescription.view.CircleProgressView;
 
 import java.util.ArrayList;
@@ -32,7 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class PlanFragment extends BaseFragment {
+public class PlanFragment extends BaseFragment implements CenterDialog.OnCenterItemClickListener{
     @BindView(R.id.vp_view)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
@@ -165,9 +168,11 @@ public class PlanFragment extends BaseFragment {
     @BindView(R.id.tv_circle_progress_text)
     TextView tv_circle_progress_text;
 
+    @BindView(R.id.ll_current_weight)
+    LinearLayout ll_current_weight;
+
     @BindView(R.id.tv_circle_progress_title)
     TextView tv_circle_progress_title;
-
     @BindView(R.id.breakfast)
     LinearLayout breakfast;
     LayoutInflater mInflater;
@@ -184,8 +189,9 @@ public class PlanFragment extends BaseFragment {
     private Record pRecord = null;
     private Plan pPlan = null;
     private String time;
-    CircleProgressView cpView;
-
+    private CircleProgressView cpView;
+    private CenterDialog centerDialog;
+    private Double dialog_height=0.3;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -206,9 +212,10 @@ public class PlanFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 
-    @OnClick({R.id.breakfast, R.id.ll_to_food, R.id.ll_to_weight})
+    @OnClick({R.id.breakfast, R.id.ll_to_food, R.id.ll_to_weight,R.id.ll_current_weight})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.breakfast:
@@ -222,71 +229,76 @@ public class PlanFragment extends BaseFragment {
             case R.id.ll_to_food:
                 ll_to_food.setVisibility(View.INVISIBLE);
                 ll_to_weight.setVisibility(View.VISIBLE);
+                ll_current_weight.setVisibility(View.INVISIBLE);
                 tv_circle_progress_title.setText("饮食管理");
-                total_plan_num = Float.parseFloat(pPlan.getFoodExchange());
-                total_actual_num = pRecord.getBreakfast_plan() + pRecord.getLunch_plan() +
-                        pRecord.getDinner_plan() + pRecord.getBreakfast_addition_plan() +
-                        pRecord.getLunch_addition_plan() + pRecord.getDinner_addition_plan();
-
-                int planPercent = (int) ((total_actual_num / total_plan_num) * 100);
-                TLog.log(planPercent + "%");
-                cpView.setProgress(planPercent);
-                cpView.setProgressText(total_actual_num + "份/" + (int)total_plan_num + "份");
-                tv_circle_progress_text.setText(planPercent + "%");
+                setFoodCircleProgress();
                 break;
             case R.id.ll_to_weight:
                 ll_to_food.setVisibility(View.VISIBLE);
                 ll_to_weight.setVisibility(View.INVISIBLE);
+                ll_current_weight.setVisibility(View.VISIBLE);
                 tv_circle_progress_title.setText("体重管理");
-                int weightPercent = 0;
-                if (Float.parseFloat(pPlan.getTargetWeight()) > Float.parseFloat(pPlan.getWeight())) {
-                    total_weight_mimus_num = Float.parseFloat(pPlan.getTargetWeight()) - Float.parseFloat(pPlan.getWeight());
-                    weight_minus_num = spUtils.getWeight()- Float.parseFloat(pPlan.getWeight());
-                    weightPercent = (int) ((weight_minus_num / total_weight_mimus_num) * 100);
-                } else {
-                    total_weight_mimus_num = Float.parseFloat(pPlan.getWeight()) - Float.parseFloat(pPlan.getTargetWeight());
-                    weight_minus_num = Float.parseFloat(pPlan.getWeight()) - spUtils.getWeight();
-                    weightPercent = (int) ((weight_minus_num / total_weight_mimus_num) * 100);
-                }
-                TLog.log(weightPercent + "%");
-                cpView.setProgress(weightPercent);
-                cpView.setProgressText(spUtils.getWeight() + "kg/" + pPlan.getTargetWeight() + "kg");
-                tv_circle_progress_text.setText(spUtils.getWeight() + "kg");
+                setWeightCircleProgress();
+                break;
+            case R.id.ll_current_weight:
+                centerDialog.show();
                 break;
 
         }
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        time = DateUtil.getDate("yyyy-MM-dd");
-        pPlan = spUtils.getPlan();
-        if (spUtils.getRecord() == null) {
-            pRecord = new Record();
-        } else {
-            if (spUtils.getRecord().getCheckTime() == null) {
-                pRecord = new Record();
-            } else {
-                if (!(spUtils.getRecord().getCheckTime().equals(time))) {
-                    pRecord = new Record();
-                } else {
-                    pRecord = spUtils.getRecord();
+    public void OnCenterItemClick(CenterDialog dialog, View view,String et_weight) {
+        TLog.log(et_weight);
+        switch (view.getId()){
+            case R.id.dialog_weight_sure:
+                //ToastUtil.showShort(getContext(),"确定");
+                TLog.log("确定");
+                if (!TextUtils.isEmpty(et_weight)){
+                    spUtils.setWeight(Integer.parseInt(et_weight));
+                    setWeightCircleProgress();
                 }
-            }
+                break;
+            default:
+                break;
         }
+    }
+    public void setWeightCircleProgress(){
+        int weightPercent = 0;
+        if (Float.parseFloat(pPlan.getTargetWeight()) > Float.parseFloat(pPlan.getWeight())) {
+            total_weight_mimus_num = Float.parseFloat(pPlan.getTargetWeight()) - Float.parseFloat(pPlan.getWeight());
+            weight_minus_num = spUtils.getWeight()- Float.parseFloat(pPlan.getWeight());
+            weightPercent = (int) ((weight_minus_num / total_weight_mimus_num) * 100);
+        } else {
+            total_weight_mimus_num = Float.parseFloat(pPlan.getWeight()) - Float.parseFloat(pPlan.getTargetWeight());
+            weight_minus_num = Float.parseFloat(pPlan.getWeight()) - spUtils.getWeight();
+            weightPercent = (int) ((weight_minus_num / total_weight_mimus_num) * 100);
+        }
+        TLog.log(weightPercent + "%");
+        cpView.setProgress(weightPercent);
+        cpView.setProgressText(spUtils.getWeight() + "kg/" + pPlan.getTargetWeight() + "kg");
+        tv_circle_progress_text.setText(spUtils.getWeight() + "kg");
 
+    }
+    public void setFoodCircleProgress(){
         total_plan_num = Float.parseFloat(pPlan.getFoodExchange());
         total_actual_num = pRecord.getBreakfast_plan() + pRecord.getLunch_plan() +
                 pRecord.getDinner_plan() + pRecord.getBreakfast_addition_plan() +
                 pRecord.getLunch_addition_plan() + pRecord.getDinner_addition_plan();
-        CircleProgressView cpView = (CircleProgressView) view.findViewById(R.id.circle_progress_view);
-        int percent = (int) ((total_actual_num / total_plan_num) * 100);
-        TLog.log(percent + "%");
-        cpView.setProgress(percent);
-        cpView.setProgressText(total_actual_num + "份/" + total_plan_num + "份");
-        tv_circle_progress_text.setText(percent + "%");
 
+        int planPercent = (int) ((total_actual_num / total_plan_num) * 100);
+        TLog.log(planPercent + "%");
+        cpView.setProgress(planPercent);
+        cpView.setProgressText(total_actual_num + "份/" + (int)total_plan_num + "份");
+        tv_circle_progress_text.setText(planPercent + "%");
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        centerDialog = new CenterDialog(getContext(), R.layout.dialog_current_weight, new int[]{ R.id.dialog_weight_sure,R.id.et_current_weight});
+        centerDialog.setOnCenterItemClickListener(this);
+        centerDialog.setHeight(dialog_height);
 //        mInflater = LayoutInflater.from(getContext());
 //        if (view1 == null && view2 == null) {
 //            view1 = mInflater.inflate(R.layout.fragment_diet, null);
@@ -317,6 +329,33 @@ public class PlanFragment extends BaseFragment {
     @SuppressLint("SetTextI18n")
     @Override
     public void initView() {
+        time = DateUtil.getDate("yyyy-MM-dd");
+        pPlan = spUtils.getPlan();
+        if (spUtils.getRecord() == null) {
+            pRecord = new Record();
+        } else {
+            if (spUtils.getRecord().getCheckTime() == null) {
+                pRecord = new Record();
+            } else {
+                if (!(spUtils.getRecord().getCheckTime().equals(time))) {
+                    pRecord = new Record();
+                } else {
+                    pRecord = spUtils.getRecord();
+                }
+            }
+        }
+        total_plan_num = Float.parseFloat(pPlan.getFoodExchange());
+        total_actual_num = pRecord.getBreakfast_plan() + pRecord.getLunch_plan() +
+                pRecord.getDinner_plan() + pRecord.getBreakfast_addition_plan() +
+                pRecord.getLunch_addition_plan() + pRecord.getDinner_addition_plan();
+        CircleProgressView cpView = (CircleProgressView) view.findViewById(R.id.circle_progress_view);
+        int percent = (int) ((total_actual_num / total_plan_num) * 100);
+        TLog.log(percent + "%");
+        cpView.setProgress(percent);
+        cpView.setProgressText(total_actual_num + "份/" + total_plan_num + "份");
+        tv_circle_progress_text.setText(percent + "%");
+
+
         Plan plan = spUtils.getPlan();
         breakfast_plan.setText(plan.getBreakfast_plan() + "份");
         breakfast_vegetable.setText("蔬菜类：" + plan.getBreakfast_vegetable() + "份");
@@ -379,6 +418,7 @@ public class PlanFragment extends BaseFragment {
         dinner_addition_nut.setText("坚果类：" + plan.getDinner_addition_nut() + "份");
 
     }
+
 
     //ViewPager适配器
     class MyPagerAdapter extends PagerAdapter {

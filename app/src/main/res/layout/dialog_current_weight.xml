@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/shape1"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/et_current_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_user_info"
+        android:gravity="center"
+        android:hint="请输入现体重(kg)"
+        android:inputType="number"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/dialog_weight_sure"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/btn_register"
+        android:gravity="center"
+        android:text="确定"
+        android:textSize="16sp" />
+</LinearLayout>

@@ -160,10 +160,10 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
     }
 
     @Override
-    public void OnCenterItemClick(CenterDialog dialog, View view) {
+    public void OnCenterItemClick(CenterDialog dialog, View view, String et_weight) {
         switch (view.getId()){
             case R.id.dialog_sure:
-                ToastUtil.showShort(getContext(),"按钮点击");
+                //ToastUtil.showShort(getContext(),"确定");
                 break;
             default:
                 break;
@@ -173,9 +173,8 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
     @Override
     public void onStart() {
         super.onStart();
-        centerDialog = new CenterDialog(getContext(), R.layout.dialog_layout, new int[]{R.id.dialog_cancel, R.id.dialog_sure});
+        centerDialog = new CenterDialog(getContext(), R.layout.dialog_tips, new int[]{ R.id.dialog_sure});
         centerDialog.setOnCenterItemClickListener(this);
-
         if (!spUtils.getHavePlan()) {
             line_food.setVisibility(View.GONE);
             line_food_noplan.setVisibility(View.VISIBLE);
@@ -1075,6 +1074,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
                 spUtils.getUser().getResults().getAccess_token(),
                 spUtils.getUser().getResults().getHospitalBaseUrl());
     }
+
 }
 
 

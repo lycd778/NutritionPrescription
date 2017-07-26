@@ -55,13 +55,16 @@ public class FindPasswordActicity extends BaseActivity<FindPasswordContract.Pres
         mPresenter.start();
     }
 
-    @OnClick({R.id.btn_find_password})
+    @OnClick({R.id.btn_find_password,R.id.tv_verification_code})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_find_password:
                 Validator validator = new Validator(this);
                 validator.setValidationListener(this);
                 validator.validate();
+                break;
+            case R.id.tv_verification_code:
+
                 break;
         }
     }
