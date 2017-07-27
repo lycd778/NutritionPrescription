@@ -48,9 +48,11 @@ public class UserInfoActivity extends BaseActivity {
         } else {
             image_user_info_male.setImageResource(R.mipmap.ic_user_female_checked);
         }
-        tv_user_info_height.setText(plan.getHeight());
-        tv_user_info_weight.setText(plan.getWeight());
-        tv_user_info_bmi.setText(plan.getBmi());
+        if (!spUtils.getHavePlan()) {
+            tv_user_info_height.setText(plan.getHeight());
+            tv_user_info_weight.setText(plan.getWeight());
+            tv_user_info_bmi.setText(plan.getBmi());
+        }
 
     }
 }

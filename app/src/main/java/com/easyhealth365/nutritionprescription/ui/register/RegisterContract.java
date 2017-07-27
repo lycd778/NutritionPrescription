@@ -13,9 +13,10 @@ public interface RegisterContract {
         void showProgress();
         void hideProgress();
         void showError(String error);
-        void navigateToLogin();
+        void navigateToLogin(String message);
         void updateReUser();
-        void showResult(String message);
+        void checkPhoneResult(String message);
+        void registerResult(String message);
     }
 
     interface Presenter extends BasePresenter {

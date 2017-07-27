@@ -48,8 +48,10 @@ public class MainPresenter implements MainContract.Presenter {
 
                     @Override
                     public void onNext(List<PlanID> IDList) {
-                        if (IDList.size() == 0) {
+                        mainView.hideProgress();
+                        if (IDList.isEmpty()) {
                             spUtils.setHavePlan(false);
+                            mainView.initTabHost();
                         } else {
                             spUtils.setHavePlan(true);
                             for (PlanID plID : IDList) {

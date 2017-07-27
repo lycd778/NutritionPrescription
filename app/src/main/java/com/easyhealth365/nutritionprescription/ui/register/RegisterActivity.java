@@ -137,10 +137,6 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
         mPresenter = new RegisterPresenter(this);
         mPresenter.start();
         ButterKnife.bind(this);
-        et_re_username.setText("15645464748");
-        et_re_email.setText("qlx7117@sina.com");
-        et_re_password.setText("123456");
-        et_re_confirm_password.setText("123456");
     }
 
     public void setPresenter(RegisterPresenter presenter) {
@@ -158,7 +154,7 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
             case R.id.btn_re_back:
                 i--;
                 if (i < 0) {
-                    navigateToLogin();
+                    finish();
                 } else {
                     switchInfo();
                 }
@@ -419,8 +415,13 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     }
 
     @Override
-    public void showResult(String message) {
+    public void checkPhoneResult(String message) {
         showErrorTip(tv_username, message);
+    }
+
+    @Override
+    public void registerResult(String message) {
+        ToastUtil.showShort(getApplicationContext(),message);
     }
 
 
@@ -440,7 +441,8 @@ public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> i
     }
 
     @Override
-    public void navigateToLogin() {
+    public void navigateToLogin(String message) {
+        ToastUtil.showShort(getApplicationContext(),message);
         Intent intent = new Intent(getBaseContext(), LoginActivity.class);
         startActivity(intent);
     }

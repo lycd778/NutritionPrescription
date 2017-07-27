@@ -1,6 +1,6 @@
 package com.easyhealth365.nutritionprescription.api;
 
-import com.easyhealth365.nutritionprescription.beans.CheckPhone;
+import com.easyhealth365.nutritionprescription.beans.NormalResult;
 import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.beans.PlanID;
 import com.easyhealth365.nutritionprescription.beans.PreRecord;
@@ -52,16 +52,16 @@ interface ApiStores {
      * 验证手机是否存在
      */
     @GET("api/user/exist")
-    Flowable<CheckPhone> checkPhone(@Query("telephone") String telephone,
-                                    @Query("password") String password,
-                                    @Query("realname") String realname,
-                                    @Query("gender") String gender);
+    Flowable<NormalResult> checkPhone(@Query("telephone") String telephone,
+                                      @Query("password") String password,
+                                      @Query("realname") String realname,
+                                      @Query("gender") String gender);
 
     /**
      * 注册返回(json post)
      */
     @POST("api/user/reg")
-    Flowable<ResponseBody> register(@Body RegisterUser registerUser);
+    Flowable<NormalResult> register(@Body RegisterUser registerUser);
 
     /**
      * 上传处方执行记录返回(json post)
@@ -82,6 +82,17 @@ interface ApiStores {
     Flowable<UpdatePasswordResult> resetPassword(@Field("userid") String userid,
                                                  @Field("oldpassword") String oldpassword,
                                                  @Field("newpassword") String newpassword);
+    /**
+     * 找回密码返回(json post)
+     */
+    @FormUrlEncoded
+    @POST("api/user/forget")
+    Flowable<UpdatePasswordResult> findPassword(@Field("mbtelephone") String mbtelephone,
+                                                 @Field("type") int type,
+                                                 @Field("telephone") String telephone,
+                                                 @Field("password") String password,
+                                                 @Field("password") boolean istelephonecheck);
+
 }
 
 

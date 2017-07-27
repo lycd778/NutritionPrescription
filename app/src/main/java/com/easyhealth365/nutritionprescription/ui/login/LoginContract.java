@@ -16,6 +16,7 @@ public interface LoginContract {
         void init();
         void navigateToMain();
         void navigateToRegister();
+        void navigateToFindPassword();
     }
 
     interface Presenter extends BasePresenter {

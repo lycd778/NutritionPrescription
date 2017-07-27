@@ -1,6 +1,6 @@
 package com.easyhealth365.nutritionprescription.api;
 
-import com.easyhealth365.nutritionprescription.beans.CheckPhone;
+import com.easyhealth365.nutritionprescription.beans.NormalResult;
 import com.easyhealth365.nutritionprescription.beans.Plan;
 import com.easyhealth365.nutritionprescription.beans.PlanID;
 import com.easyhealth365.nutritionprescription.beans.PreRecord;
@@ -88,14 +88,14 @@ public class ApiService {
     /**
      * 验证手机号,返回,用的是json格式的get
      */
-    public static Flowable<CheckPhone> checkPhone(String phoneNum, String password) {
+    public static Flowable<NormalResult> checkPhone(String phoneNum, String password) {
         return apiStores.checkPhone(phoneNum, password, "xxxx", "true");
     }
 
     /**
      * 注册用户,返回,用的是json格式的post
      */
-    public static Flowable<ResponseBody> register(RegisterUser registerUser) {
+    public static Flowable<NormalResult> register(RegisterUser registerUser) {
         return apiStores.register(registerUser);
     }
 
@@ -120,6 +120,12 @@ public class ApiService {
      */
     public static Flowable<UpdatePasswordResult> resetPassword(String userid, String oldpassword, String newpassword) {
         return apiStores.resetPassword(userid,oldpassword,newpassword);
+    }
+    /**
+     * 找回密码用户,返回,用的是json格式的post
+     */
+    public static Flowable<UpdatePasswordResult> findPassword(String mbtelephone, int type, String telephone, String password, boolean istelephonecheck) {
+        return apiStores.findPassword(mbtelephone,type,telephone,password,istelephonecheck);
     }
 
 }

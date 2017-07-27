@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseActivity;
 import com.easyhealth365.nutritionprescription.base.BaseApplication;
+import com.easyhealth365.nutritionprescription.ui.find_password.FindPasswordActicity;
 import com.easyhealth365.nutritionprescription.ui.mian.MainActivity;
 import com.easyhealth365.nutritionprescription.ui.register.RegisterActivity;
 import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
@@ -74,11 +75,17 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
         startActivity(intent);
     }
 
+    @Override
+    public void navigateToFindPassword() {
+        Intent intent =new Intent(getBaseContext(),FindPasswordActicity.class);
+        startActivity(intent);
+    }
+
     @OnClick({R.id.tv_find_password, R.id.btn_login, R.id.btn_register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_find_password:
-                finish();
+                navigateToFindPassword();
                 break;
             case R.id.btn_login:
                 TLog.log("执行登录");

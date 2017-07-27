@@ -7,6 +7,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseActivity;
@@ -46,7 +47,11 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordContract.Pr
     @BindView(R.id.et_reset_password_confirm)
     EditText et_reset_password_confirm;
 
+    @BindView(R.id.reset_password_user_name)
+    TextView reset_password_user_name;
+
     SharedPreferenceUtil spUtils = SharedPreferenceUtil.getInstance();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,7 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordContract.Pr
         ButterKnife.bind(this);
         mPresenter = new ResetPasswordPresenter(this);
         mPresenter.start();
+        reset_password_user_name.setText(spUtils.getUser().getResults().getRealname());
     }
 
     @OnClick({R.id.btn_reset_password})
@@ -66,8 +72,9 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordContract.Pr
                 break;
         }
     }
+
     @OnCheckedChanged(R.id.cb_show_password)
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (!isChecked) {
             et_reset_password_old.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             et_reset_password_new.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -80,6 +87,7 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordContract.Pr
             ToastUtil.showShort(getApplicationContext(), "隐藏密码");
         }
     }
+
     @Override
     public void onValidationSucceeded() {
         if (et_reset_password_old.getEditableText().toString()
@@ -130,7 +138,7 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordContract.Pr
     public void showResult(int status) {
         if (status == 100) {
             ToastUtil.showShort(this, "重置密码成功");
-        }else{
+        } else {
             ToastUtil.showShort(this, "重置密码失败");
         }
     }

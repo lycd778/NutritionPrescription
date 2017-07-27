@@ -36,10 +36,10 @@ import butterknife.OnClick;
 
 
 public class PlanFragment extends BaseFragment implements CenterDialog.OnCenterItemClickListener{
-    @BindView(R.id.vp_view)
-    ViewPager mViewPager;
-    @BindView(R.id.tabs)
-    TabLayout mTabLayout;
+//    @BindView(R.id.vp_view)
+//    ViewPager mViewPager;
+//    @BindView(R.id.tabs)
+//    TabLayout mTabLayout;
 
     @BindView(R.id.line_plan)
     LinearLayout line_plan;
@@ -202,10 +202,11 @@ public class PlanFragment extends BaseFragment implements CenterDialog.OnCenterI
         if (!spUtils.getHavePlan()) {
             line_plan.setVisibility(View.GONE);
             line_plan_noplan.setVisibility(View.VISIBLE);
+        }else {
+            cpView = (CircleProgressView) view.findViewById(R.id.circle_progress_view);
+            initView();
         }
         manager = getFragmentManager();
-        cpView = (CircleProgressView) view.findViewById(R.id.circle_progress_view);
-        initView();
         return view;
     }
 

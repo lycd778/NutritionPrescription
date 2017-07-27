@@ -11,7 +11,7 @@ import java.util.List;
  * Created by lingxiao-Ching on 2017/7/12.
  */
 
-public class CheckPhone extends BaseBean {
+public class NormalResult extends BaseBean {
 
 
     private static final long serialVersionUID = -5557338762905348856L;
@@ -37,5 +37,13 @@ public class CheckPhone extends BaseBean {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "NormalResult{" +
+                "status=" + status +
+                ", message='" + message + '\'' +
+                '}';
     }
 }

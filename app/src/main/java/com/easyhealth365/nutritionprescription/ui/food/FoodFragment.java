@@ -38,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FoodFragment extends BaseFragment<FoodContract.Presenter> implements FoodContract.View ,CenterDialog.OnCenterItemClickListener{
+public class FoodFragment extends BaseFragment<FoodContract.Presenter> implements FoodContract.View, CenterDialog.OnCenterItemClickListener {
     @BindView(R.id.line_food)
     LinearLayout line_food;
     @BindView(R.id.progressBar)
@@ -161,7 +161,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
 
     @Override
     public void OnCenterItemClick(CenterDialog dialog, View view, String et_weight) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.dialog_sure:
                 //ToastUtil.showShort(getContext(),"确定");
                 break;
@@ -173,42 +173,43 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
     @Override
     public void onStart() {
         super.onStart();
-        centerDialog = new CenterDialog(getContext(), R.layout.dialog_tips, new int[]{ R.id.dialog_sure});
-        centerDialog.setOnCenterItemClickListener(this);
         if (!spUtils.getHavePlan()) {
-            line_food.setVisibility(View.GONE);
-            line_food_noplan.setVisibility(View.VISIBLE);
-        } else {
-            time = DateUtil.getDate("yyyy-MM-dd");
-
-            if (spUtils.getRecord() == null) {
-                mRecord = new Record();
+            centerDialog = new CenterDialog(getContext(), R.layout.dialog_tips, new int[]{R.id.dialog_sure});
+            centerDialog.setOnCenterItemClickListener(this);
+            if (!spUtils.getHavePlan()) {
+                line_food.setVisibility(View.GONE);
+                line_food_noplan.setVisibility(View.VISIBLE);
             } else {
-                if (spUtils.getRecord().getCheckTime() == null) {
+                time = DateUtil.getDate("yyyy-MM-dd");
+
+                if (spUtils.getRecord() == null) {
                     mRecord = new Record();
                 } else {
-                    if (!(spUtils.getRecord().getCheckTime().equals(time))) {
+                    if (spUtils.getRecord().getCheckTime() == null) {
                         mRecord = new Record();
                     } else {
-                        mRecord = spUtils.getRecord();
+                        if (!(spUtils.getRecord().getCheckTime().equals(time))) {
+                            mRecord = new Record();
+                        } else {
+                            mRecord = spUtils.getRecord();
+                        }
                     }
+
+
                 }
-
-
+                mPlan = spUtils.getPlan();
+                for (int i = 0; i >= -5; i--) {
+                    preDate[Math.abs(i)] = DateUtil.getOldDate(i);
+                    TLog.log(preDate[Math.abs(i)]);
+                }
+                initView();
             }
-            mPlan = spUtils.getPlan();
-            for (int i = 0; i >= -5; i--) {
-                preDate[Math.abs(i)] = DateUtil.getOldDate(i);
-                TLog.log(preDate[Math.abs(i)]);
-            }
-            initView();
         }
-
     }
 
     @OnClick({R.id.vegetable_plus, R.id.vegetable_minus, R.id.fruit_plus, R.id.fruit_minus, R.id.bread_plus, R.id.bread_minus,
             R.id.bean_plus, R.id.bean_minus, R.id.milk_plus, R.id.milk_minus, R.id.meat_plus, R.id.meat_minus,
-            R.id.oil_plus, R.id.oil_minus, R.id.nut_plus, R.id.nut_minus, R.id.btn_save_plan,R.id.ll_show_tips
+            R.id.oil_plus, R.id.oil_minus, R.id.nut_plus, R.id.nut_minus, R.id.btn_save_plan, R.id.ll_show_tips
     })
     public void onClick(View view) {
         switch (view.getId()) {
@@ -1038,7 +1039,7 @@ public class FoodFragment extends BaseFragment<FoodContract.Presenter> implement
         if (state == 1) {
             ToastUtil.showShort(getContext(), "记录上传成功");
         } else if (state == -1) {
-            ToastUtil.showShort(getContext(), "记录上传失败");
+           //ToastUtil.showShort(getContext(), "记录上传失败");
         }
     }
 

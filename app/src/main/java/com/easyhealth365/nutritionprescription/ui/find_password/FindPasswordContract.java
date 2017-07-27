@@ -12,11 +12,12 @@ public interface FindPasswordContract{
         void showProgress();
         void hideProgress();
         void showError(String error);
-        void showResult(int status);
         void navigateToLogin();
+        void SendMessage(int status);
     }
     interface Presenter extends BasePresenter {
         void findPassword(String mbtelephone,int type, String telephone,String password,boolean istelephonecheck);
+        void checkedPhone(String phoneNum, String password);
         void onDestroy();
     }
 }

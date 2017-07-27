@@ -5,23 +5,26 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.easyhealth365.nutritionprescription.R;
 import com.easyhealth365.nutritionprescription.base.BaseFragment;
 import com.easyhealth365.nutritionprescription.ui.day_report.DayReportActivity;
 import com.easyhealth365.nutritionprescription.ui.login.LoginActivity;
-import com.easyhealth365.nutritionprescription.ui.mian.MainActivity;
-import com.easyhealth365.nutritionprescription.ui.register.RegisterActivity;
 import com.easyhealth365.nutritionprescription.ui.reset_password.ResetPasswordActivity;
 import com.easyhealth365.nutritionprescription.ui.user_info.UserInfoActivity;
-import com.easyhealth365.nutritionprescription.utils.TLog;
+import com.easyhealth365.nutritionprescription.utils.SharedPreferenceUtil;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserFragment extends BaseFragment {
+    @BindView(R.id.user_name)
+    TextView user_name;
     private View view;
     private static final String TAG = UserFragment.class.getSimpleName();
+    SharedPreferenceUtil spUtils=SharedPreferenceUtil.getInstance();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class UserFragment extends BaseFragment {
             view = inflater.inflate(R.layout.fragment_user, null);
         }
         ButterKnife.bind(this, view);
+        user_name.setText(spUtils.getUser().getResults().getRealname());
         return view;
     }
 
